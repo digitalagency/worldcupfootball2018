@@ -1,0 +1,18 @@
+<?php if(@$menu != 'home') { ?>
+<?php $this->load->view('includes/header');?>
+<?php $this->load->helper("view_helper"); ?>
+
+<!-- body start -->
+<div class="container">
+    <div class="row">
+        <?php $this->load->view('admin/common/flash_message'); ?>
+        <?php $this->load->view($main);?>
+    </div>
+</div>
+<!-- body end -->
+
+<?php $this->load->view('includes/footer');?>
+<?php } else{
+	$this->load->view($main);
+}
+?>
