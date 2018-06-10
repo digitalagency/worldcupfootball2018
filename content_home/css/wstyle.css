@@ -1,4 +1,4 @@
-/*@font-face {
+@font-face {
     font-family: 'ganeshregular';
     src: url('../fonts/ganesh_regular_0-webfont.woff2') format('woff2'),
          url('../fonts/ganesh_regular_0-webfont.woff') format('woff');
@@ -44,7 +44,7 @@ p{
 }
 p span{
 	font-family: 'swis721_blkcn_btblack';
-}*/
+}
 .container{
 	margin:0 auto;
 	max-width:100%;
@@ -70,10 +70,6 @@ p span{
     float: none;
     padding: 10px 0;
 }
-
-.navbar-default ul li.active{
-	background-color: #EB2B90;
-}
 .navbar-default ul li:last-child{
     border-right: none;
 }
@@ -89,14 +85,13 @@ p span{
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
     color: #FFE600 !important;
     background-color: transparent;
-	font-weight:700;
 }
 .header {
-    background-image: url(../images/home.jpg);
+    background-image: url(../images/header-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 1400px;
+    height: 853px;
     position: relative;
     background-position: 59% 39%;
 }
@@ -105,17 +100,6 @@ p span{
 	top: 104px;
 	left: 20px;
 }
-
-.header figure.main{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-
-.header figure.main img{
-    width:1200px;
-}
-
 .header figure.berger-box {
     position: absolute;
     bottom: -51px;
@@ -220,7 +204,6 @@ figcaption:after {
 	display: block;
 }
 
-.gallery .img-section .desc{text-align: center;font-weight: bold;margin: 5px; color: #5F287B;}
 
 
 /* Footer start */
@@ -353,53 +336,28 @@ figcaption:after {
 
 
 /* terms-conditions start */
-.terms{
-    background-image: url(../images/terms_back.jpg) !important;
-}
-
 
 .terms-conditions{
-    background-image: url(../images/back.jpg);
+    background-image: url(../images/term-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    padding: 55px 60px 15px 55px;    
-    min-height: 1465px;
+    padding: 55px 60px 15px 55px;
 }
 .terms-conditions span{
     font-family: Arial;
 }
 .terms-conditions li {
     font-size: 12px;
-    font-weight: 700;
-    color: #000;
-    line-height: 18px;
-}
-.terms-conditions .table1 {
-   /* padding-right: 405px;*/
-}
-
-
-.ecoupon{
-    background-image: url(../images/back_ecoupon.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    padding: 55px 0px 15px 14px;    
-    min-height: 1465px;
-}
-.ecoupon span{
-    font-family: Arial;
-}
-.ecoupon li {
-    font-size: 12px;
-    font-weight: 700;
+    font-weight: 500;
     color: #000;
 }
-
 ol.first {
     list-style-type: devanagari;
     padding-left: 20px;
+}
+.terms-conditions .table1 {
+   /* padding-right: 405px;*/
 }
 ol.first li {
     font-family: himalbold_bold111090_131932;
@@ -562,7 +520,7 @@ em.more-info {
     font-weight: 700;
     font-size: 14px;
     font-style: normal;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 em.more-info strong{
     font-size: 15px;
@@ -588,7 +546,6 @@ figure.defult-img {
     margin-bottom: 30px;
     padding: 5px;
     background: #fff;
-    min-height: 254px;
 }
 
 figure.defult-img img {
@@ -621,8 +578,7 @@ figure.defult-img img:hover {
 }
 .pattern input, .pattern figure{
     display: table-cell;
-    vertical-align: middle;
-    height: 40px;    
+    vertical-align: middle;    
 }
 .radial-rorm input{
     margin-right: 10px;
@@ -686,8 +642,8 @@ figure.defult-img img:hover {
     font-size: 15px;
 }
 .procedure-wrap {
-    /*background: #fff;*/
-    padding: 40px 0;
+    background: #fff;
+    padding: 40px 0 40px 40px;
 }
 ul.numbers{
     padding-right: 30px;
@@ -724,12 +680,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec4b97', end
     /*background: #ec4b97;*/
     padding: 17px;
     position: relative;
-    /*margin: 0 260px 25px 0px;*/
-    margin : 0 -15px 25px 0px;
+    margin: 0 -15px 25px 100px;
     border-bottom-right-radius: 13px;
-    width:70%;
 }
-/*.fblike:before {
+.fb-like:before {
     content: '\f082';
     font-family: 'fontAwesome';
     position: absolute;
@@ -737,9 +691,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec4b97', end
     color: #3b589c;
     font-size: 90px;
     top: -30px;
-	
-}*/
-.fblike::after {
+}
+.fb-like::after {
     content: '';
     position: absolute;
     right: 0;
@@ -750,27 +703,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec4b97', end
     width: 15px;
     height: 15px;
 }
-.fblike em {
+.fb-like em {
     font-size: 21px;
     color: #fff;
     font-weight: 700;
     display: inline-block;
 }
-.fblike em img{
+.fb-like em img{
     display: inline-block;
     vertical-align: top;
 }
 
 
 /* upload-procedure end */
-
-
-/* Additional css */
-.text-left{
-    text-align: left !important;
-}
-.text-normal{
-    font-weight: 100;
-}
-
-.numbers li a {word-break : break-all;}

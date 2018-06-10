@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'Flama-Basic';
+    src: url('../fonts/Flama-Basic-2.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Flama-Book';
+    src: url('../fonts/Flama-Book.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'SF-Sports-Night-NS';
+    src: url('../fonts/SF-Sports-Night-NS.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html, body {margin: 0px; font-family: 'Flama-Basic', sans-serif;}
+body { background-color: #000000;}
+
+p{
+	font-family: 'Flama-Basic';
+    line-height: 25px;	
+}
+p span{
+	font-family: 'swis721_blkcn_btblack';
+}
+.no-padding{
+    padding: 0;
+}
+.container{
+	margin:0 auto;
+	max-width:100%;
+    width: 1000px;
+}
+ .header {
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 1030px;
+    position: relative;
+    background-position: 100% 39%;
+} 
+.header figure.logo {
+    position: absolute;
+    /*top: 60px;
+    left: 135px;*/
+}
+.logo figcaption {
+    position: absolute;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: -55px;
+    font-family: 'Flama-Basic', sans-serif;
+}
+.mainpanel {
+    position: absolute;
+    top: 385px;
+}
+.mainpanel .title_header_image{
+    background-color: #9a9a9a;
+    background-image: url(../images/title_header_image.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.mainpanel .title_header_image p{
+    font-family: 'SF-Sports-Night-NS';
+    font-weight: 700;
+    padding: 5px 25px;
+}
+.mainpanel .formsection{    
+    background-image: url(../images/background_bar.png);
+    background-repeat: repeat-y;
+}
+.mainpanel .formsection .myform{
+    padding: 0 40px;
+}
+
+.mainpanel .formsection .textbox{
+    background: none;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid;
+    border-width: 90%;
+}
+
+.mainpanel .formsection .btn {    
+    background-image: url(../images/button_background.jpg);
+    background-repeat: repeat-x;
+    border-radius: 0px;
+    width: 100%;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border: 0px;
+}
+
+.mainpanel .formsection input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.mainpanel .formsection .myform a {
+  color: #737373;
+  text-align: center;
+}
+
+
+
+label.myButton input[type="file"] {
+    position:absolute;
+    top: -1000px;
+}
+
+/***** Example custom styling *****/
+.myButton {
+    border: 1px solid #3D3D3D;
+    padding: 5px;
+    background: none;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.myButton:hover {
+    cursor: pointer;
+}
+/*.myButton:active {
+    background: #FFFFFF;
+}*/
+.myButton :invalid + span {
+    color: #8C8C8C;
+    font-size: 12px;
+}
+.myButton :valid + span {
+    color: #FFFFFF;
+}
+.mainpanel .formsection .check_box{
+    color:#737373;
+}
+/* Footer start */
+.footer{
+	background: #01AEF0;
+    padding: 10px 0;
+}
+.nopadding {
+    padding: 0 5px;
+}

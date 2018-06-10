@@ -101,6 +101,7 @@ class Question extends MY_Controller {
         $data['page_header'] = 'Match Day Contest';
         $data['page_header_icone'] = 'fa-question';
         $data['nav'] = 'Question';
+        $data['active'] = 'MatchDayContest';
         $data['panel_title'] = 'Question List';
         $data['questionpage'] = 'taken';        
         $data['main'] = 'matchdaycontest_listall';
@@ -137,92 +138,29 @@ class Question extends MY_Controller {
     }
 
     public function TheUltimateContest(){
-
-        $config['base_url'] = base_url() . 'admin/Question/TheUltimateContest';
-        //$config['uri_segment'] = 3;
-        $config['per_page'] = 50;
-
-        /* Bootstrap Pagination  */
-
-        $config['full_tag_open'] = "<ul class='pagination'>";
-        $config['full_tag_close'] ="</ul>";
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-        $config['next_tag_open'] = "<li>";
-        $config['next_tagl_close'] = "</li>";
-        $config['prev_tag_open'] = "<li>";
-        $config['prev_tagl_close'] = "</li>";
-        $config['first_tag_open'] = "<li>";
-        $config['first_tagl_close'] = "</li>";
-        $config['last_tag_open'] = "<li>";
-        $config['last_tagl_close'] = "</li>";
-
-        /* End of Bootstrap Pagination */
-        //echo "page number = ".$this->uri->segment(4);
-        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-        $this->db->where('contest_type', '1');
-        $this->db->from('tbl_questions');
-        $query = $this->db->get();
-        $total_rows = $query->num_rows();
-        $config['total_rows'] = $total_rows; 
-        
-        //$data['question_info'] = $this->Question_model->get_all_match_day_questions($config['per_page'], $page);
         
 
-        $this->pagination->initialize($config);
+        if(isset($_POST['question_id_1']))
+        {
+            $this->Question_model->updateUltimateContestAnswers();
+            $this->session->set_flashdata('success', 'Answer Updated Successfully...');
+            redirect(base_url() . 'admin/Question/TheUltimateContest/', 'refresh');
+        }
 
         $data['title'] = '.:: The Ultimate Contest  ::.';
         $data['page_header'] = 'The Ultimate Contest';
         $data['page_header_icone'] = 'fa-question ';
         $data['nav'] = 'Question';
+        $data['active'] = 'TheUltimateContest';
         $data['panel_title'] = 'Question List';
         $data['questionpage'] = 'taken';        
         $data['main'] = 'theultimatecontest_listall';
-        //$data['organisation_type'] =$this->general_model->getAll('dropdown','fid = 6','','id,dropvalue');
+        $data['question_info'] = $this->Question_model->get_all_ultimate_contest_questions();
 
         $this->load->view('home', $data);
     }
 
     public function AllTimeContest(){
-
-        $config['base_url'] = base_url() . 'admin/Question/AllTimeContest';
-        //$config['uri_segment'] = 3;
-        $config['per_page'] = 50;
-
-        /* Bootstrap Pagination  */
-
-        $config['full_tag_open'] = "<ul class='pagination'>";
-        $config['full_tag_close'] ="</ul>";
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-        $config['next_tag_open'] = "<li>";
-        $config['next_tagl_close'] = "</li>";
-        $config['prev_tag_open'] = "<li>";
-        $config['prev_tagl_close'] = "</li>";
-        $config['first_tag_open'] = "<li>";
-        $config['first_tagl_close'] = "</li>";
-        $config['last_tag_open'] = "<li>";
-        $config['last_tagl_close'] = "</li>";
-
-        /* End of Bootstrap Pagination */
-        //echo "page number = ".$this->uri->segment(4);
-        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-        $this->db->where('contest_type', '1');
-        $this->db->from('tbl_questions');
-        $query = $this->db->get();
-        $total_rows = $query->num_rows();
-        $config['total_rows'] = $total_rows; 
-        
-        //$data['question_info'] = $this->Question_model->get_all_match_day_questions($config['per_page'], $page);
-        
-
-        $this->pagination->initialize($config);
 
         $data['title'] = '.:: All Time Contest ::.';
         $data['page_header'] = 'All Time Contest';
@@ -231,8 +169,7 @@ class Question extends MY_Controller {
         $data['panel_title'] = 'Question List';
         $data['questionpage'] = 'taken';        
         $data['main'] = 'alltimecontest_listall';
-        //$data['organisation_type'] =$this->general_model->getAll('dropdown','fid = 6','','id,dropvalue');
-
+        $data['question_info'] = $this->Question_model->get_all_time_contest_questions();
         $this->load->view('home', $data);
 
     }
@@ -298,8 +235,9 @@ class Question extends MY_Controller {
     public function add(){
         $data['title'] = '.:: ADD Question ::.';
         $data['page_header'] = 'Question ';
-        $data['page_header_icone'] = 'fa-gift';
+        $data['page_header_icone'] = 'fa-question';
         $data['nav'] = 'Question';
+        $data['active'] = 'AllTimeContest';
         $data['panel_title'] = 'Add Question  '; 
         $order_by = 'id ASC';  
         $data['main'] = 'question_add_edit';
@@ -307,77 +245,50 @@ class Question extends MY_Controller {
         $this->load->view('home', $data);
     }
 
-    public function addQuestion(){
-
-        $this->form_validation->set_rules('question_code', 'question_code', 'required');
-        //echo $this->session->lang;
-        if (FALSE == $this->form_validation->run()) {
-            $data['title'] = '.:: ADD Question ::.';
-            $data['page_header'] = 'Question';
-            $data['page_header_icone'] = 'fa-product-hunt';
-            $data['nav'] = 'Question';
-            $data['panel_title'] = 'Add Question ';
-            
-            $data['main'] = 'question_add_edit';
-
-            $this->load->view('home', $data);
-
-        } else {
-
-            $pid = $this->Question_model->add_question();
-            $this->session->set_flashdata('success', 'Question added Successfully...');
-            redirect(base_url() . 'admin/Question', 'refresh');
+    public function addQuestionProcess(){
+        $contest_type = $this->uri->segment(4);
+        $qid = $this->Question_model->add_question($contest_type);
+        if($qid>0)
+        {
+            $this->session->set_flashdata('success', 'All Time Contest Question added Successfully...');
+            redirect(base_url() . 'admin/Question/AllTimeContest', 'refresh');
         }
     }  
 
-    public function edit($id){
-
+    public function edit(){
+        $id = $this->uri->segment(5);
         if (!isset($id))
-            redirect(base_url() . 'admin/Question');
+            redirect(base_url() . 'admin/Question/AllTimeContest');
 
         if (!is_numeric($id))
-            redirect(base_url() . 'admin/Question');
+            redirect(base_url() . 'admin/Question/AllTimeContest');
 
         $data['title'] = '.:: EDIT Question ::.';
         $data['page_header'] = 'Question';
-        $data['page_header_icone'] = 'fa-gift';
+        $data['page_header_icone'] = 'fa-question';
         $data['nav'] = 'Question';
-        $data['panel_title'] = 'Edit Question ';
-        $where = array('parent_id'=>'0');  
-        $order_by = 'fullname ASC';  
-        $data['question_detail'] = $this->general_model->getById('tbl_question','id',$id);
+        $data['active'] = 'AllTimeContest';
+        $data['panel_title'] = 'Edit Question ';  
+        $data['question_detail'] = $this->general_model->getById('tbl_questions','id',$id);
         $data['main'] = 'question_add_edit';
 
         $this->load->view('home', $data);
     }
 
-    public function editQuestion($pid){
+    public function editQuestionProcess(){
+        $qid = $this->uri->segment(5);
 
-        if (!isset($pid))
-            redirect(base_url() . 'admin/Question');
+        if (!isset($qid))
+            redirect(base_url() . 'admin/Question/AllTimeContest');
 
-        if (!is_numeric($pid))
-            redirect(base_url() . 'admin/Question');
+        if (!is_numeric($qid))
+            redirect(base_url() . 'admin/Question/AllTimeContest');        
 
-        
-        $this->form_validation->set_rules('question_code', 'question_code', 'required');
-
-        if (FALSE == $this->form_validation->run()) {
-            $data['title'] = '.:: EDIT Question ::.';
-            $data['page_header'] = 'Question';
-            $data['page_header_icone'] = 'fa-gift';
-            $data['nav'] = 'Question';
-            $data['panel_title'] = 'Edit Question ';
-            $data['Question_detail'] = $this->general_model->getById('tbl_question','id',$pid);
-            $data['main'] = 'Question/edit/'.$pid;
-
-            $this->load->view('home', $data);
-
-        } else {
-
-            $this->Question_model->update_question($pid);
-            $this->session->set_flashdata('success', 'Question Updated Successfully...');
-            redirect(base_url() . 'admin/Question/edit/'.$pid, 'refresh');
+        $status = $this->Question_model->update_question($qid);
+        if($status>0)
+        {
+            $this->session->set_flashdata('success', 'All Time Contest Question Updated Successfully...');
+            redirect(base_url() . 'admin/Question/edit/3/'.$qid, 'refresh');
         }
     }
 

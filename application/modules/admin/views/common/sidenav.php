@@ -25,7 +25,7 @@
           <ul class="treeview-menu">
             <li class="<?php if($this->uri->segment(3) == 'MatchDayContest'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/Question/MatchDayContest"><i class="fa fa-circle-o"></i> Match Day Contest</a></li>
             <li class="<?php if($this->uri->segment(3) == 'TheUltimateContest'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/Question/TheUltimateContest"><i class="fa fa-circle-o"></i> The Ultimate Contest</a></li>
-            <li class="<?php if($this->uri->segment(3) == 'AllTimeContest'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/Question/AllTimeContest"><i class="fa fa-circle-o"></i> All time Contest</a></li>
+            <li class="<?php if($this->uri->segment(3) == 'AllTimeContest' || (isset($active) && $active == 'AllTimeContest')){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/Question/AllTimeContest"><i class="fa fa-circle-o"></i> All time Contest</a></li>
           </ul>
         </li> 
       </ul>

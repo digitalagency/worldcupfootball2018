@@ -18,16 +18,231 @@ class Home_model extends CI_Model {
 
     }
 
-    public function getPattern()
+    function doRegistration($imagepath,$imagename)
     {
-    	$this->db->select('id,pattern,shades');
-        $this->db->order_by("id","ASC");
-        $query =  $this->db->get('tbl_pattern');
+        $username = $this->input->post('username');
+        $emailaddress = $this->input->post('emailaddress');
+        $userpassword = $this->input->post('userpassword');
+        $checkIfUsernameExists = $this->checkIfUsernameExists($username);
+        $checkIfEmailExists = $this->checkIfEmailExists($emailaddress);
+        if($checkIfUsernameExists==0 && $checkIfEmailExists==0){
+            $data = array(
+                'fname' => $this->input->post('fname'),
+                'username' => $this->input->post('username'),
+                'email' => $this->input->post('emailaddress'),
+                'password' => md5($userpassword),
+                'registered_on' => date('Y-m-d H:i:s'),
+                'imagepath' => $imagepath.$imagename,
+                'facebook_name' => $this->input->post('facebook_name'),
+                'facebook_email' => $this->input->post('facebook_email'),
+                'facebook_link' => $this->input->post('facebook_link')
+            );
+            $this->db->insert('tbl_participants',$data);
+            $id = $this->db->insert_id(); 
+            return $id;
+        }
+        else if($checkIfUsernameExists>0){
+            redirect(base_url() . '?error=ru');
+        } 
+        else if($checkIfEmailExists>0){
+            redirect(base_url() . '?error=re');
+        } 
+    }
+
+    public function checkIfEmailExists($emailaddress)
+    {
+        $this->db->select('id');
+        $this->db->where('email',$emailaddress);
+        $query =  $this->db->get('tbl_participants');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $user_id = $val->id;
+            return $user_id;
+        }
+
+    }
+
+    public function checkIfUsernameExists($username)
+    {
+        $this->db->select('id');
+        $this->db->where('username',$username);
+        $query =  $this->db->get('tbl_participants');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $user_id = $val->id;
+            return $user_id;
+        }
+
+    }
+
+    function doLogin()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('userpassword');
+
+        $provided_password = md5($password);
+        
+        $where = '(username="'.$username.'" OR email = "'.$username.'") AND password = "'.$provided_password.'"';
+        $this->db->select('id,username,email');
+        $this->db->where($where);
+        $query =  $this->db->get('tbl_participants');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            //echo $this->db->last_query();
+            $val = $query->row();
+            $user_id = $val->id;
+            $userdata = array(
+                   'user_id'  => $val->id,
+                   'username'  => $val->username,
+                   'email'     => $val->email,
+                   'logged_in' => TRUE
+               );
+            $this->session->set_userdata($userdata);
+            redirect(base_url() . 'dashboard');
+        }
+
+    }    
+
+    public function checkLoggedIn()
+    {        
+        $user_id = $this->session->userdata('user_id');
+        if(empty($user_id))            
+                redirect(base_url());
+    }
+
+    public function getUser($user_id)
+    {
+    	$this->db->select('');
+        $this->db->where("id",$user_id);
+        $query =  $this->db->get('tbl_participants');
         if ($query->num_rows() == 0) {
             return FALSE;
         } else {
             return $query->result();
         }
+    }
+
+    public function getMatchInfo($match_id)
+    {
+        $this->db->select('');
+        $this->db->where("id",$match_id);
+        $query =  $this->db->get('tbl_match');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    public function getMatchDayContest()
+    {
+        $this->db->select('');
+        $query =  $this->db->get('tbl_match');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    function getMatchDayContestQuestion($match_id)
+    {
+        $this->db->select('');
+        $this->db->where("match_id",$match_id);
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }        
+    }
+
+    function getUltimateContestQuestion(){
+        $this->db->select('');
+        $this->db->where("contest_type",'2');
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+
+    }
+
+    function all_time_contest(){        
+        $this->db->select('');
+        $this->db->where("contest_type",'3');
+        $this->db->group_by('datetime');
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+    }
+
+    function all_time_contest_questions($question_id){
+        $datetime = $this->get_datetime($question_id);
+        $this->db->select('');
+        $this->db->where("datetime",$datetime);
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+
+    }    
+
+    function get_datetime($question_id)
+    {        
+        $this->db->select('datetime');
+        $this->db->where('id',$question_id);
+        $q = $this->db->get('tbl_questions');
+        $data1 = $q->result_array();
+        $data = array_shift($data1);
+        return $data['datetime'];
+    }
+
+    public function get_all_countries(){
+        $this->db->select('*');
+        $this->db->order_by("country_name","ASC");
+        $query =  $this->db->get('tbl_country');
+        //echo "SELECT * FROM ".$this->table_country." LIMIT ".$limit.", ".$offset;
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    function get_country_name($country_id)
+    {        
+        $this->db->select('country_name');
+        $this->db->where('id',$country_id);
+        $q = $this->db->get('tbl_country');
+        $data1 = $q->result_array();
+        $data = array_shift($data1);
+        return $data['country_name'];
+    }
+
+    function get_all_players($country_id)
+    {
+        $this->db->select();
+        $this->db->where('country_id',$country_id);
+        $query = $this->db->get('tbl_players');  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }        
     }
 
     public function getPattern_by_shade($shades)
@@ -210,64 +425,6 @@ class Home_model extends CI_Model {
         return $region_arr[$area];
     }
 
-    function uploadPhoto($no_of_coupon,$coupon_no,$imagepath,$imagename,$medium)
-    {
-        $registration_number = strtoupper($this->input->post('regno'));
-        $reg_arr = explode('-',$registration_number);
-        //print_r($reg_arr);
-        $regioncode = $reg_arr['0'].'-'.$reg_arr['1'];
-        $serialNumber = $this->getSerialnumber($regioncode);
-        //echo 'serialNumber = '.$serialNumber;
-        $data = array(
-            'registration_date' => date('Y-m-d'),
-            'full_name' => $this->input->post('fname'),
-            'main_region' => $this->input->post('main_region'),
-            'sub_region' => $this->input->post('sub_region'),
-            'coupon_qty' => $no_of_coupon,
-            'coupon_no' => $coupon_no,
-            'shade' => $this->input->post('shade'),
-            'pattern' => $this->input->post('pattern'),
-            'facebook_id' => $this->input->post('facebook_id'),
-            'facebook_name' => $this->input->post('facebook_name'),
-            'facebook_email' => $this->input->post('facebook_email'),
-            'medium' => $medium
-        );
-
-        $data2 = array(
-            'serial_number' => $serialNumber,
-            'user_id' => $registration_number,
-            'imagepath' => $imagepath,
-            'imagename' => $imagename
-        );
-
-        $photo_id_prev = $this->checkPrevious($registration_number);
-        if($photo_id_prev==0)
-        {   
-            //Update user table
-            $this->db->where('registration_number', $registration_number);
-            $this->db->update('tbl_user', $data); 
-
-            //Insert in Photo table
-            $this->db->insert('tbl_photo', $data2);
-            return $this->db->insert_id();
-        }
-        else
-            return $photo_id_prev;
-    }
-
-    public function checkPrevious($regno)
-    {
-        $this->db->select('id');
-        $this->db->where('user_id',$regno);
-        $query =  $this->db->get('tbl_photo');
-        if ($query->num_rows() == 0) {
-            return 0;
-        } else {
-            $val = $query->row();
-            $photo_id = $val->id;
-            return $photo_id;
-        }
-    }
 
     public function getGift($regno)
     {

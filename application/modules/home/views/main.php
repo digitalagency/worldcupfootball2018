@@ -1,4 +1,3 @@
-<?php if(@$menu != 'home') { ?>
 <?php $this->load->view('includes/header');?>
 <?php $this->load->helper("view_helper"); ?>
 
@@ -12,7 +11,3 @@
 <!-- body end -->
 
 <?php $this->load->view('includes/footer');?>
-<?php } else{
-	$this->load->view($main);
-}
-?>

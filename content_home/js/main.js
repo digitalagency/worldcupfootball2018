@@ -21,27 +21,44 @@ $(document).ready(function() {
 			return false;
 		});
 	});
+    
+    
+    
+      // dynamic add form fields
+	$(function()
+	  {
+		$(document).on('click', '.btn-add', function(e)
+       {
+         console.log('button clicked');
+         e.preventDefault();
 
+         var controlForm = $('.file-controls'),
+             currentEntry = $(this).parents('.entry:first'),
+             newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
+         console.log(controlForm);
+         console.log(currentEntry);
+         console.log(newEntry);
 
+         newEntry.find('input').val('');
+         controlForm.find('.entry:not(:last) .btn-add')
+           .removeClass('btn-add').addClass('btn-remove')
+           .removeClass('btn-success').addClass('btn-info')
+           .html('<span class="glyphicon glyphicon-minus"></span>');
+       }).on('click', '.btn-remove', function(e)
+         {
+           $(this).parents('.entry:first').remove();
 
-	$('.navbar .dropdown').hover(function() {
-			$(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
-
-		}, function() {
-			$(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideUp();
-
-		});
-
-		$('.navbar .dropdown > a').click(function(){
-			location.href = this.href;
-		});
-
+           e.preventDefault();
+           return false;
+         });
+	  });
+    
+    
 
 
 	//add class on image
 
 	$("img").addClass("img-responsive");
-
 
 });

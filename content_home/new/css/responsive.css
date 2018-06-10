@@ -1,0 +1,745 @@
+@media (min-width: 1600px) {
+.header figure.logo {
+    position: absolute;
+    top: 70px;
+    left: 130px;
+}
+.header {
+    height: 895px;
+}
+.right-product {
+    top: 200px;
+    right: 560px;
+}
+
+}
+
+
+@media (max-width: 1024px) {
+    
+.offers .super figcaption p {
+    padding: 10px 0;
+}
+.header figure.logo {
+    left: 100px;
+    top: 20px;
+}
+.logo figcaption {
+    left: 70px;
+    top: 360px;
+}
+.right-product {
+    right: 50px;
+    width: 25%;
+}
+.offers .col-md-4, .offers .col-md-8, .offers .col-md-9, .offers .col-md-3{
+    width: 100%;
+}
+.offers .bumper figcaption {
+    flex: 7;
+    margin: 0px 25px 0 -51px;
+}
+ .offer-item.bumper figure {
+    flex: 2;
+    margin: -78px 0 0 0;
+}
+.offer-item.bumper {
+    margin: 20px 0 80px 0;
+}
+.offers .super figure {
+    margin: -65px -10px 0 0;
+}
+.offers .super figcaption p {
+    padding: 20px 55px 10px 20px;
+    margin-bottom: 0;
+}
+.offer-item.bumper h2 {
+    top: -30px;
+    left: 160px;
+}
+.offers .super figcaption {
+    margin: 0 -50px 0 20px;
+}
+.offers .super figcaption:after {
+    border-bottom: 104px solid #993f98;
+}
+.offer-item.super h2 {
+    right: 435px;
+}
+.sure figure {
+    margin-top: -71px;
+}
+.top_offers {
+    margin-bottom: 70px;
+}
+.offer-item.sure {
+    margin-bottom: 100px;
+}
+.offer-item.so-cash figcaption {
+    margin: -10px 20px 0 20px;
+}
+.footer-right figcaption p {
+    padding: 0px 11px;
+}
+.footer-left {
+    margin: 15px -20px 0 -15px;
+}
+.header {
+    height: 945px;
+}
+.so-cash figcaption:after {
+    border-bottom: 114px solid #993f98;
+}
+.so-cash figcaption:before {
+    border-top: 114px solid #993f98;
+} 
+    
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+.offers .cash figcaption p em{
+    display: inline-block;
+    margin-right: 3px;
+}
+.offers .cash figcaption p{
+    margin: 12px 0;
+}
+.cash figcaption p br{
+    display: none;
+}
+.cash {
+    margin: 50px 0 0 40px;
+}
+.offers .cash figure {
+    left: 0px;
+    top: 39px;
+}
+.header figure.logo{
+    width: 50%;
+    top: 175px;
+}
+.berger-box {
+    width: 50%;
+}
+.header p.caption {
+    right: 0;
+    width: 54%;
+    bottom: -75px;
+}
+.offers figcaption {
+    padding: 9px 10px;
+}
+.terms-conditions {
+    padding: 75px 15px 65px 15px;
+}
+em.left {
+    width: 100%;
+}
+.terms-conditions {
+    background-position: 22%;
+}    
+.register form {
+    background-color: rgba(41, 41, 41, 0.6);
+    margin: 0px;
+}
+.upload-procedure {
+    padding: 30px;
+}
+.fblike em {
+    font-size: 19px;
+}
+.header figure.logo {
+    width: 60%;
+    top: 95px;
+}
+.logo figcaption {
+    left: 50px;
+}
+.offer-item.bumper figure {
+    margin: -74px 0 0 0;
+}
+.offer-item.bumper h2 {
+    top: -57px;
+    left: 169px;
+}
+.offers .bumper figcaption:after {
+    border-top: 84px solid #993f98;
+}
+.offers .super figure {
+    flex: 3;
+}
+.offers .super figcaption p {
+    padding: 10px 30px 10px 10px;
+    margin-bottom: 0;
+}
+.offers .super figcaption:after {
+    border-bottom: 113px solid #993f98;
+}
+.offer-item.super h2 {
+    right: 495px;
+}
+.sure figcaption {
+    margin-left: -62px;
+    padding-left: 80px;
+}
+.sure figcaption p{
+    margin-bottom: 0;
+}
+.sure figure {
+    margin-top: -80px;
+}
+.header {
+    height: 915px;
+}
+.offers .super figcaption:after {
+    border-bottom: 109px solid #993f98;
+}
+
+}
+
+@media (max-width: 768px) {
+
+.logo figcaption p, .logo figcaption p span {
+    font-size: 20px;
+    font-weight: 700;
+}
+.header figure.logo {
+    left: 50px;
+    top: 10px;
+}
+.logo figcaption {
+    left: 100px;
+    top: 265px;
+}
+.logo figcaption p {
+    line-height: 25px;
+}
+.right-product .express {
+    margin-bottom: 30px;
+}
+.offer-item.bumper figure {
+    margin: -58px 0 0 -5px;
+}   
+.offer-item.bumper h2 {
+    left: 140px;
+}
+.offers .super figcaption p {
+    padding: 10px 36px 10px 10px;
+}
+.offers .super figure {
+    margin: -28px -10px 0 0;
+}
+.offers .super figcaption:after {
+    border-bottom: 138px solid #993f98;
+}
+.sure figure {
+    margin-top: -50px;
+}
+.sure figcaption {
+    margin-left: -62px;
+    padding-left: 59px;
+}
+.header {
+    height: 675px;
+}
+.offers .bumper figcaption {
+    flex: 6;
+}
+
+
+}
+
+@media (max-width: 767px) {
+
+.offers .cash figcaption p em{
+    display: inline-block;
+    margin-right: 3px;
+}
+.offers .cash figcaption p{
+    margin: 12px 0;
+}
+.cash figcaption p br{
+    display: none;
+}
+.cash {
+    margin: 50px 0 0 40px;
+}
+.offers .cash figure {
+    left: 0px;
+    top: 39px;
+}
+.header figure.logo{
+    width: 50%;
+}
+.berger-box {
+    width: 50%;
+}
+.header p.caption {
+    right: 0;
+    width: 54%;
+    bottom: -74px;
+}
+.offers figcaption {
+    padding: 9px 10px;
+}
+.navbar-default ul li {
+    display: block;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    border-right: none;
+}
+.navbar-default ul li:last-child{
+    border-bottom: none;
+}
+.navbar-collapse{
+    padding: 0;
+}
+.terms-conditions {
+    padding: 75px 15px 65px 15px;
+}
+.terms-conditions {
+    background-position: 22%;
+}  
+em.left {
+    width: 100%;
+}
+.upload-procedure {
+    padding: 30px;
+}
+.fblike {
+    margin: 0 -15px 25px 75px;
+}
+.fblike em {
+    font-size: 18px;
+}
+.fblike:before {
+    left: -74px;
+    font-size: 70px;
+    top: -18px;
+}
+.procedure-wrap {
+    padding: 40px 0 40px 30px;
+}  
+.header figure.logo {
+    left: 80px;
+    top: 50px;
+}
+.logo figcaption {
+    left: 70px;
+    top: 225px;
+}
+.right-product .express {
+    margin-bottom: 30px;
+}  
+.offers .bumper figcaption:after, .offers .super figcaption:after, .sure figcaption:after, .so-cash figcaption:after, .so-cash figcaption:before{
+    display: none;
+}
+.offers .bumper figcaption {
+    margin: 0px 0 0 -151px;
+}
+
+.offer-item.bumper figure {
+    flex: 3;
+}
+.offer-item.bumper figure {
+    margin: -60px 0 0 -15px;
+}
+.offers .super figcaption {
+    margin: 0 -50px 0 0;
+}
+.sure figcaption{
+    margin-left: 0;
+    padding: 15px 30px;
+}
+.offer-item.so-cash figcaption p{
+    margin: 0 !important;
+}
+.sure figure {
+    margin: 0 0 -40px 140px;
+    z-index: 0;
+}
+.offer-item {
+    display: flex;
+    flex-direction: column;
+}
+.offers figcaption, .offer-item figure {
+    margin: 0 !important;
+}
+.offer-item.bumper h2 {
+    left: 15px;
+    transform: rotate(0);
+    bottom: 84px;
+    top: auto;
+    padding: 10px 30px;
+}
+.offers .bumper figcaption {
+    padding: 20px 0px 7px 30px;
+}
+.offer-item figure{
+    z-index: 0 !important;
+}
+.offer-item.bumper img {
+    margin: 0 0 -50px 130px;
+    width: 40%;
+}
+.offer-item.bumper {
+    margin: 0px 0 40px 0;
+}
+.offer-item.super h2 {
+    left: 15px;
+    right: auto;
+}
+.offers .super figure {
+    order: 1;
+    width: 70%;
+}
+.offers .super figcaption {
+    order: 2;
+    z-index: 1;
+    padding: 15px 30px;
+}
+.offer-item.super h2 {
+    left: 15px;
+    right: auto;
+    bottom: 80px;
+    top: auto;
+}
+.offer-item.super img {
+    margin: 0 0 -60px 142px;
+}
+.offer-item.sure figure{
+    width: 75%;
+}
+.offer-item.sure img {
+    margin: 0 0 -50px 160px;
+}
+.top_offers {
+    margin-bottom: 40px;
+}
+.so-cash {
+    margin-top: -60px;
+}
+.offers figcaption p {
+    padding: 10px 15px 0 0 !important;
+}
+.right-product {
+    top: 150px;
+}
+
+
+}
+
+
+
+@media (max-width: 640px) {
+
+.header {
+    background-image: url(../images/header-bg2.jpg);
+}
+.header p.caption {
+    right: 0;
+    width: 100%;
+    bottom: 60px;
+}
+.offers .col-md-6.col-sm-6.col-xs-6{
+    width: 100%;
+    margin-bottom: 115px;
+}
+.cash {
+    margin: -20px 0 0 30px;
+}
+.offers .cash figure {
+    top: -30px;
+}
+.offers {
+    margin-top: 30px;
+}
+.header figure.logo {
+    top: 40px;
+    width: 60%;
+    left: 125px;
+}
+.header figure.berger-box {
+    bottom: -40px;
+    left: 0;    
+}
+.header p.caption {
+    bottom: -110px;
+}
+p.bg, p.bg a{
+    font-size: 15px;
+}
+.fblike:before {
+    top: -7px;
+} 
+.right-product {
+    position: static;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}  
+.right-product img{
+    display: inline-block;
+} 
+figure.logo img {
+    width: 100%;
+}
+.logo figcaption {
+    left: 60px;
+    top: 230px;
+}
+
+
+
+}
+
+@media (max-width: 480px) {
+.footer{
+    text-align: center;
+}
+.footer img{
+    display: inline-block;
+}
+.footer .col-md-10.col-sm-9.col-xs-9, .footer .col-md-2.col-sm-3.col-xs-3{
+    width: 100%;
+}
+.footer-left {
+    margin: 20px 0 0px 80px;
+}
+.footer .col-sm-2.col-sm-2.col-xs-2, .footer .col-md-6.col-sm-4.col-xs-10{
+    width: 100%;
+}
+.footer-left {
+    margin: 10px 0;
+}
+.offers .col-md-6.col-sm-6.col-xs-6 {
+    margin-bottom: 95px;
+}
+.header figure.logo {
+    top: 15px;
+    left: 85px;
+}
+.terms-conditions {
+    padding: 105px 15px 65px 15px;
+}
+.pattern input {
+    margin: 20px 4px 0 0;
+}
+.register form{
+    margin: 0;
+}
+.upload-procedure{
+    padding-top: 55px;
+}  
+.logo figcaption {
+    left: 20px;
+    top: 180px;
+    line-height: 22px;
+}
+.top_offerscol-md-4, .top_offers .col-md-8, .top_offers .col-md-9, .top_offers .col-md-3, .top_offers .col-md-5{
+    paddin: 0 !important;
+} 
+.offer-item.sure figure {
+    width: 64%;
+}
+.offer-item.sure img {
+    margin: 0 0 -14px 160px;
+} 
+.header {
+    height: 505px;
+}
+.offer-item.super h2 {
+    bottom: 131px;
+} 
+.offers p, .offers p strong, .offers p span {
+    font-size: 16px;
+}
+.footer .col-md-7.col-sm-5.col-xs-11, .footer .col-sm-1.col-sm-1.col-xs-1{
+    width: 100%;
+}
+.footer .col-sm-1.col-sm-1.col-xs-1 img{
+    width: 20%;
+}
+.logo figcaption p, .logo figcaption p span {
+    font-size: 17px;
+}
+
+
+}
+
+
+
+@media (min-width: 320px) and (max-width: 414px)  {
+.offers .cash figcaption p em {
+    display: block;
+}
+.offers .cash figure {
+    top: -16px;
+}
+    
+ul.second li {
+    margin: 0 0 5px 0;
+}
+ul.second li:before, ul.second li:after{
+    display: none;
+}
+ul.second {
+    margin-left: -35px;
+}
+em.more-info strong {
+    font-size: 14px;
+}
+em.more-info strong a {
+    font-size: 14px;
+}    
+ul.last {
+    overflow: hidden;
+}
+.pattern .col-md-2.col-sm-3.col-xs-4 {
+    width: 50%;
+}    
+.fblike em {
+    font-size: 14px;
+}
+ul.second-stage li {
+    margin-left: 0;
+}
+ul.second-stage li:before {
+    left: -10px;
+} 
+.footer .col-md-2 col-sm-3 col-xs-6{
+    width: 100%;
+}
+.offer-item.bumper img {
+    margin: 0 0 -10px 130px;
+}
+.offer-item.super h2 {
+    top: 42px;
+    bottom: auto;
+}
+.offer-item.super img {
+    margin: 0px 0 -20px 102px;
+}
+.offer-item.sure figure {
+    width: 94%;
+}
+.offer-item.sure img {
+    margin: 0 0 -14px 20px;
+}
+.footer .col-md-2.col-sm-3.col-xs-6{
+    width: 100%;
+    margin-bottom: 15px;
+}
+.header figure.logo {
+    left: 80px;
+}
+.logo figcaption {
+    left: 0px;
+    top: 160px;
+}
+.header{
+    background-position: 58% 39%;x
+}
+
+}
+
+@media (max-width: 360px) {
+
+.header p.caption {
+    bottom: -110px;
+    font-size: 18px;
+}
+.offers {
+    margin-top: 180px;
+}
+ul.numbers {
+    padding-right: 15px;
+}
+.procedure-wrap {
+    padding: 40px 0 40px 15px;
+} 
+.header figure.logo {
+    left: 50px;
+    width: 70%;
+}
+.offers {
+    margin-top: 20px;
+}  
+figcaption br {
+    display: none;
+} 
+.offer-item.bumper h2 {
+    bottom: 63px;
+}
+
+
+}
+
+
+@media (max-width: 320px) {
+
+.header figure.logo {
+    left: 20px;
+    top: 28px;
+    width: 80%;
+}
+.offers .bumper figcaption p, .offers .super figcaption p {
+    padding: 10px 0 !important;
+    text-align: center;
+}
+.cash {
+    margin: 0;
+}
+.offers .cash figure {
+    top: -56px;
+}
+.offers .bumper figcaption {
+    margin-left: 0px;
+}
+.header p.caption {
+    bottom: -105px;
+}
+figcaption:after {
+    border-bottom: 75px solid #fff;
+    right: -1px;
+    top: -8px;
+}
+figcaption:before {
+    left: -1px;
+    top: 5px;
+}
+.super figcaption:after {
+    border-bottom: 78px solid #fff;
+    right: -1px;
+    top: -8px;
+}
+.super figcaption:before {
+    left: -1px;
+    top: 0px;
+    border-bottom: 78px solid #fff;
+}
+.cash figcaption:after {
+    border-bottom: 78px solid #fff;
+    top: -3px;
+}
+.cash figcaption:before {
+    left: -1px;
+    top: -1px;
+}
+.social-links .col-md-8 {
+    padding: 0 0px 0 15px;
+}
+.offer-item.super h2 {
+    top: 35px;
+}
+.offers .super figure {
+    width: 90%;
+}
+.offer-item.super img {
+    margin: 0px 0 -20px 30px;
+}
+
+
+}

@@ -52,24 +52,35 @@ class question_model extends CI_Model {
         $this->db->delete($this->table_question);
     }
 
-    public function add_question(){
+    public function add_question($contest_type){
         $data = array(
-            'question_code' => $this->input->post('question_code'),
-            'prize_details' => $this->input->post('prize_details')
+            'contest_type' => $contest_type,
+            'datetime' => $this->input->post('question_date'),            
+            'question' => $this->input->post('question'),
+            'answer' => $this->input->post('answer'),
+            'option_1' => $this->input->post('option_1'),
+            'option_2' => $this->input->post('option_2'),
+            'option_3' => $this->input->post('option_3')
         );
         $this->db->insert($this->table_question,$data);
-        $cid = $this->db->insert_id();        
+        $qid = $this->db->insert_id(); 
+        return $qid;       
     }
 
-    public function update_question($cid){
+    public function update_question($qid){
         $data = array(
-          'question_code' => $this->input->post('question_code'),
-          'prize_details' => $this->input->post('prize_details'),
-          'question_status' => $this->input->post('question_status'),
-          'user_id' => $this->input->post('user_id')
+            'datetime' => $this->input->post('question_date'),
+            'question' => $this->input->post('question'),
+            'answer' => $this->input->post('answer'),
+            'option_1' => $this->input->post('option_1'),
+            'option_2' => $this->input->post('option_2'),
+            'option_3' => $this->input->post('option_3')
         );
-        $this->db->where('id',$cid);
-        $this->db->update($this->table_question,$data);
+        $this->db->where('id',$qid);
+        if($this->db->update($this->table_question,$data))
+            return '1';
+        else
+            return '0';
     }
 
     function updateAnswers()
@@ -84,6 +95,48 @@ class question_model extends CI_Model {
             );
             $this->db->where('id',$question_id);
             $this->db->update($this->table_question,$data);
+        }
+    }
+
+    function updateUltimateContestAnswers()
+    {
+        for($i=1;$i<=5;$i++)
+        {
+            $question_id = $_POST['question_id_'.$i];
+            if($i==2 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
+            {                
+                $answer = $_POST['answer_'.$i]['0'].','.$_POST['answer_'.$i]['1'];
+            }
+            else
+                $answer = $_POST['answer_'.$i];
+            //echo $question_id.' -- '.$answer.'<br>';
+            $data = array(
+              'answer' => $answer
+            );
+            $this->db->where('id',$question_id);
+            $this->db->update($this->table_question,$data);
+        }
+    }
+
+    function get_all_ultimate_contest_questions(){
+        $this->db->select();
+        $this->db->where('contest_type', '2');
+        $query = $this->db->get($this->table_question);  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    function get_all_time_contest_questions(){
+        $this->db->select();
+        $this->db->where('contest_type', '3');
+        $query = $this->db->get($this->table_question);  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
         }
     }
 

@@ -1,75 +1,268 @@
-html, body {margin: 0px;font-family: 'Open Sans', sans-serif;}
-body {}
-#wrapper {width: 810px; margin:0 auto;background-image: url(../images/back_fb.jpg); background-repeat: repeat-x;height: 1048px !important;}
-#wrapper.for {height: 672px;}
-#wrapper.forreg {height: 470px;}
-#wrapper .img {background-image: url(../images/home_fb.jpg);background-repeat: no-repeat;background-size: cover;height: 1048px;width: 100%;} 
-#wrapper .register-success {background-image: url(../images/success.png);background-repeat: no-repeat;background-size: cover;height: 1048px;width: 100%;} 
-#wrapper .terms {background-image: url(../images/terms_fb.jpg);background-repeat: no-repeat;background-size: cover;height: 1048px;width:100%; }
-#wrapper .upload_procedure {background-image: url(../images/upload_fb.jpg);background-repeat: no-repeat;background-size: cover;height: 1048px;width:100%; }
-.logo {text-align: center;padding-top: 150px;}
-.logoside {text-align: center;padding-top: 60px; margin-right: 40px;}
-.content {background-color:rgba(41, 41, 41, 0.32);width:74%;margin:25px auto;padding: 30px;}.content .form-group {margin-bottom: 22px;}
-.content .form-group label {width: 25%;float: left; color: #FFF;}
-.content .form-group input {width: 50%;float: left;}
-.content .form-group input.file {color: #FFF;}
-.content .form-group.submit  {margin-bottom: 0px;}
-.content .form-group.submit input {width: auto;margin-bottom: 0px;border-radius: 7px;padding: 11px;border: none;color: #FFF;background-color: #3E73AD;font-weight: bold;}
-.textbox {border-radius: 6px; border: 1px solid #999;outline:0;height:25px;width: 275px;padding: 0px 5px;}
-.selectbox {border-radius: 6px; border: 1px solid #999;outline:0;height:25px;width: 311px;padding: 0px 5px;}
-.clear {clear: both;}
-.menu { /*margin: 0px 2px;*/}
-.menu ul {margin: 0px;padding: 0px;background-color: #002c80;}
-.menu ul li {list-style: none;display: inline-block; /* margin: 0px -2px;*/}
-.menu ul li a {display: block; padding: 20px 24px;color: #FFF;text-decoration: none;font-size: 17px;}
-.menu ul li a:hover {background-color: #EB2B90;}
-.active {background-color: #EB2B90;}/*---------------------------------------------------gallery---------------------------------------------*/
-.gallery{margin: 5px;padding: 5px; height: auto; width: auto; text-align: center;}.gallery .img-section {float: left; padding:10px; border: 1px solid #EE278E; margin-left: 55px; margin-bottom: 15px;margin-top: 15px;background: #C5B1CD;}.gallery img{display: inline; margin: 5px; border: 1px solid #ffffff; width: 280px;}.gallery .img-section .desc{text-align: center;font-weight: bold;margin: 5px; color: #DD1F21;}.gallery img:hover{border: 1px solid #72a1d5;}
-/*---------------------------------------------------gallery1---------------------------------------------*/
-.gallery1{height: auto; width: auto; text-align: center; /*background-color: #614A9A;*/ padding-left: 12px;
-} 
-.gallery1 .img-section {float: left; border: 1px solid #002c80; margin: 10px;padding-bottom:5px; width:175px; background-color: white; height: 200px;}
-.gallery1 img{display: inline; margin: 5px; border: 1px solid #ffffff; }
-.gallery1 .img-section .desc{text-align: center;font-weight: normal; width: 120px; margin: 5px;}
-.gallery1 img:hover{border: 1px solid #72a1d5;}
-/*---------------------------------------------------gallery single-----------------------------------------*/
-.gall{margin: 5px;padding: 5px; height: auto; width: auto; text-align: center;}
-.gall .img-section {float: left; margin: 10px; padding-bottom:5px; width:175px;}
-.gall img{display: inline; margin: 5px; }
-.gall .img-section .desc{text-align: center;font-weight: normal; width: 120px; margin: 5px;}
-/*.gall img:hover{border: 1px solid #72a1d5;}*/
-.countNum {    position: relative;    background: white;    border: 1px solid #9197a3;    border-radius: 2px;    color: #4e5665;    display: inline-block;    font-size: 11px;    height: auto;    line-height: 18px;    margin-left: 6px;    min-width: 15px;    padding: 0 3px;    text-align: center;    white-space: nowrap;}
-.countNum:before {    position: absolute;    content: "";    border-color: transparent #9197a3;    border-style: solid;    border-width: 4px 5px 4px 0;    display: block;    top: 5px;    left: -6px;}
-.countNum like_count:before {    position: absolute;    content: "";    border-color: transparent #FFF;    border-style: solid;    border-width: 4px 4px 4px 0;    display: block;    top: 5px;    left: -4px;}.fb_iframe_widget {display: inline !important;}.image{max-width: 700px;}
-.homeNav{background-color: #5A052F; margin-right: -2px !important;}
-.ternsNav{background-color: #506F24; margin-right: -2px !important;}
-.uploadNav{background-color: #36143A; margin-right: -2px !important;}
-.regNav{background-color: #482254; margin-right: -2px !important;}
-.photoNav{background-color: #2C397A; margin-right: -2px !important;} 
-.paginaion99 {float: left;width: 95%; margin-left: 20px;}
-.paginaion99 a {
-    background-color: #aaa;
-    color: #fff;
-    padding: 3px 4px;
-    text-decoration: none;
-    font-size: 13px;
-    min-width: 16px;
-    display: inline-block;
-    border-radius: 4px;
-    box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.7);
-    margin: 3px 0;
-}
-.paginaion99 > a:first-child, 
-.paginaion99 > a:last-child {
-    background: #4A67B7;
-    }
-.paginaion99 a.paginationActive {
-    background-color: #444 !important;
-}
-div#wrapper.gal-lery {
-    width: 790px;
+@font-face {
+    font-family: 'Flama-Basic';
+    src: url('../fonts/Flama-Basic-2.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
-.pagination{
-        margin: 0px !important;
+@font-face {
+    font-family: 'Flama-Book';
+    src: url('../fonts/Flama-Book.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'SF-Sports-Night-NS';
+    src: url('../fonts/SF-Sports-Night-NS.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html, body {margin: 0px; font-family: 'Flama-Basic', sans-serif;}
+body { background-color: #000000;}
+
+p{
+	font-family: 'Flama-Basic';
+    line-height: 25px;	
+}
+p span{
+	font-family: 'Flama-Basic';
+}
+.no-padding{
+    padding: 0;
+}
+.container{
+
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+	margin:0 auto;
+	max-width:100%;
+    width: 1000px;
+    padding: 0px;
+}
+ .header {
+    /*background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 1030px;*/
+    position: relative;
+    background-position: 100% 39%;
+} 
+/*.header figure.logo {
+    position: absolute;
+    /*top: 60px;
+    left: 135px;*/
+}*/
+
+
+.header figure.logo {
+    display: inline-block;
+    /*border: 1px dotted gray;
+    margin: 20px;*/ /* adjust as needed */
+}
+.header figure img {
+    vertical-align: top;
+}
+.header figure figcaption {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: -55px;
+    font-family: 'Flama-Basic', sans-serif;
+}
+
+
+/*.logo figcaption {
+    position: absolute;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: -55px;
+    font-family: 'Flama-Basic', sans-serif;
+}*/{
+
+}
+
+.user_section{      
+    background-image: url(../images/user_section_background.jpg);
+    background-repeat: repeat-x;
+    height:100px;
+    padding: 0px;
+    color: #FFFFFF;
+}
+.user_section .user_score{    
+    padding: 25px 150px;
+}
+
+.user_section .user_image img{
+    max-height: 50px;
+}
+.mainpanel{
+    padding: 50px 140px;
+}
+
+.mainpanel .title_header_image{
+    background-color: #9a9a9a;
+    background-image: url('../images/title_header_image.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.mainpanel .title_header_image p{
+    font-family: 'SF-Sports-Night-NS';
+    font-weight: 700;
+    padding: 5px 25px;
+}
+
+.mainpanel .introform{
+    padding:0px;
+}
+.mainpanel .formsection{    
+    background-image: url(../images/background_bar.png);
+    background-repeat: repeat-y;
+    margin: 15px;
+}
+.mainpanel .formsection .myform{
+    padding: 0 40px;
+}
+
+.mainpanel .formsection .textbox{
+    background: none;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid;
+    border-width: 90%;
+}
+
+.mainpanel .formsection .btn {    
+    background-image: url(../images/button_background.jpg);
+    background-repeat: repeat-x;
+    border-radius: 0px;
+    width: 100%;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border: 0px;
+}
+
+.mainpanel .formsection .myform a {
+  color: #737373;
+  text-align: center;
+}
+
+
+
+label.myButton input[type="file"] {
+    position:absolute;
+    top: -1000px;
+}
+
+/***** Example custom styling *****/
+.myButton {
+    border: 1px solid #3D3D3D;
+    padding: 5px;
+    background: none;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.myButton:hover {
+    cursor: pointer;
+}
+/*.myButton:active {
+    background: #FFFFFF;
+}*/
+.myButton :invalid + span {
+    color: #8C8C8C;
+    font-size: 12px;
+}
+.myButton :valid + span {
+    color: #FFFFFF;
+}
+.mainpanel .formsection .check_box{
+    color:#737373;
+}
+/* Footer start */
+.footer{
+	background: #01AEF0;
+    padding: 10px 0;
+}
+.nopadding {
+    padding: 0 5px;
+}
+.center-block {
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
+}
+
+.circle_container{
+    padding: 20px 20px 100px 50px; 
+}
+
+.circle_container button{
+}
+.circle_container a{
+    color: #FFFFFF;
+    border: 0px;
+    padding:5px 20px; 
+}
+
+.circle_container a.btn_match{
+    color: #000000;
+    background-color: #00AEEF;
+    margin-top: 5px;
+}
+
+.circle_container button.btn_ultimate{
+    color: #000000;
+    background-color: #00A950;
+    margin-top: 5px;
+}
+
+.circle_container button.btn_all{
+    background-color: #F68D29;
+    margin-top: 5px;
+}
+
+.table{
+    color: #FFFFFF;
+}
+
+@media (max-width: 320px) {
+    .logo figcaption p{
+            margin-top: -18px;
+    }
+}
+@media (max-width: 360px) {
+    .logo figcaption p{
+            margin-top: -18px;
+    }
+}
+@media (min-width: 320px) and (max-width: 414px)  {
+    .logo figcaption p{
+            margin-top: -18px;
+    }
+}
+@media (max-width: 480px){
+    .logo figcaption p{
+            margin-top: -18px;
+    }
+
+    .mainpanel{
+        padding: 10px;
+    }
+}
+@media (max-width: 640px) {
+    .logo figcaption p{
+        margin-top: 35px;
+    }
+
+    .mainpanel{
+        padding: 10px;
+    }
+
 }

@@ -126,6 +126,17 @@ class country_model extends CI_Model {
         } 
     }
 
+    function get_players()
+    {
+        $this->db->select();
+        $query = $this->db->get('tbl_players');  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }        
+    }
+
     function get_all_players($country_id)
     {
         $this->db->select();
