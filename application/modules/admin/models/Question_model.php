@@ -103,7 +103,7 @@ class question_model extends CI_Model {
         for($i=1;$i<=5;$i++)
         {
             $question_id = $_POST['question_id_'.$i];
-            if($i==2 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
+            if($i==1 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
             {                
                 $answer = $_POST['answer_'.$i]['0'].','.$_POST['answer_'.$i]['1'];
             }

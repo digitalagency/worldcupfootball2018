@@ -17,7 +17,7 @@
               <div class="form-group submit">
                 <input value="Login" name="btnLogin" id="btnLogin" type="submit" class="btn">
               </div>
-              <div class="form-group text-center"> <a href="">Forgot your Password ?</a> </div>
+              <div class="form-group text-center"> <a href="<?php echo base_url();?>forgot-password">Forgot your Password ?</a> </div>
               <!-- <div class="form-group">
                 <div id="fb-root"></div>
                 <script>(function(d, s, id) {

@@ -1,13 +1,21 @@
+<?php
+$question_id = $this->uri->segment(2);
+$now = date('Y-m-d H:i:s');
+$question_date = $this->home_model->get_question_date_by_question_id($question_id);
+$left_hours = $this->home_model->dateDiff($now, $question_date);
+if($left_hours>24)
+  redirect(base_url() . 'dashboard');
+?>
 <div class="user_section">
   <?php $this->load->view('includes/user_scoreboard_section'); ?>
 </div>
-<div class="row mainpanel">
+<div class="row mainpanel listing">
 
     <img src="<?php echo base_url();?>content_home/images/match_day_contest_heading.png">
-  <div class="col-md-12">
+  <div class="col-md-12 question_listing_section">
           <div class="table-responsive">  
             <?php
-            $action = base_url() . 'match-day-contest/';
+            $action = base_url() . 'all-time-contest-question/'.$this->uri->segment(2);
             $attributes = array('class' => 'form-horizontal form-bordered', 'id' => 'form1', 'enctype' => 'multipart/form-data');
             echo form_open_multipart($action, $attributes);
             ?>
@@ -21,50 +29,16 @@
                   //print_r($row);
                   //echo $key->ordering;
                     ++$counter;
+                    $answer = $this->home_model->get_user_answer_by_question_id($row->id);
                     ?>
                   <tr>
                     <td><?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"></td>
                   </tr>
                   <tr>
                     <td>
-                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_1;?>"> <?php echo $row->option_1;?>
-                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_2;?>"> <?php echo $row->option_2;?>
-                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_3;?>"> <?php echo $row->option_3;?>
-
-                    
-                    <?php
-                    if($row->question_number=="2")
-                    {
-                      ?>
-                      <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?><input type="number" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $row->answer; ?>"> <input type="number" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $row->answer; ?>" > <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
-                      
-                      <?php
-                    }
-                    if($row->question_number=="4")
-                    {
-                    ?>
-                    <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
-                      <option value="">Select Answer</option>                
-                      <option disabled><?php echo $this->home_model->get_country_name($match_info['0']->team_1);?></option>
-                        <?php 
-                        $players = $this->home_model->get_all_players($match_info['0']->team_1);
-                        foreach($players as $player){?>
-                        <option value="<?php echo $player->id;?>" <?php if($row->answer==$player->id) echo 'selected="selected"';?>>&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $player->player_name;?></option>
-                        <?php 
-                        }
-                        ?>
-                      <option disabled><?php echo $this->home_model->get_country_name($match_info['0']->team_2);?></option>
-                        <?php 
-                        $players = $this->home_model->get_all_players($match_info['0']->team_2);
-                        foreach($players as $player){?>
-                        <option value="<?php echo $player->id;?>">&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $player->player_name;?></option>
-                        <?php 
-                        }
-                        ?>
-                    </select>
-                    <?php
-                    }
-                    ?>
+                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_1;?>" <?php if($answer==$row->option_1) echo 'checked="checked"';?>> <?php echo $row->option_1;?>
+                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_2;?>" <?php if($answer==$row->option_2) echo 'checked="checked"';?>> <?php echo $row->option_2;?>
+                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_3;?>" <?php if($answer==$row->option_3) echo 'checked="checked"';?>> <?php echo $row->option_3;?>
                     </td>
                   </tr>
                   <?php
@@ -72,15 +46,19 @@
                   endforeach;
                   ?>                  
                   <tr>
-                    <td><button class="btn btn-success btn-flat" type="submit">Update</button></td>
+                    <td>
+                      <?php
+                      if($this->home_model->check_if_already_answered_by_question_id($question_id)==0){?>
+                      <button name="btnSubmit" class="btn btn-success btn-flat" type="submit">Submit</button>
+                      <?php } else{
+                        echo "You have already answered to these match questions.";
+                      }
+                      ?>
+                    </td>
                   </tr>
                   <?php
-                } else {
+                  }
                   ?>
-                  <tr>
-                    <td colspan="8"><center>No Question has been added !!!</center></td>
-                  </tr>
-                  <?php } ?>
                 </tbody>
               </table>              
               <?php echo form_close(); ?>

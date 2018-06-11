@@ -164,6 +164,138 @@ class Home_model extends CI_Model {
         }        
     }
 
+    function get_question_date_by_question_id($question_id)
+    {
+        $this->db->select('datetime');
+        $this->db->where("id",$question_id);
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            
+            $val = $query->row();
+            $datetime = $val->datetime;
+            return $datetime;
+        }
+    }
+
+    function get_match_date_by_match_id($match_id)
+    {
+        $this->db->select('match_date');
+        $this->db->where("id",$match_id);
+        $query =  $this->db->get('tbl_match');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            
+            $val = $query->row();
+            $match_date = $val->match_date;
+            return $match_date;
+        }
+    }
+
+    function enter_match_day_contest_answer($match_id){
+        $user_id = $this->session->userdata('user_id');
+        if($this->check_if_already_answered($match_id)==0)
+        {
+            for($i=1;$i<=4;$i++)
+            {
+                $data='';
+                $data = array(
+                    'match_id' => $match_id,
+                    'user_id' => $user_id,
+                    'question_id' => $this->input->post('question_id_'.$i)
+                );
+                if($i==2)
+                    $data['answer'] = $this->input->post('answer1_'.$i).'-'.$this->input->post('answer2_'.$i);
+                else
+                    $data['answer'] = $this->input->post('answer_'.$i);
+                $this->db->insert('tbl_answer',$data);
+                $aid = $this->db->insert_id(); 
+            }
+            return $aid;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    function check_if_already_answered($match_id)
+    {        
+        $user_id = $this->session->userdata('user_id');
+        $this->db->select('');
+        $this->db->where("match_id",$match_id);
+        $this->db->where("user_id",$user_id);
+        $query =  $this->db->get('tbl_answer');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    function check_if_already_answered_by_question_id($question_id)
+    {        
+        $user_id = $this->session->userdata('user_id');
+        $this->db->select('');
+        $this->db->where("question_id",$question_id);
+        $this->db->where("user_id",$user_id);
+        $query =  $this->db->get('tbl_answer');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    function get_correct_answer_by_question_id($question_id)
+    {
+        $this->db->select('answer,contest_type');
+        $this->db->where("id",$question_id);
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            
+            $val = $query->row();
+            $answer = $val->answer;
+            return $answer;
+        }
+    }
+
+    function get_correct_answer_n_contest_type_by_question_id($question_id)
+    {
+        $this->db->select('answer,contest_type');
+        $this->db->where("id",$question_id);
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            
+            $val = $query->row();
+            $answer = $val->answer;
+            $result['contest_type'] = $val->contest_type;
+            $result['answer'] = $val->answer;
+            return $result;
+        }
+    }
+
+    function get_user_answer_by_question_id($question_id)
+    {        
+        $user_id = $this->session->userdata('user_id');
+        $this->db->select('answer');
+        $this->db->where("question_id",$question_id);
+        $this->db->where("user_id",$user_id);
+        $query =  $this->db->get('tbl_answer');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {            
+            $val = $query->row();
+            $answer = $val->answer;
+            return $answer;
+        }
+    }
+
     function getUltimateContestQuestion(){
         $this->db->select('');
         $this->db->where("contest_type",'2');
@@ -174,6 +306,34 @@ class Home_model extends CI_Model {
             return $query->result();
         } 
 
+    }
+
+    function enter_ultimate_contest_answer(){
+        $user_id = $this->session->userdata('user_id');
+        //print_r($_POST);
+        if($this->check_if_already_answered('0')==0)
+        {
+            for($i=1;$i<=5;$i++)
+            {
+                $data='';
+                $data = array(
+                    'user_id' => $user_id,
+                    'question_id' => $this->input->post('question_id_'.$i)
+                );
+                $question_id = $_POST['question_id_'.$i];
+                if($i==1 && isset($_POST['answer1_'.$i]) && isset($_POST['answer2_'.$i]))
+                {                
+                    $data['answer'] = $_POST['answer1_'.$i].','.$_POST['answer2_'.$i];
+                }
+                else
+                    $data['answer'] = $_POST['answer_'.$i];
+                print_r($data);
+                //echo $question_id.' -- '.$answer.'<br>';            
+                $this->db->insert('tbl_answer',$data);
+                $aid = $this->db->insert_id(); 
+            }
+            return $aid;
+        }
     }
 
     function all_time_contest(){        
@@ -200,6 +360,32 @@ class Home_model extends CI_Model {
         } 
 
     }    
+
+    function enter_all_time_contest_answer(){
+        $user_id = $this->session->userdata('user_id');
+        $question_id = $this->uri->segment(2);
+        //print_r($_POST);
+        
+        if($this->check_if_already_answered_by_question_id($question_id)==0)
+        {
+            for($i=1;$i<=4;$i++)
+            {
+                $data='';
+                $data = array(
+                    'user_id' => $user_id,
+                    'question_id' => $this->input->post('question_id_'.$i),
+                    'answer' => $this->input->post('answer_'.$i)
+                );
+                $question_id = $_POST['question_id_'.$i];
+                    $data['answer'] = $_POST['answer_'.$i];
+                //print_r($data);
+                //echo $question_id.' -- '.$answer.'<br>';            
+                $this->db->insert('tbl_answer',$data);
+                $aid = $this->db->insert_id(); 
+            }
+            return $aid;
+        }
+    }
 
     function get_datetime($question_id)
     {        
@@ -243,6 +429,61 @@ class Home_model extends CI_Model {
         } else {
             return $query->result();
         }        
+    }
+
+    function calculateUserScore()
+    {
+        $user_id = $this->session->userdata('user_id');
+        //if contest_type = 1, score = 10
+        //if contest_type = 2, score = 100
+        //if contest_type = 3, score = 10
+
+        $this->db->select();
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get('tbl_answer');  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            $totalScore = 0;
+            $results = $query->result();
+            foreach($results as $row){
+                $result = $this->get_correct_answer_n_contest_type_by_question_id($row->question_id);
+                $correctAnswer = $result['answer'];
+                $contest_type = $result['contest_type']; 
+                $userAnswer = $row->answer;
+                if($contest_type==1 || $contest_type==3)
+                    $totalScore+=10;
+                elseif($contest_type==2)
+                    $totalScore+=100;
+            }
+        } 
+        return $totalScore;
+    }
+
+    function dateDiff($fromDate, $toDate)
+    {
+        /*$start  = date_create($fromDate);
+        $end    = date_create($toDate);
+        echo $start.' -- '.$end;*/
+        $start=date_create($fromDate);
+        $end=date_create($toDate);
+        $diff   = date_diff( $start, $end );
+
+       /* echo 'The difference is ';
+        echo  $diff->y . ' years, ';
+        echo  $diff->m . ' months, ';
+        echo  $diff->d . ' days, ';
+        echo  $diff->h . ' hours, ';
+        echo  $diff->i . ' minutes, ';
+        echo  $diff->s . ' seconds';*/
+        // Output: The difference is 28 years, 5 months, 19 days, 20 hours, 34 minutes, 36 seconds
+        //echo 'The difference in hours : ' . $diff->h;
+        //echo 'The difference in days : ' . $diff->days;
+        // Output: The difference in days : 10398
+        if($diff->y==0 && $diff->m==0 && $diff->d==0)
+            return $diff->h;
+        else
+            return $diff->h+100;
     }
 
     public function getPattern_by_shade($shades)

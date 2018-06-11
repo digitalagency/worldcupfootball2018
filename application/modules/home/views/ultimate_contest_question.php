@@ -1,14 +1,11 @@
-<div class="user_section">
-  <?php $this->load->view('includes/user_scoreboard_section'); ?>
-</div>
-<div class="row mainpanel">
+<div class="row mainpanel listing">
 
     <img src="<?php echo base_url();?>content_home/images/match_day_contest_heading.png">
   
-        <div class="col-md-12">
+        <div class="col-md-12 question_listing_section">
           <div class="table-responsive">  
             <?php
-            $action = base_url() . 'admin/Question/TheUltimateContest/'.$this->uri->segment(4);
+            $action = base_url() . 'ultimate-contest-question/';
             $attributes = array('class' => 'form-horizontal form-bordered', 'id' => 'form1', 'enctype' => 'multipart/form-data');
             echo form_open_multipart($action, $attributes);
             ?>
@@ -16,12 +13,14 @@
               <tbody>
                 <?php
                 $i = 1;
+                $answer='';
                 if (!empty($question_info)) { 
                   $counter=0;
                   foreach ($question_info as $row):
                   //print_r($row);
                   //echo $key->ordering;
                     ++$counter;
+                    $answer = $this->home_model->get_user_answer_by_question_id($row->id);
                     ?>
                   <tr>
                     <td><?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"></td>
@@ -31,35 +30,32 @@
                     <?php
                     if($row->question_number=="1")
                     {
-                      ?>  
-
-                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>"> <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
-                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>"> <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
-                                          
-                     
-                      <?php
+                    ?>
+                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($answer==$match_info['0']->team_1) echo 'selected="selected"';?>> <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
+                    <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($answer==$match_info['0']->team_2) echo 'selected="selected"';?>> <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
+                    <?php
                     }
                     if($row->question_number=="2")
                     {
                       $answer_1 = '';
                       $answer_2 = '';
-                      if(!empty($row->answer))
+                      if(!empty($answer))
                       {
-                        $aa = explode(',',$row->answer);
+                        $aa = explode(',',$answer);
                         $answer_1 = $aa['0'];
                         $answer_2 = $aa['1'];
                       }
                       ?>                                            
-                      <select class="form-control" name="answer1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>[]" required>
+                      <select class="form-control selectbox" name="answer1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>[]" required  style="background:#1c1c1c; width:40%; color:#FFFFFF; float:left;">
                         <option value="" >Select Country</option>
                         <?php foreach($countries as $country){?>                
-                        <option value="<?php echo $country->id;?>"><?php echo $country->country_name;?></option>
+                        <option value="<?php echo $country->id;?>" <?php if($answer_1==$country->id) echo 'selected="selected"';?>><?php echo $country->country_name;?></option>
                         <?php } ?>
                       </select>                                            
-                      <select class="form-control" name="answer2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>[]" required>
+                      <select class="form-control" name="answer2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>[]" required style="background:#1c1c1c; width:40%; color:#FFFFFF; float:left; margin-left:20px;">
                         <option value="">Select Country</option>
                         <?php foreach($countries as $country){?>                
-                        <option value="<?php echo $country->id;?>"><?php echo $country->country_name;?></option>
+                        <option value="<?php echo $country->id;?>" <?php if($answer_2==$country->id) echo 'selected="selected"';?>><?php echo $country->country_name;?></option>
                         <?php } ?>
                       </select>
                       <?php
@@ -67,20 +63,20 @@
                     if($row->question_number=="3")
                     {
                     ?>
-                      <input type="text" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $row->answer; ?>" placeholder="0-0">
+                      <input type="text" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0" style="background:#1c1c1c; width:40%; color:#FFFFFF;">
                     <?php
                     }
                     if($row->question_number=="4")
                     {
                     ?>
-                      <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                      <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required style="background:#1c1c1c; width:40%; color:#FFFFFF;">
                         <option value="">Select a Player</option>
                         <?php foreach($countries as $country){?>                
                         <option value="" disabled><?php echo $country->country_name;?></option>
                         <?php 
                         $players = $this->home_model->get_all_players($country->id);
                         foreach($players as $player){?>
-                        <option value="<?php echo $player->id;?>">&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $player->player_name;?></option>
+                        <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $player->player_name;?></option>
                         <?php }
                         } ?>
                       </select>
@@ -94,15 +90,11 @@
                   endforeach;
                   ?>                  
                   <tr>
-                    <td><button class="btn btn-success btn-flat" type="submit">Update</button></td>
+                    <td><?php if(empty($answer)){?><button class="btn btn-success btn-flat" type="submit" name="btnSubmit">Submit</button><?php } else echo "You have already answered these questions."; ?></td>
                   </tr>
                   <?php
-                } else {
-                  ?>
-                  <tr>
-                    <td colspan="8"><center>No Question has been added !!!</center></td>
-                  </tr>
-                  <?php } ?>
+                }
+                ?>
                 </tbody>
               </table>              
               <?php echo form_close(); ?>

@@ -138,8 +138,6 @@ class Question extends MY_Controller {
     }
 
     public function TheUltimateContest(){
-        
-
         if(isset($_POST['question_id_1']))
         {
             $this->Question_model->updateUltimateContestAnswers();
