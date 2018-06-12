@@ -4,6 +4,16 @@
     <h3>FORGOT PASSWORD</h3>
   </div>
   <div class="down">
+    <?php
+    if(isset($message) && !empty($message))
+    {
+    ?>
+    <div class="form-group">
+      <label for="Email"><?php echo $message;?></label>
+    </div>
+    <?php
+    }
+    ?>
     <div class="form-group">
       <label for="Email">YOUR EMAIL ADDRESS</label>
       <input type="email" class="form-control" id="emailaddress" name="emailaddress" required>

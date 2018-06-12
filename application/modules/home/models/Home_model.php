@@ -118,7 +118,14 @@ class Home_model extends CI_Model {
             $user_info = $this->getUser($user_id);
             $name = $user_info['0']->fname;
             //do send password reset link
-            $reset_code = rand('1111111111,9999999999');
+            $reset_code = rand(11111111,99999999);
+
+
+            $data = array(
+                'reset_code' => $reset_code
+            );
+            $this->db->where('id', $user_id);
+            $this->db->update('tbl_participants', $data); 
             // Multiple recipients
             $to = $emailaddress;
 
@@ -133,9 +140,9 @@ class Home_model extends CI_Model {
             </head>
             <body>
               Dear '.$name.',<br><br>
-                To reset your password, please click on <a href="'.base_url().'password-reset/'.$reset_code.'" target="_blank">Reset My Password</a>
+                To reset your password, please click on <a href="'.base_url().'password-reset/'.$reset_code.'" target="_blank">Reset My Password</a><br>
                 
-                If you do not wish to change your password, please ignore this email.
+                If you do not wish to change your password, please ignore this email.<br><br><br><br>
 
 
                 Thank You !!!<br>
@@ -144,7 +151,7 @@ class Home_model extends CI_Model {
             </body>
             </html>
             ';
-
+            //echo $message;
             // To send HTML mail, the Content-type header must be set
             $headers[] = 'MIME-Version: 1.0';
             $headers[] = 'Content-type: text/html; charset=iso-8859-1';
@@ -164,6 +171,27 @@ class Home_model extends CI_Model {
             return "Sorry, the email address provided doesn't exist in our database.";
         }
     } 
+
+    function reset_password($your_password)
+    {
+        $reset_code = $this->uri->segment(2);
+        $user_id = $this->getUserIdByResetcode($reset_code);
+        if($user_id>0)
+        {
+            $new_password = md5($your_password);
+            $data = array(
+                'reset_code' => '',
+                'password' => $new_password
+            );
+            $this->db->where('id', $user_id);
+            $this->db->update('tbl_participants', $data);
+            return "You have successfully reset your password.";
+        }
+        else
+        {
+            return "Sorry, the provided reset code is not available or has expired. Please reset your password again.";
+        }
+    }
 
     public function checkLoggedIn()
     {        
@@ -188,6 +216,22 @@ class Home_model extends CI_Model {
     {
         $this->db->select('id');
         $this->db->where("email",$emailaddress);
+        $query =  $this->db->get('tbl_participants');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $id = $val->id;
+            return $id;
+        }
+    }
+
+
+
+    public function getUserIdByResetcode($resetcode)
+    {
+        $this->db->select('id');
+        $this->db->where("reset_code",$resetcode);
         $query =  $this->db->get('tbl_participants');
         if ($query->num_rows() == 0) {
             return 0;
