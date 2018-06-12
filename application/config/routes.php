@@ -80,3 +80,4 @@ $route['all-time-contest-question/(:any)'] = 'home/all_time_contest_question/$1'
 $route['forgot-password'] = 'home/forgot_password';
 $route['forgot-password-process'] = 'home/forgot_password_process';
 $route['reset-password/(:any)'] = 'home/reset_password/$1';
+$route['getselectecountry'] ='home/getselectecountry';

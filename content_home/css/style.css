@@ -135,6 +135,11 @@ label.myButton input[type="file"] {
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
+.countryscore {
+    display: inline-table;
+    margin-right: 20px;
+}
+
 /* Developer added CSS ends here */
 
 @media (max-width: 480px) {
