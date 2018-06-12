@@ -66,12 +66,6 @@ $route['admin/Coupon/([0-9]+)'] = 'admin/Coupon';
 
 
 // Frontend Section
-//$route['facebook/'] = 'home/Facebook';
-$route['facebook/(:any)'] = 'home/Facebook/$1';
-$route['facebook/(:any)/(:any)'] = 'home/Facebook/$1/$2';
-$route['facebook/(:any)/(:any)/(:any)'] = 'home/Facebook/$1/$2/$3';
-
-
 $route['terms-and-condition'] = 'home/terms_and_condition';
 $route['registration_process'] = 'home/registration_process';
 $route['thank-you'] = 'home/thank_you';
@@ -85,8 +79,4 @@ $route['all-time-contest'] = 'home/all_time_contest';
 $route['all-time-contest-question/(:any)'] = 'home/all_time_contest_question/$1';
 $route['forgot-password'] = 'home/forgot_password';
 $route['forgot-password-process'] = 'home/forgot_password_process';
-$route['photo-gallery'] = 'home/photo_gallery';
-$route['photo-gallery/(:any)'] = 'home/photo_gallery/$1';
-$route['photo-gallery/(:any)/(:any)'] = 'home/photo_gallery/$1/$2';
-$route['add-new-gift-coupons'] = 'home/add_new_gift_coupons';
-$route['update-likes-with-cron/(:any)'] = 'home/update_likes_with_cron/$1';
+$route['reset-password/(:any)'] = 'home/reset_password/$1';

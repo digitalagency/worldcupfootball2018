@@ -79,7 +79,7 @@ if($left_hours>24)
               if($row->question_number=="4")
               {
               ?>
-              <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
+              <select name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
                 <option value="">Select Answer</option>                
                 <option disabled><?php echo $this->home_model->get_country_name($match_info['0']->team_1);?></option>
                   <?php 

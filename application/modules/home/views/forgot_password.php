@@ -1,8 +1,11 @@
-    <div class="row mainpanel">
-      <div class="col-md-6">
-        <?php $this->load->view('includes/fotgot_password');?>
-      </div>
-      <div class="col-md-6">
-        <?php $this->load->view('includes/home-right-panel.php');?>
-      </div>
+<div class="container first">
+  <div class="row">
+    <div class="col-md-6">
+      <?php $this->load->view('includes/fotgot_password');?>
     </div>
+    <div class="col-md-6">
+      <?php $this->load->view('includes/login');?>
+      <div class="face"> <img src="images/face.jpg"> </div>
+    </div>
+  </div>
+</div>

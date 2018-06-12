@@ -180,12 +180,37 @@ class Home extends View_Controller {
 
     function forgot_password()
     {        
+        $message='';
         $data['menu'] = 'register';
-        $data['page_title'] = '.:: Set Wet Nepal :: ';           
+        $data['page_title'] = '.:: Set Wet Nepal :: ';  
+        if(isset($_POST['emailaddress']))
+        {
+            $emailaddress = $_POST['emailaddress'];
+            $message = $this->home_model->send_reset_password_link($emailaddress);
+        }         
 
+        $data['message'] = $message;
         $data['main'] = 'forgot_password';
         //$data['main'] = 'photo_upload_completed';
         $this->load->view('main',$data);
+    }
+
+    function forgot_password_process()
+    {       
+        $data['menu'] = 'register';
+        $data['page_title'] = 'Forgot Password :: Set Wet Nepal';          
+
+        $data['main'] = 'forgot_password_process';
+        $this->load->view('main',$data);        
+    }
+
+    function reset_password()
+    {       
+        $data['menu'] = 'register';
+        $data['page_title'] = 'Reset Password :: Set Wet Nepal';          
+
+        $data['main'] = 'reset_password';
+        $this->load->view('main',$data);        
     }
 
     function photo_upload_test()

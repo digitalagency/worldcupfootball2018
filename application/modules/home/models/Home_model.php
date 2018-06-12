@@ -108,7 +108,62 @@ class Home_model extends CI_Model {
             redirect(base_url() . 'dashboard');
         }
 
-    }    
+    }  
+
+    public function send_reset_password_link($emailaddress) 
+    {
+        $user_id = $this->getUserIdByEmail($emailaddress);
+        if($user_id>0)
+        {
+            $user_info = $this->getUser($user_id);
+            $name = $user_info['0']->fname;
+            //do send password reset link
+            $reset_code = rand('1111111111,9999999999');
+            // Multiple recipients
+            $to = $emailaddress;
+
+            // Subject
+            $subject = 'Forgot Password Request - SETWET Play in Style';
+
+            // Message
+            $message = '
+            <html>
+            <head>
+              <title>Forgot Password Request - SETWET Play in Style</title>
+            </head>
+            <body>
+              Dear '.$name.',<br><br>
+                To reset your password, please click on <a href="'.base_url().'password-reset/'.$reset_code.'" target="_blank">Reset My Password</a>
+                
+                If you do not wish to change your password, please ignore this email.
+
+
+                Thank You !!!<br>
+                SETWET<br>
+                Play in Style
+            </body>
+            </html>
+            ';
+
+            // To send HTML mail, the Content-type header must be set
+            $headers[] = 'MIME-Version: 1.0';
+            $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+            // Additional headers
+            $headers[] = 'To: '.$name.' <'.$to.'>';
+            $headers[] = 'From: SETWET Play in Style <noreply@setwetnepal.com>';
+
+            // Mail it
+            if(mail($to, $subject, $message, implode("\r\n", $headers)))
+                return "Please check your email to reset your password.";
+            else
+                return "Sorry, we are unable to reset your password due to some technical problem. Please try again later.";
+        }
+        else
+        {
+            return "Sorry, the email address provided doesn't exist in our database.";
+        }
+    } 
 
     public function checkLoggedIn()
     {        
@@ -126,6 +181,20 @@ class Home_model extends CI_Model {
             return FALSE;
         } else {
             return $query->result();
+        }
+    }
+
+    public function getUserIdByEmail($emailaddress)
+    {
+        $this->db->select('id');
+        $this->db->where("email",$emailaddress);
+        $query =  $this->db->get('tbl_participants');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $id = $val->id;
+            return $id;
         }
     }
 
