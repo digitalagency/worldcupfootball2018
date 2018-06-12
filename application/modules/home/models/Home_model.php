@@ -29,6 +29,8 @@ class Home_model extends CI_Model {
             $data = array(
                 'fname' => $this->input->post('fname'),
                 'username' => $this->input->post('username'),
+                'gender' => $this->input->post('gender'),
+                'mobile_number' => $this->input->post('mobile_number'),
                 'email' => $this->input->post('emailaddress'),
                 'password' => md5($userpassword),
                 'registered_on' => date('Y-m-d H:i:s'),

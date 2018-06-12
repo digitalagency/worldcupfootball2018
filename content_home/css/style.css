@@ -25,6 +25,8 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 .bottom {margin-top:96px; }
 .face {margin-top: 30px;}
 
+.terms {width: 100%; color:#FFFFFF;}
+
 #user-bar {background-color: rgba(255, 255, 255, 0.4);padding: 10px;color: #FFF;}
 #user-bar .left {margin-top: 20px;}
 #user-bar .left p {font-size: 26px;}
@@ -36,6 +38,7 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 
 .circle-line {margin: 98px 0px;}
 .circle-line .wrap {text-align: center;margin-bottom: 30px;}
+.circle-line .wrap img{width: 180px;}
 .circle-line .wrap a {font-size: 18px;}
 .circle-line .wrap .low {margin-top: 10px;}
 .circle-line .wrap .btn {font-size: 22px;margin-top: 10px;border: none;border-radius: 0px;padding: 6px 46px;}
@@ -151,8 +154,15 @@ label.myButton input[type="file"] {
     #opt .wrap .down .cont .i-wrap {font-size: 16px;}
     #opt .wrap .down .cont .op .date,#opt .wrap .down .cont .op .off {width: 100%;}
     #opt .wrap .down .cont .op {margin-bottom: 32px;}
+    #opt .uppd h1 {font-size: 40px;} 
     .q .form-control {
     width: 100%;margin-bottom: 10px;
+    }
+    #user-bar .left p {
+        font-size: 20px;
+    }
+    #user-bar .left a {
+        font-size: 16px;
     }
 }
 @media (min-width: 480px) and (max-width: 769px) {
@@ -161,8 +171,15 @@ label.myButton input[type="file"] {
     .home.h-left {float: none;}
     #opt .wrap {width: 100%;}
     #opt .wrap .down .cont .op {margin-bottom: 32px;}
+    #opt .uppd h1 {font-size: 40px;} 
     .q .form-control {
     width: 42%;
+    }
+    #user-bar .left p {
+        font-size: 20px;
+    }
+    #user-bar .left a {
+        font-size: 16px;
     }
 }
 @media (min-width: 769px) and (max-width: 993px) {
@@ -171,8 +188,15 @@ label.myButton input[type="file"] {
     .home.h-left {float: none;}
     .circle-line .wrap img {width: 100%;}
     #opt .wrap .down .cont .i-wrap {font-size: 16px;}
+    #opt .uppd h1 {font-size: 40px;} 
     #opt .wrap .down .cont .op {
-    margin-bottom: 22px;
-}
+        margin-bottom: 22px;
+    }
+    #user-bar .left p {
+        font-size: 20px;
+    }
+    #user-bar .left a {
+        font-size: 16px;
+    }
 }
 @media (min-width: 993px) and (max-width: 1200px){}

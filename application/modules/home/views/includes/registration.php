@@ -13,6 +13,18 @@
       <input type="text" class="form-control" id="username" name="username" required>
     </div>
     <div class="form-group">
+      <label for="Email">GENDER</label>
+      <div class="clear"></div>
+      <input type="radio" id="gender" name="gender"  value="male" required>
+      <img src="<?php echo base_url().'content_home/images/male.png';?>" alt="Male">
+      <input type="radio" id="gender" name="gender" value="female" required>
+      <img src="<?php echo base_url().'content_home/images/female.png';?>" alt="Female">
+    </div>
+    <div class="form-group">
+      <label for="Email">MOBILE NUMBER</label>
+      <input type="number" class="form-control" id="mobile_number" name="mobile_number" required>
+    </div>
+    <div class="form-group">
       <label for="Email">EMAIL</label>
       <input type="email" class="form-control" id="emailaddress" name="emailaddress" required>
     </div>
@@ -26,7 +38,7 @@
     </div>
     <div class="form-group">
       <label class="myButton">
-        <input name="yourimage" id="yourimage" type="file" required />
+        <input name="yourimage" id="yourimage" type="file" />
         <span>UPLOAD YOUR IMAGE</span>
       </label>
     </div>
@@ -38,7 +50,7 @@
       <div class="checkbox">
         <label>
           <input type="checkbox" name="i_agree">
-          By Clicking on submit, you agree to our terms and conditions. </label>
+          By Clicking on submit, you agree to our <a href="<?php echo base_url();?>privacy-policy" target="_blank">privacy policy</a> and <a href="<?php echo base_url();?>terms-and-conditions" target="_blank">terms and conditions</a>. </label>
       </div>
     </div>
   </div>

@@ -66,7 +66,8 @@ $route['admin/Coupon/([0-9]+)'] = 'admin/Coupon';
 
 
 // Frontend Section
-$route['terms-and-condition'] = 'home/terms_and_condition';
+$route['privacy-policy'] = 'home/privacy_policy';
+$route['terms-and-conditions'] = 'home/terms_and_conditions';
 $route['registration_process'] = 'home/registration_process';
 $route['thank-you'] = 'home/thank_you';
 $route['login-process'] = 'home/login_process';

@@ -3,10 +3,14 @@ $this->home_model->checkLoggedIn();
 $user_id = $this->session->userdata('user_id');
 $user_info = $this->home_model->getUser($user_id);
 $your_score = $this->home_model->calculateUserScore();
+$page = $this->uri->segment(1);
+if($page!="terms-and-conditions" && $page!="privacy-policy" && $page!="")
+{
 ?>
 <div id="user-bar">
     <div class="container">
         <div class="left">
+            <a href="<?php echo base_url();?>dashboard"><img src="<?php echo base_url();?>content_home/images/home.png" title="Go to Home"></a>
             <p>Your Score: <span><?php if($your_score>0) echo $your_score; else echo 0;?></span></p>
             <a href="<?php echo base_url();?>scoreboard">Click to See Scoreboard</a>
         </div>
@@ -19,3 +23,6 @@ $your_score = $this->home_model->calculateUserScore();
         <div class="clear"></div>
     </div>
 </div>
+<?php
+}
+?>

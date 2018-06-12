@@ -23,11 +23,19 @@ class Home extends View_Controller {
         $this->load->view('main',$data);
     }
 
-    function terms_and_condition()
+    function terms_and_conditions()
     {        
-        $data['menu'] = 'terms';
+        $data['page'] = 'terms';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
-        $data['main'] = 'terms_and_condition';
+        $data['main'] = 'terms_and_conditions';
+        $this->load->view('main',$data);
+    }
+
+    function privacy_policy()
+    {
+        $data['page'] = 'privacy';
+        $data['page_title'] = '.:: Set Wet Nepal :: ';
+        $data['main'] = 'privacy_policy';
         $this->load->view('main',$data);
     }
 
@@ -100,7 +108,7 @@ class Home extends View_Controller {
             }
 
             $image_path = FCPATH.$imagepath.$imagename;
-            $registration_id = $this->home_model->doRegistration($imagepath,$imagename);
+            $registration_id = $this->home_model->doRegistration($imagepath.'thumb/',$imagename);
             if($registration_id>0)  
                 redirect(base_url() . 'thank-you');
         }

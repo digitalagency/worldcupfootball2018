@@ -5,7 +5,7 @@
   </div>
   <div class="down">
     <div class="form-group">
-      <label for="Name">Thank you for the participation in the worldcup Football 2018 quiz competition. Please login to answer the questions.</label>      
+      <label for="Name">Thank you for the participation in Set Wet Play in Style quiz competition. Please login to answer the questions.</label>      
     </div>
   </div>
 </div>
