@@ -47,13 +47,13 @@
                         $answer_2 = $aa['1'];
                       }
                       ?>                                            
-                      <select class="form-control" name="answer1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>" required >
+                      <select onchange="selectCountry();" class="form-control firstcountry"  name="answer1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>" required >
                         <option value="" >Select Country</option>
                         <?php foreach($countries as $country){?>                
                         <option value="<?php echo $country->id;?>" <?php if($answer_1==$country->id) echo 'selected="selected"';?>><?php echo $country->country_name;?></option>
                         <?php } ?>
                       </select>                                            
-                      <select class="form-control" name="answer2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>" required >
+                      <select  onchange="selectCountry();" class="form-control secondcountry" name="answer2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>" required >
                         <option value="">Select Country</option>
                         <?php foreach($countries as $country){?>                
                         <option value="<?php echo $country->id;?>" <?php if($answer_2==$country->id) echo 'selected="selected"';?>><?php echo $country->country_name;?></option>
@@ -64,13 +64,18 @@
                         if($row->question_number=="3")
                         {
                         ?>
-                          <input type="text" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                          <div class="countryscore">
+                            <div id="firstcountryname"></div><input type="text" name="answer_1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                          </div>
+                          <div class="countryscore">
+                            <div id="secoundcountryname"></div><input type="text" name="answer_2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                          </div>
                         <?php
                         }
                         if($row->question_number=="4")
                         {
                         ?>
-                          <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                          <select class="form-control returncountry" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
                             <option value="">Select a Player</option>
                             <?php foreach($countries as $country){?>                
                             <option value="" disabled><?php echo $country->country_name;?></option>
