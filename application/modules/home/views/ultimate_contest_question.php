@@ -78,7 +78,7 @@
                           <select class="form-control returncountry" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
                             <option value="">Select a Player</option>
                             <?php foreach($countries as $country){?>                
-                            <option value="" disabled><?php echo $country->country_name;?></option>
+                            <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
                             <?php 
                             $players = $this->home_model->get_all_players($country->id);
                             foreach($players as $player){?>
