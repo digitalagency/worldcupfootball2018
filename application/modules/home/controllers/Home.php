@@ -273,14 +273,14 @@ class Home extends View_Controller {
         $output .= ' <option value="">Select a Player</option>';
         if($firstCountry!=''){
             $players1 = $this->home_model->get_all_players($firstCountry);
-            $output .= '<option value="" disabled>'.$firstCountryName.'</option>';
+            $output .= '<option value="" disabled class="countrydisable">'.$firstCountryName.'</option>';
             foreach($players1 as $p1){
                 $output .='<option value="'.$p1->id.'">-&nbsp;'.$p1->player_name.'</option>';
             }
         }
         if($secoundCountry!=''){
             $players2 = $this->home_model->get_all_players($secoundCountry);
-            $output .= '<option value="" disabled>'.$secoundCountryName.'</option>';
+            $output .= '<option value="" disabled class="countrydisable">'.$secoundCountryName.'</option>';
             foreach($players2 as $p2){
                 $output .='<option value="'.$p2->id.'">-&nbsp;'.$p2->player_name.'</option>';
             }

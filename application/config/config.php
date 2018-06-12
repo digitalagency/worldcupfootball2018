@@ -23,9 +23,12 @@ date_default_timezone_set("Asia/Kathmandu");
 | a PHP script and you can easily do that on your own.
 |
 */
-if($_SERVER['HTTP_HOST']=="worldcup2018.dac" || $_SERVER['HTTP_HOST']=="127.0.0.1"|| $_SERVER['HTTP_HOST']=="localhost")
+if($_SERVER['HTTP_HOST']=="worldcup2018.dac" || $_SERVER['HTTP_HOST']=="127.0.0.1")
 {
 	$config['base_url'] = 'http://worldcup2018.dac';
+}
+elseif($_SERVER['HTTP_HOST']=="localhost"){
+	$config['base_url'] = 'http://localhost/worldcupfootball2018';
 }
 else
 {	

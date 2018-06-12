@@ -140,6 +140,7 @@ label.myButton input[type="file"] {
     margin-right: 20px;
 }
 .countryscore input{color:#000}
+.countrydisable{font-size:20px}
 /* Developer added CSS ends here */
 
 @media (max-width: 480px) {
