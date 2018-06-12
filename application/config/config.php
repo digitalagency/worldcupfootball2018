@@ -29,7 +29,8 @@ if($_SERVER['HTTP_HOST']=="worldcup2018.dac" || $_SERVER['HTTP_HOST']=="127.0.0.
 }
 else
 {	
-	$config['base_url'] = 'https://rangmagical.bergernepal.com';
+	$config['base_url'] = 'http://dac.technocreates.net/worldcup2018';	
+	//$config['base_url'] = 'http://playinstyle.setwetnepal.com';
 }
 
 

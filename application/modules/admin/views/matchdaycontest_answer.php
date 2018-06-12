@@ -62,11 +62,21 @@
                     <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
                       <option value="">Select Answer</option>                
                       <option disabled><?php echo $this->Country_model->get_country_name($match_info['0']->team_1);?></option>
-                        <option value="1" <?php if($row->answer=='1') echo 'selected="selected"';?>> - Player 1</option>
-                        <option value="2" <?php if($row->answer=='2') echo 'selected="selected"';?>> - Player 2</option>
+                        <?php 
+                        $players = $this->Country_model->get_all_players($match_info['0']->team_1);
+                        foreach($players as $player){?>
+                        <option value="<?php echo $player->id;?>" <?php if($row->answer==$player->id) echo 'selected="selected"';?>>&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $player->player_name;?></option>
+                        <?php 
+                        }
+                        ?>
                       <option disabled><?php echo $this->Country_model->get_country_name($match_info['0']->team_2);?></option>
-                        <option value="3" <?php if($row->answer=='3') echo 'selected="selected"';?>> - Player 1</option>
-                        <option value="4" <?php if($row->answer=='4') echo 'selected="selected"';?>> - Player 2</option>
+                        <?php 
+                        $players = $this->Country_model->get_all_players($match_info['0']->team_2);
+                        foreach($players as $player){?>
+                        <option value="<?php echo $player->id;?>" <?php if($row->answer==$player->id) echo 'selected="selected"';?>>&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $player->player_name;?></option>
+                        <?php 
+                        }
+                        ?>
                     </select>
                     <?php
                     }

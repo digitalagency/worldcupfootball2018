@@ -3,7 +3,7 @@
    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Asian Paints Nepal :: Administrator Login Panel</title>
+    <title>Set Wet Nepal :: Administrator Login Panel</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -71,7 +71,7 @@
       <div class="alert alert-info alert-dismissible">
         Notice: This site is meant to be accessed and used by authorized users only.
       </div>
-      <center>&copy; <?php echo date("Y"); ?>. All Rights Reserved. Asian Paints Nepal</center>
+      <center>&copy; <?php echo date("Y"); ?>. All Rights Reserved. Set Wet Nepal</center>
     </div>
     <!-- /.login-box-body -->
   </div>

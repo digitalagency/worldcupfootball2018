@@ -66,28 +66,17 @@ $route['admin/Coupon/([0-9]+)'] = 'admin/Coupon';
 
 
 // Frontend Section
-//$route['facebook/'] = 'home/Facebook';
-$route['facebook/(:any)'] = 'home/Facebook/$1';
-$route['facebook/(:any)/(:any)'] = 'home/Facebook/$1/$2';
-$route['facebook/(:any)/(:any)/(:any)'] = 'home/Facebook/$1/$2/$3';
-
-
 $route['terms-and-condition'] = 'home/terms_and_condition';
-$route['upload-procedure'] = 'home/upload_procedure';
-$route['photo-upload'] = 'home/photo_upload';
-$route['photo-upload-test'] = 'home/photo_upload_test';
-$route['photo-upload-process'] = 'home/photo_upload_process';
-$route['ecoupon-process/(:any)/(:any)'] = 'home/ecoupon_process/$1/$2';
-$route['photo-album'] = 'home/photo_album';
-$route['photo-gallery-top'] = 'home/photo_gallery_top';
-$route['photo-gallery-top/(:any)'] = 'home/photo_gallery_top/$1';
-$route['photo-gallery-single'] = 'home/photo_gallery_single';
-$route['photo-gallery-single/(:any)'] = 'home/photo_gallery_single/$1';
-$route['get-user'] = 'home/get_users';
-$route['photo-gallery'] = 'home/photo_gallery';
-$route['photo-gallery/(:any)'] = 'home/photo_gallery/$1';
-$route['photo-gallery/(:any)/(:any)'] = 'home/photo_gallery/$1/$2';
+$route['registration_process'] = 'home/registration_process';
 $route['thank-you'] = 'home/thank_you';
-$route['thank-you/(:any)'] = 'home/thank_you/$1';
-$route['add-new-gift-coupons'] = 'home/add_new_gift_coupons';
-$route['update-likes-with-cron/(:any)'] = 'home/update_likes_with_cron/$1';
+$route['login-process'] = 'home/login_process';
+$route['dashboard'] = 'home/dashboard';
+$route['match-day-contest'] = 'home/match_day_contest';
+$route['match-day-contest-question/(:any)'] = 'home/match_day_contest_question/$1';
+$route['ecoupon-process/(:any)/(:any)'] = 'home/ecoupon_process/$1/$2';
+$route['ultimate-contest-question'] = 'home/ultimate_contest_question';
+$route['all-time-contest'] = 'home/all_time_contest';
+$route['all-time-contest-question/(:any)'] = 'home/all_time_contest_question/$1';
+$route['forgot-password'] = 'home/forgot_password';
+$route['forgot-password-process'] = 'home/forgot_password_process';
+$route['reset-password/(:any)'] = 'home/reset_password/$1';

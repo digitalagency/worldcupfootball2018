@@ -1,11 +1,7 @@
 
-</section>
-
-
-
-
-<a href="#" class="scrollToTop" title="Scroll Back To Top"><i class="fa fa-angle-up"></i></a>
-    
-
+<footer>
+  <p>&copy; 2018 by SETWET Nepal. All Rights Reserved.</p>
+</footer>
+<?php $this->load->view('includes/scripts');?>
 </body>
 </html>

@@ -82,9 +82,9 @@ if($_SERVER['HTTP_HOST']=="worldcup2018.dac" || $_SERVER['HTTP_HOST']=="127.0.0.
 }
 else
 {	
-	$username = "";
+	$username = "setwetne_playusr";
 	$password = "GWdV055X&[xU";
-	$database = "";
+	$database = "setwetne_playinstyle";
 }
 
 $db['default'] = array(

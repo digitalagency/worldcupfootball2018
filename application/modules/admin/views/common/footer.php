@@ -1,5 +1,5 @@
  <footer class="main-footer">
-    <strong>Copyright © <?php echo date('Y ');?>Asian Paints Nepal.</strong>  All rights reserved.
+    <strong>Copyright © <?php echo date('Y ');?>Set Wet Nepal.</strong>  All rights reserved.
   </footer>
 
 <!-- Bootstrap 3.3.6 -->
