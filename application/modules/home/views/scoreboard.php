@@ -1,4 +1,3 @@
-<?php $this->load->view('includes/user_scoreboard_section'); ?>
 <div class="circle-line">
   <div class="container">
     <div class="row">
@@ -6,8 +5,7 @@
         <div class="wrap">
           <img src="<?php echo base_url();?>content_home/images/con-cir1.png" alt="">
           <div class="low">
-            <a href="#">How to play the contest</a><br>
-            <button type="button" class="btn btn-default one" onclick="window.location='<?php echo base_url().'match-day-contest';?>'">Click to Play</button>
+            <button type="button" class="btn btn-default one"><?php echo $this->home_model->calculate_point_by_contest_type('1');?></button>
           </div>
         </div>
       </div>
@@ -15,8 +13,7 @@
         <div class="wrap">
           <img src="<?php echo base_url();?>content_home/images/con-cir2.png" alt="">
           <div class="low">
-            <a href="#">How to play the contest</a><br>
-            <button type="button" class="btn btn-default two" onclick="window.location='<?php echo base_url().'ultimate-contest-question';?>'">Click to Play</button>
+            <button type="button" class="btn btn-default two"><?php echo $this->home_model->calculate_point_by_contest_type('2');?></button>
           </div>
         </div>
       </div>
@@ -24,8 +21,7 @@
         <div class="wrap">
           <img src="<?php echo base_url();?>content_home/images/con-cir3.png" alt="">
           <div class="low">
-            <a href="#">How to play the contest</a><br>
-            <button type="button" class="btn btn-default three" onclick="window.location='<?php echo base_url().'all-time-contest';?>'">Click to Play</button>
+            <button type="button" class="btn btn-default three"><?php echo $this->home_model->calculate_point_by_contest_type('3');?></button>
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@
     <div class="ext">
       <div class="checkbox">
         <label>
-          <input type="checkbox">
+          <input type="checkbox" name="i_agree">
           Remember Password </label>
       </div>
       <a class="fp" href="<?php echo base_url();?>forgot-password">Forgot Password</a><br>

@@ -81,3 +81,5 @@ $route['forgot-password'] = 'home/forgot_password';
 $route['forgot-password-process'] = 'home/forgot_password_process';
 $route['reset-password/(:any)'] = 'home/reset_password/$1';
 $route['getselectecountry'] ='home/getselectecountry';
+$route['scoreboard'] ='home/scoreboard';
+$route['log-out'] ='home/log_out';

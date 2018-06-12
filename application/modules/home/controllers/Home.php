@@ -40,7 +40,14 @@ class Home extends View_Controller {
         $this->load->view('main',$data);
     }
 
-
+    function scoreboard()
+    {        
+        $this->home_model->checkLoggedIn();
+        $data['menu'] = 'procedure';
+        $data['page_title'] = '.:: Set Wet Nepal :: ';
+        $data['main'] = 'scoreboard';
+        $this->load->view('main',$data);
+    }
 
     function registration_process()
     {
@@ -109,6 +116,11 @@ class Home extends View_Controller {
         if($user_id==0)
             redirect(base_url() . '?error=iupc'); // Incorrect Username/Password Combination
 
+    }
+
+    function log_out()
+    {
+        $this->home_model->doLogout();
     }
 
     function match_day_contest()
@@ -211,17 +223,6 @@ class Home extends View_Controller {
         //echo $message;
         $data['message'] = $message;
         $data['main'] = 'reset_password';
-        $this->load->view('main',$data);
-    }
-
-    function photo_upload_test()
-    {        
-        $data['menu'] = 'register';
-        $data['page_title'] = '.:: Set Wet Nepal :: ';           
-        $data['metallica'] = $this->home_model->getPattern_by_shade('Metallica');
-        $data['nonmetallica'] = $this->home_model->getPattern_by_shade('Non - metallica');
-
-        $data['main'] = 'photo_upload_test';
         $this->load->view('main',$data);
     }
 
