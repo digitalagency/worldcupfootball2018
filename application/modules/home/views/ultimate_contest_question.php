@@ -65,10 +65,10 @@
                         {
                         ?>
                           <div class="countryscore">
-                            <div id="firstcountryname"></div><input type="text" name="answer1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                            <div id="firstcountryname"></div><input type="text" name="answer_1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
                           </div>
                           <div class="countryscore">
-                            <div id="secoundcountryname"></div><input type="text" name="answer2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                            <div id="secoundcountryname"></div><input type="text" name="answer_2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
                           </div>
                         <?php
                         }

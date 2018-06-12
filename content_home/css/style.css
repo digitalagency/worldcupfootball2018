@@ -139,7 +139,7 @@ label.myButton input[type="file"] {
     display: inline-table;
     margin-right: 20px;
 }
-
+.countryscore input{color:#000}
 /* Developer added CSS ends here */
 
 @media (max-width: 480px) {
