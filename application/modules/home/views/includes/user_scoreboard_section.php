@@ -21,14 +21,14 @@ if($page!="terms-and-conditions" && $page!="privacy-policy" && $page!="thank-you
         </div>
         <div class="right">
             <div class="wrap">
-                <?php if(!empty($user_info['0']->imagepath)){?>
+                <?php if(file_exists($user_info['0']->imagepath)){?>
                 <img src="<?php echo base_url().$user_info['0']->imagepath;?>" alt="..." class="img-circle" width="100%">
                 <?php } else { 
 
                 ?>
                 <img src="<?php echo base_url().'content_home/images/'.$gender_img;?>" alt="..." class="img-circle" width="100%">
                 <?php } ?>
-                <p><?php echo $this->session->userdata('username');?> <a href="<?php echo base_url();?>log-out"><img src="<?php echo base_url();?>content_home/images/logout.png"></a></p>
+                <p><?php echo $user_info['0']->fname;?> <a href="<?php echo base_url();?>log-out"><img src="<?php echo base_url();?>content_home/images/logout.png"></a></p>
             </div>
         </div>
         <div class="clear"></div>

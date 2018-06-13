@@ -4,14 +4,24 @@
     <h3>Register</h3>
   </div>
   <div class="down">
+    <?php if(isset($_GET['error'])){?>
     <div class="form-group">
-      <label for="Name">NAME</label>
+      <label for="message">
+        <?php 
+        if($_GET['error']=="re"){
+          echo "The provided email address is already taken.";
+        }
+        ?>        
+    </div>
+    <?php } ?>
+    <div class="form-group">
+      <label for="Name">FULL NAME</label>
       <input type="text" class="form-control" id="fname" name="fname" required>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="Username">USERNAME</label>
       <input type="text" class="form-control" id="username" name="username" required>
-    </div>
+    </div> -->
     <div class="form-group">
       <label for="Email">MOBILE NUMBER</label>
       <input type="number" min="0" class="form-control" id="mobile_number" name="mobile_number" required>
@@ -49,7 +59,7 @@
       <input value="<?php if(isset($user['email'])) echo $user['email'];?>" name="facebook_email" id="facebook_email" type="hidden">
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="i_agree">
+          <input type="checkbox" name="i_agree" required>
           By Clicking on submit, you agree to our <a href="<?php echo base_url();?>privacy-policy" target="_blank">privacy policy</a> and <a href="<?php echo base_url();?>terms-and-conditions" target="_blank">terms and conditions</a>. </label>
       </div>
     </div>

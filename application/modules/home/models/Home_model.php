@@ -23,12 +23,13 @@ class Home_model extends CI_Model {
         $username = $this->input->post('username');
         $emailaddress = $this->input->post('emailaddress');
         $userpassword = $this->input->post('userpassword');
-        $checkIfUsernameExists = $this->checkIfUsernameExists($username);
+        //$checkIfUsernameExists = $this->checkIfUsernameExists($username);
         $checkIfEmailExists = $this->checkIfEmailExists($emailaddress);
-        if($checkIfUsernameExists==0 && $checkIfEmailExists==0){
+        //if($checkIfUsernameExists==0 && $checkIfEmailExists==0){
+        if($checkIfEmailExists==0){
             $data = array(
                 'fname' => $this->input->post('fname'),
-                'username' => $this->input->post('username'),
+                /*'username' => $this->input->post('username'),*/
                 'gender' => $this->input->post('gender'),
                 'mobile_number' => $this->input->post('mobile_number'),
                 'email' => $this->input->post('emailaddress'),
@@ -209,7 +210,7 @@ class Home_model extends CI_Model {
     {        
         $user_id = $this->session->userdata('user_id');
         if(empty($user_id))            
-                redirect(base_url());
+            redirect(base_url());
     }
 
     public function getUser($user_id)
@@ -238,7 +239,19 @@ class Home_model extends CI_Model {
         }
     }
 
-
+    public function getGender($emailaddress)
+    {
+        $this->db->select('id');
+        $this->db->where("gender",$emailaddress);
+        $query =  $this->db->get('tbl_participants');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $gender = $val->gender;
+            return $gender;
+        }
+    }
 
     public function getUserIdByResetcode($resetcode)
     {
@@ -325,18 +338,21 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=4;$i++)
             {
-                $data='';
-                $data = array(
-                    'match_id' => $match_id,
-                    'user_id' => $user_id,
-                    'question_id' => $this->input->post('question_id_'.$i)
-                );
-                if($i==2)
-                    $data['answer'] = $this->input->post('answer1_'.$i).'-'.$this->input->post('answer2_'.$i);
-                else
-                    $data['answer'] = $this->input->post('answer_'.$i);
-                $this->db->insert('tbl_answer',$data);
-                $aid = $this->db->insert_id(); 
+                if(isset($_POST['question_id_'.$i]) && (isset($_POST['answer_'.$i]) || isset($_POST['answer1_'.$i]) || isset($_POST['answer2_'.$i]))
+                {
+                    $data='';
+                    $data = array(
+                        'match_id' => $match_id,
+                        'user_id' => $user_id,
+                        'question_id' => $this->input->post('question_id_'.$i)
+                    );
+                    if($i==2)
+                        $data['answer'] = $this->input->post('answer1_'.$i).'-'.$this->input->post('answer2_'.$i);
+                    else
+                        $data['answer'] = $this->input->post('answer_'.$i);
+                    $this->db->insert('tbl_answer',$data);
+                    $aid = $this->db->insert_id(); 
+                }
             }
             return $aid;
         }
@@ -440,7 +456,7 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=5;$i++)
             {
-                if(isset($_POST['question_id_'.$i]))
+                if(isset($_POST['question_id_'.$i]) && (isset($_POST['answer_'.$i]) || isset($_POST['answer1_'.$i]) || isset($_POST['answer2_'.$i]))
                 {
                     $data='';
                     $data = array(
@@ -485,8 +501,7 @@ class Home_model extends CI_Model {
             return FALSE;
         } else {
             return $query->result();
-        } 
-
+        }
     }    
 
     function enter_all_time_contest_answer(){
@@ -498,7 +513,7 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=4;$i++)
             {
-                if(isset($_POST['question_id_'.$i]))
+                if(isset($_POST['question_id_'.$i]) && isset($_POST['answer_'.$i]))
                 {
                     $data='';
                     $data = array(

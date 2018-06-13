@@ -86,6 +86,7 @@
                         <?php }
                         } ?>
                       </select>
+<<<<<<< HEAD
                     <?php
                     }
                     ?> 
@@ -100,6 +101,92 @@
                     <?php
                     }
                     ?>
+=======
+                      <?php
+                        }
+                        if($row->question_number=="3")
+                        {
+                        ?>
+                          <div class="countryscore">
+                            <div id="firstcountryname"></div><input type="text" name="answer_1_<?php echo $counter;?>" id="answer1_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                          </div>
+                          <div class="countryscore">
+                            <div id="secoundcountryname"></div><input type="text" name="answer_2_<?php echo $counter;?>" id="answer2_<?php echo $counter;?>" value="<?php echo $answer; ?>" placeholder="0-0">
+                          </div>
+                        <?php
+                        }
+                        if($row->question_number=="4")
+                        {
+                            if($counter == '3'){?>
+                                <select class="form-control returncountry" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                                    <option value="">Select a Player</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
+                                        <?php
+                                        $players = $this->home_model->get_all_players($country->id);
+                                        foreach($players as $player){?>
+                                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            <?php }
+                            elseif($counter == '4' ){?>
+                                <select class="form-control bestplayercountry" onchange="bestplayer();">
+                                    <option value="">Select Country</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="<?php echo $country->id;?>" ><?php echo $country->country_name;?></option>
+                                    <?php } ?>
+                                </select>
+                                <select class="form-control bestplayer" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                                    <option value="">Select a Player</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
+                                        <?php
+                                        $players = $this->home_model->get_all_players($country->id);
+                                        foreach($players as $player){?>
+                                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            <?php }
+                            elseif($counter == '5'){?>
+                                <select class="form-control highestscorecountry" onchange="highestscore();">
+                                    <option value="">Select Country</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="<?php echo $country->id;?>" ><?php echo $country->country_name;?></option>
+                                    <?php } ?>
+                                </select>
+                                <select class="form-control highestscore" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                                    <option value="">Select a Player</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
+                                        <?php
+                                        $players = $this->home_model->get_all_players($country->id);
+                                        foreach($players as $player){?>
+                                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            <?php }
+                        ?>
+
+                        <?php
+                        }
+                        ?> 
+                        </div>     
+                        <?php
+                        $i++;
+                        endforeach;                            
+                        }
+                        ?>
+                        <?php if(!empty($answer)){?>
+                        <label class="radio-inline">You have already answered to these questions.</label>  
+                        <?php
+                        }
+                        ?>
+                        </div>
+
+>>>>>>> dcbf68461a7c0b4c2f3c3d1dda74c1278995e9bc
                     </div>
 
                 </div>

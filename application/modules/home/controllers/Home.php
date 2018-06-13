@@ -142,14 +142,14 @@ class Home extends View_Controller {
     }
 
     function match_day_contest_question($match_id)
-    {        
+    { 
+        $this->home_model->checkLoggedIn();       
         $data['menu'] = 'procedure';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
         $data['main'] = 'match_day_contest_question';  
         
         if(isset($_POST['btnSubmit']))
         {
-            //print_r($_POST);
             $this->home_model->enter_match_day_contest_answer($match_id); 
         }
 
@@ -160,7 +160,8 @@ class Home extends View_Controller {
     }
 
     function ultimate_contest_question()
-    {        
+    {  
+        $this->home_model->checkLoggedIn();     
         $data['menu'] = 'procedure';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
         $data['main'] = 'ultimate_contest_question';        
@@ -175,6 +176,7 @@ class Home extends View_Controller {
 
     function all_time_contest()
     {        
+        $this->home_model->checkLoggedIn();
         $data['menu'] = 'procedure';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
         $data['main'] = 'all_time_contest';
@@ -184,7 +186,8 @@ class Home extends View_Controller {
     }
 
     function all_time_contest_question($question_id)
-    {        
+    {  
+        $this->home_model->checkLoggedIn();     
         $data['menu'] = 'procedure';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
         $data['main'] = 'all_time_contest_question';          
@@ -231,27 +234,6 @@ class Home extends View_Controller {
         //echo $message;
         $data['message'] = $message;
         $data['main'] = 'reset_password';
-        $this->load->view('main',$data);
-    }
-
-    function photo_album()
-    {        
-        $data['menu'] = 'album';
-        $data['page_title'] = '.:: Set Wet Nepal :: ';
-        $data['main'] = 'photo_album';
-        $this->load->view('main',$data);
-    }
-
-    function photo_gallery_top()
-    {        
-        $data['menu'] = 'album';
-        $data['page_title'] = '.:: Set Wet Nepal :: ';
-        $regioncode = $this->uri->segment(2);
-        //$resGal = $mydb->getQuery('*', 'tbl_photo', 'user_id LIKE "'.$code.'%" AND imagepath!="" AND imagename!="" ORDER BY likes DESC, id ASC LIMIT 16');
-        $data['regioncode'] = $regioncode;
-        $data['nor'] = $this->home_model->getTopusers_by_regioncode($regioncode);
-        $data['topusers'] = $this->home_model->getTopusers_by_regioncode($regioncode);
-        $data['main'] = 'photo_gallery_top';
         $this->load->view('main',$data);
     }
 

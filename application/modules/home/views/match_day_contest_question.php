@@ -45,17 +45,38 @@ if($left_hours>24)
             <div class="q">
               <p><?php echo $counter;?>. <?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"></p>
               <?php
-              if($row->question_number=="1" || $row->question_number=="3")
+              if($row->question_number=="1")
               {
               ?>
               <label class="radio-inline">
-                <input type="radio" onclick="handleClick(this);" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
               </label>
               <label class="radio-inline">
-                <input type="radio" onclick="handleClick(this);" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
-              </label>                  
+              </label>
+                <label class="radio-inline">
+                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                  Draw
+                </label>
+              <?php
+              }
+              if($row->question_number=="3")
+              {
+              ?>
+              <label class="radio-inline">
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
+                <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
+              </label>
+              <label class="radio-inline">
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
+              </label>
+                <label class="radio-inline">
+                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                  None
+                </label>
               <?php
               }
               if($row->question_number=="2")
@@ -67,10 +88,10 @@ if($left_hours>24)
                 ?>
                 <label class="radio-inline">
                   <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
-                  <input type="number" min="0" name="answer1_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['0']; ?>" style="background:#1c1c1c; width:50px;"> 
+                  <input type="number" name="answer1_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['0']; ?>" style="background:#1c1c1c; width:50px;"> 
                 </label>
                 <label class="radio-inline">
-                  <input type="number" min="0" name="answer2_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['1']; ?>" style="background:#1c1c1c; width:50px;"> 
+                  <input type="number" name="answer2_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['1']; ?>" style="background:#1c1c1c; width:50px;"> 
                   <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
                 </label>
                 
@@ -80,7 +101,8 @@ if($left_hours>24)
               {
               ?>
               <select class="form-control firstteamplayer"  name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
-                <option value="">Select Answer</option>                
+                <option value="">Select Answer</option>
+                <option value="0">None</option>
                 <option disabled class="countrydisable"><?php echo $this->home_model->get_country_name($match_info['0']->team_1);?></option>
                   <?php 
                   $players = $this->home_model->get_all_players($match_info['0']->team_1);
