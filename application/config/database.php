@@ -74,11 +74,16 @@ $active_group = 'default';
 $query_builder = TRUE;
 //echo $_SERVER['HTTP_HOST'];
 //if($_SERVER['HTTP_HOST']=="bergernepal.dev" || $_SERVER['HTTP_HOST']=="127.0.0.1")
-if($_SERVER['HTTP_HOST']=="worldcup2018.dac" || $_SERVER['HTTP_HOST']=="127.0.0.1"|| $_SERVER['HTTP_HOST']=="localhost")
+if($_SERVER['HTTP_HOST']=="worldcup2018.dac" || $_SERVER['HTTP_HOST']=="127.0.0.1")
 {
 	$username = "root";
 	$password = "";
 	$database = "orn_worldcup2018";
+}
+elseif( $_SERVER['HTTP_HOST']=="localhost"){
+	$username = "root";
+	$password = "";
+	$database = "setwetne_playinstyle";
 }
 else
 {	

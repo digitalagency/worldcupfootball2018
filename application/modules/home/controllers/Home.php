@@ -296,6 +296,18 @@ class Home extends View_Controller {
 
        echo $output;
     }
+
+    function getfirstteamplayer(){
+        $firstteam =  $_POST['firstteam'];
+        $output = '';
+        $output .= ' <option value="">Select Answer</option>';
+        $output .= '<option value="" disabled class="countrydisable">'.$this->home_model->get_country_name($firstteam).'</option>';
+        $players = $this->home_model->get_all_players($firstteam);
+        foreach($players as $p){
+            $output .='<option value="'.$p->id.'">-&nbsp;'.$p->player_name.'</option>';
+        }
+        echo $output;
+    }
 }
 
 /* End of file Home.php

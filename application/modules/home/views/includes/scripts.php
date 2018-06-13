@@ -17,6 +17,19 @@
 
         var firstcountryid = $(".firstcountry option:selected").val();
         var secoundcountryid = $(".secondcountry option:selected").val();
+
+
+        if(!$('.secondcountry').find("option:contains('" + firstcountryid  + "')").length){
+            $(".secondcountry option").removeAttr("disabled","disabled");
+            $(".secondcountry option[value=" + firstcountryid + "]").attr("disabled","disabled");
+        }
+
+        if(!$('.firstcountry').find("option:contains('" + secoundcountryid  + "')").length){
+            $(".firstcountry option").removeAttr("disabled","disabled");
+            $(".firstcountry option[value=" + secoundcountryid + "]").attr("disabled","disabled");
+        }
+
+
         var url = '<?php echo base_url('getselectecountry');?>';
 
         $.ajax({
@@ -25,7 +38,6 @@
             type:'POST',
 
             success:function(data){
-                console.log(data);
                 $('.returncountry').empty();
                 $('.returncountry').append(data);
             }
@@ -34,4 +46,19 @@
 
     }
 
+    function handleClick(myRadio) {
+        var firstteam = myRadio.value;
+        var url = '<?php echo base_url('getfirstteamplayer');?>';
+//        alert('Selected Team: ' + selCountry);
+
+        $.ajax({
+           url: url,
+            data: {firstteam:firstteam },
+            type : 'POST',
+            success: function(data){
+                $('.firstteamplayer').empty();
+                $('.firstteamplayer').append(data);
+            }
+        });
+    }
 </script>
