@@ -49,13 +49,18 @@ if($left_hours>24)
               {
               ?>
               <label class="radio-inline">
-                <input type="radio" onclick="handleClick(this);" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
               </label>
               <label class="radio-inline">
-                <input type="radio" onclick="handleClick(this);" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
-              </label>                  
+              </label>
+
+                <label class="radio-inline">
+                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                  None
+                </label>
               <?php
               }
               if($row->question_number=="2")
@@ -80,7 +85,8 @@ if($left_hours>24)
               {
               ?>
               <select class="form-control firstteamplayer"  name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
-                <option value="">Select Answer</option>                
+                <option value="">Select Answer</option>
+                <option value="0">None</option>
                 <option disabled class="countrydisable"><?php echo $this->home_model->get_country_name($match_info['0']->team_1);?></option>
                   <?php 
                   $players = $this->home_model->get_all_players($match_info['0']->team_1);
