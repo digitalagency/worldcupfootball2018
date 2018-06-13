@@ -86,6 +86,18 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 .pagination>li:first-child>a, .pagination>li:first-child>span {border-radius: 0px;}
 .pagination>li:last-child>a, .pagination>li:last-child>span {border-radius: 0px;}
 
+
+/*Change Log*/
+
+#home {background: #000;height: 100vh; overflow: hidden; font-size: 18px;}
+#home .back {background-image: url(../images/home-back.png);background-repeat: no-repeat;background-position: center;width: 100%;height: 662px;position: relative;}
+#home .back .cont {position: absolute;bottom: 46px;left: 0;right: 0;text-align: center;}
+#home .back .cont p {color: #FFF;}
+#home .back .cont p:last-child {margin: 10px;  }
+#home .back .cont .submit {margin: 0px;color: #0a8ec1;text-decoration: none;}
+/*Change Log*/
+
+
 footer {margin-top: 80px;text-align: center;}
 footer a {}
 footer p {background-color: #01aeef;text-align: center;padding: 10px 0px;font-size: 12px;margin-bottom: 0px;margin-top: 4px;}

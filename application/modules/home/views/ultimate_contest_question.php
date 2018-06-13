@@ -74,18 +74,59 @@
                         }
                         if($row->question_number=="4")
                         {
-                        ?>
-                          <select class="form-control returncountry" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
-                            <option value="">Select a Player</option>
-                            <?php foreach($countries as $country){?>                
-                            <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
-                            <?php 
-                            $players = $this->home_model->get_all_players($country->id);
-                            foreach($players as $player){?>
-                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                            if($counter == '3'){?>
+                                <select class="form-control returncountry" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                                    <option value="">Select a Player</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
+                                        <?php
+                                        $players = $this->home_model->get_all_players($country->id);
+                                        foreach($players as $player){?>
+                                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
                             <?php }
-                            } ?>
-                          </select>
+                            elseif($counter == '4' ){?>
+                                <select class="form-control bestplayercountry" onchange="bestplayer();">
+                                    <option value="">Select Country</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="<?php echo $country->id;?>" ><?php echo $country->country_name;?></option>
+                                    <?php } ?>
+                                </select>
+                                <select class="form-control bestplayer" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                                    <option value="">Select a Player</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
+                                        <?php
+                                        $players = $this->home_model->get_all_players($country->id);
+                                        foreach($players as $player){?>
+                                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            <?php }
+                            elseif($counter == '5'){?>
+                                <select class="form-control highestscorecountry" onchange="highestscore();">
+                                    <option value="">Select Country</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="<?php echo $country->id;?>" ><?php echo $country->country_name;?></option>
+                                    <?php } ?>
+                                </select>
+                                <select class="form-control highestscore" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
+                                    <option value="">Select a Player</option>
+                                    <?php foreach($countries as $country){?>
+                                        <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
+                                        <?php
+                                        $players = $this->home_model->get_all_players($country->id);
+                                        foreach($players as $player){?>
+                                            <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            <?php }
+                        ?>
+
                         <?php
                         }
                         ?> 

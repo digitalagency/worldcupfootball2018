@@ -61,4 +61,39 @@
             }
         });
     }
+
+    function bestplayer(){
+        var bestcountryid = $(".bestplayercountry option:selected").val();
+        var url = '<?php echo base_url('getfirstteamplayer');?>';
+
+        $.ajax({
+            url: url,
+            data: {firstteam:bestcountryid },
+            type : 'POST',
+            success: function(data){
+                //console.log(data);
+                $('.bestplayer').empty();
+                $('.bestplayer').append(data);
+            }
+        });
+
+
+    }
+
+    function highestscore(){
+        var highestcountryid = $(".highestscorecountry option:selected").val();
+
+        var url = '<?php echo base_url('getfirstteamplayer');?>';
+
+        $.ajax({
+            url: url,
+            data: {firstteam:highestcountryid },
+            type : 'POST',
+            success: function(data){
+                //console.log(data);
+                $('.highestscore').empty();
+                $('.highestscore').append(data);
+            }
+        });
+    }
 </script>
