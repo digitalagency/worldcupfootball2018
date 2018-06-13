@@ -4,6 +4,8 @@
 <meta name="author" content="">
 <title>Set Wet</title>
 <link rel="shortcut icon" href="">
+<link rel="shortcut icon" href="<?php echo base_url();?>content_home/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="<?php echo base_url();?>content_home/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="<?php echo base_url();?>content_home/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url();?>content_home/css/fa-brands.min.css">
 <link rel="stylesheet" href="<?php echo base_url();?>content_home/css/stylesheet.css">
