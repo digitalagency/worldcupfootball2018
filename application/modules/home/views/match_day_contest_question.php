@@ -88,10 +88,10 @@ if($left_hours>24)
                 ?>
                 <label class="radio-inline">
                   <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
-                  <input type="number" name="answer1_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['0']; ?>" style="background:#1c1c1c; width:50px;"> 
+                  <input type="number" min="0" name="answer1_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['0']; ?>" style="background:#1c1c1c; width:50px;"> 
                 </label>
                 <label class="radio-inline">
-                  <input type="number" name="answer2_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['1']; ?>" style="background:#1c1c1c; width:50px;"> 
+                  <input type="number" min="0" name="answer2_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['1']; ?>" style="background:#1c1c1c; width:50px;"> 
                   <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
                 </label>
                 

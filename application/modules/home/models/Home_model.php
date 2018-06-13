@@ -23,10 +23,12 @@ class Home_model extends CI_Model {
         $username = $this->input->post('username');
         $emailaddress = $this->input->post('emailaddress');
         $userpassword = $this->input->post('userpassword');
+        $mobile_number = $this->input->post('mobile_number');
         //$checkIfUsernameExists = $this->checkIfUsernameExists($username);
+        $checkIfNumberExists = $this->checkIfNumberExists($mobile_number);
         $checkIfEmailExists = $this->checkIfEmailExists($emailaddress);
         //if($checkIfUsernameExists==0 && $checkIfEmailExists==0){
-        if($checkIfEmailExists==0){
+        if($checkIfEmailExists==0 && $checkIfNumberExists==0){
             $data = array(
                 'fname' => $this->input->post('fname'),
                 /*'username' => $this->input->post('username'),*/
@@ -44,8 +46,8 @@ class Home_model extends CI_Model {
             $id = $this->db->insert_id(); 
             return $id;
         }
-        else if($checkIfUsernameExists>0){
-            redirect(base_url() . '?error=ru');
+        else if($checkIfNumberExists>0){
+            redirect(base_url() . '?error=rn');
         } 
         else if($checkIfEmailExists>0){
             redirect(base_url() . '?error=re');
@@ -56,6 +58,21 @@ class Home_model extends CI_Model {
     {
         $this->db->select('id');
         $this->db->where('email',$emailaddress);
+        $query =  $this->db->get('tbl_participants');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $user_id = $val->id;
+            return $user_id;
+        }
+    }
+
+    public function checkIfNumberExists($mobile_number)
+    {
+        $this->db->select('id');
+        $this->db->where('mobile_number',$mobile_number);
         $query =  $this->db->get('tbl_participants');
         //echo $this->db->last_query();
         if ($query->num_rows() == 0) {
@@ -338,7 +355,7 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=4;$i++)
             {
-                if(isset($_POST['question_id_'.$i]) && (isset($_POST['answer_'.$i]) || isset($_POST['answer1_'.$i]) || isset($_POST['answer2_'.$i]))
+                if(isset($_POST['question_id_'.$i]) && (isset($_POST['answer_'.$i]) || isset($_POST['answer1_'.$i]) || isset($_POST['answer2_'.$i])))
                 {
                     $data='';
                     $data = array(
@@ -456,7 +473,8 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=5;$i++)
             {
-                if(isset($_POST['question_id_'.$i]) && (isset($_POST['answer_'.$i]) || isset($_POST['answer1_'.$i]) || isset($_POST['answer2_'.$i]))
+                
+                if(isset($_POST['question_id_'.$i]) && (isset($_POST['answer_'.$i]) || isset($_POST['answer1_'.$i]) || isset($_POST['answer2_'.$i])))
                 {
                     $data='';
                     $data = array(
@@ -474,7 +492,8 @@ class Home_model extends CI_Model {
                     //echo $question_id.' -- '.$answer.'<br>';            
                     $this->db->insert('tbl_answer',$data);
                     $aid = $this->db->insert_id();
-                    } 
+                }
+                
             }
             return $aid;
         }
@@ -1014,8 +1033,8 @@ class Home_model extends CI_Model {
             $user_id = $row->user_id;
             $old_likes = $row->likes;
             $share_url = "https://rangmagical.bergernepal.com/photo-gallery-single/".$user_id;
-            $new_likes = $this->getLikesCount($share_url);
             if($new_likes>$old_likes)
+            $new_likes = $this->getLikesCount($share_url);
             {
                 $data='';
                 $data['likes'] = $new_likes;                

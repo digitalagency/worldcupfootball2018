@@ -9,7 +9,10 @@
       <label for="message">
         <?php 
         if($_GET['error']=="re"){
-          echo "The provided email address is already taken.";
+          echo "The provided email address already exists in our record.";
+        } 
+        if($_GET['error']=="rn"){
+          echo "The provided mobile number already exists in our record.";
         }
         ?>        
     </div>
