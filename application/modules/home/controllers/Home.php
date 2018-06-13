@@ -23,11 +23,19 @@ class Home extends View_Controller {
         $this->load->view('main',$data);
     }
 
-    function terms_and_condition()
+    function terms_and_conditions()
     {        
-        $data['menu'] = 'terms';
+        $data['page'] = 'terms';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
-        $data['main'] = 'terms_and_condition';
+        $data['main'] = 'terms_and_conditions';
+        $this->load->view('main',$data);
+    }
+
+    function privacy_policy()
+    {
+        $data['page'] = 'privacy';
+        $data['page_title'] = '.:: Set Wet Nepal :: ';
+        $data['main'] = 'privacy_policy';
         $this->load->view('main',$data);
     }
 
@@ -40,7 +48,14 @@ class Home extends View_Controller {
         $this->load->view('main',$data);
     }
 
-
+    function scoreboard()
+    {        
+        $this->home_model->checkLoggedIn();
+        $data['menu'] = 'procedure';
+        $data['page_title'] = '.:: Set Wet Nepal :: ';
+        $data['main'] = 'scoreboard';
+        $this->load->view('main',$data);
+    }
 
     function registration_process()
     {
@@ -93,7 +108,7 @@ class Home extends View_Controller {
             }
 
             $image_path = FCPATH.$imagepath.$imagename;
-            $registration_id = $this->home_model->doRegistration($imagepath,$imagename);
+            $registration_id = $this->home_model->doRegistration($imagepath.'thumb/',$imagename);
             if($registration_id>0)  
                 redirect(base_url() . 'thank-you');
         }
@@ -109,6 +124,11 @@ class Home extends View_Controller {
         if($user_id==0)
             redirect(base_url() . '?error=iupc'); // Incorrect Username/Password Combination
 
+    }
+
+    function log_out()
+    {
+        $this->home_model->doLogout();
     }
 
     function match_day_contest()
@@ -188,39 +208,29 @@ class Home extends View_Controller {
             $emailaddress = $_POST['emailaddress'];
             $message = $this->home_model->send_reset_password_link($emailaddress);
         }         
-
+        //echo $message;
         $data['message'] = $message;
         $data['main'] = 'forgot_password';
-        //$data['main'] = 'photo_upload_completed';
         $this->load->view('main',$data);
     }
 
-    function forgot_password_process()
-    {       
-        $data['menu'] = 'register';
-        $data['page_title'] = 'Forgot Password :: Set Wet Nepal';          
-
-        $data['main'] = 'forgot_password_process';
-        $this->load->view('main',$data);        
-    }
-
     function reset_password()
-    {       
-        $data['menu'] = 'register';
-        $data['page_title'] = 'Reset Password :: Set Wet Nepal';          
-
-        $data['main'] = 'reset_password';
-        $this->load->view('main',$data);        
-    }
-
-    function photo_upload_test()
     {        
+        $message='';
         $data['menu'] = 'register';
-        $data['page_title'] = '.:: Set Wet Nepal :: ';           
-        $data['metallica'] = $this->home_model->getPattern_by_shade('Metallica');
-        $data['nonmetallica'] = $this->home_model->getPattern_by_shade('Non - metallica');
-
-        $data['main'] = 'photo_upload_test';
+        $data['page_title'] = '.:: Set Wet Nepal :: ';  
+        if(isset($_POST['your_password']))
+        {
+            $your_password = $_POST['your_password'];
+            $confirm_password = $_POST['confirm_password'];
+            if($your_password == $confirm_password)
+                $message = $this->home_model->reset_password($your_password);
+            else
+                $message = "Password Confirmation doesn't Match. Please try again";
+        }         
+        //echo $message;
+        $data['message'] = $message;
+        $data['main'] = 'reset_password';
         $this->load->view('main',$data);
     }
 

@@ -29,6 +29,8 @@ class Home_model extends CI_Model {
             $data = array(
                 'fname' => $this->input->post('fname'),
                 'username' => $this->input->post('username'),
+                'gender' => $this->input->post('gender'),
+                'mobile_number' => $this->input->post('mobile_number'),
                 'email' => $this->input->post('emailaddress'),
                 'password' => md5($userpassword),
                 'registered_on' => date('Y-m-d H:i:s'),
@@ -110,6 +112,16 @@ class Home_model extends CI_Model {
 
     }  
 
+    function doLogout()
+    {
+        $userdata = array('user_id' => '', 'username' => '', 'email' => '', 'logged_in' => '');
+        $this->session->set_userdata($userdata);
+        $this->session->unset_userdata($userdata);
+        $this->session->sess_destroy();
+        //print_r($this->session->all_userdata());
+        redirect(base_url());
+    }  
+
     public function send_reset_password_link($emailaddress) 
     {
         $user_id = $this->getUserIdByEmail($emailaddress);
@@ -118,7 +130,14 @@ class Home_model extends CI_Model {
             $user_info = $this->getUser($user_id);
             $name = $user_info['0']->fname;
             //do send password reset link
-            $reset_code = rand('1111111111,9999999999');
+            $reset_code = rand(11111111,99999999);
+
+
+            $data = array(
+                'reset_code' => $reset_code
+            );
+            $this->db->where('id', $user_id);
+            $this->db->update('tbl_participants', $data); 
             // Multiple recipients
             $to = $emailaddress;
 
@@ -133,9 +152,9 @@ class Home_model extends CI_Model {
             </head>
             <body>
               Dear '.$name.',<br><br>
-                To reset your password, please click on <a href="'.base_url().'password-reset/'.$reset_code.'" target="_blank">Reset My Password</a>
+                To reset your password, please click on <a href="'.base_url().'reset-password/'.$reset_code.'" target="_blank">Reset My Password</a><br>
                 
-                If you do not wish to change your password, please ignore this email.
+                If you do not wish to change your password, please ignore this email.<br><br><br><br>
 
 
                 Thank You !!!<br>
@@ -144,7 +163,7 @@ class Home_model extends CI_Model {
             </body>
             </html>
             ';
-
+            //echo $message;
             // To send HTML mail, the Content-type header must be set
             $headers[] = 'MIME-Version: 1.0';
             $headers[] = 'Content-type: text/html; charset=iso-8859-1';
@@ -164,6 +183,27 @@ class Home_model extends CI_Model {
             return "Sorry, the email address provided doesn't exist in our database.";
         }
     } 
+
+    function reset_password($your_password)
+    {
+        $reset_code = $this->uri->segment(2);
+        $user_id = $this->getUserIdByResetcode($reset_code);
+        if($user_id>0)
+        {
+            $new_password = md5($your_password);
+            $data = array(
+                'reset_code' => '',
+                'password' => $new_password
+            );
+            $this->db->where('id', $user_id);
+            $this->db->update('tbl_participants', $data);
+            return "You have successfully reset your password.";
+        }
+        else
+        {
+            return "Sorry, the provided reset code is not available or has expired. Please reset your password again.";
+        }
+    }
 
     public function checkLoggedIn()
     {        
@@ -188,6 +228,22 @@ class Home_model extends CI_Model {
     {
         $this->db->select('id');
         $this->db->where("email",$emailaddress);
+        $query =  $this->db->get('tbl_participants');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $val = $query->row();
+            $id = $val->id;
+            return $id;
+        }
+    }
+
+
+
+    public function getUserIdByResetcode($resetcode)
+    {
+        $this->db->select('id');
+        $this->db->where("reset_code",$resetcode);
         $query =  $this->db->get('tbl_participants');
         if ($query->num_rows() == 0) {
             return 0;
@@ -524,6 +580,90 @@ class Home_model extends CI_Model {
                     $totalScore+=10;
                 elseif($contest_type==2)
                     $totalScore+=100;
+            }
+        } 
+        return $totalScore;
+    }
+
+    function calculate_point_by_contest_type($contest_type)
+    {
+        $user_id = $this->session->userdata('user_id');
+        //if contest_type = 1, score = 10
+        //if contest_type = 2, score = 100
+        //if contest_type = 3, score = 10
+
+        $this->db->select('tbl_questions.contest_type,tbl_answer.question_id,tbl_answer.answer');    
+        $this->db->from('tbl_answer');
+        $this->db->join('tbl_questions', 'tbl_questions.id = tbl_answer.question_id');
+        $this->db->where('tbl_questions.contest_type',$contest_type);
+        $this->db->where('tbl_answer.user_id',$user_id);
+        $query = $this->db->get(); 
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            $totalScore = 0;
+            $results = $query->result();
+            foreach($results as $row){
+                $result = $this->get_correct_answer_n_contest_type_by_question_id($row->question_id);
+                $correctAnswer = $result['answer'];
+                //$contest_type = $result['contest_type']; 
+                $userAnswer = $row->answer;
+                if($contest_type==1 || $contest_type==3)
+                    $totalScore+=10;
+                elseif($contest_type==2)
+                    $totalScore+=100;
+            }
+        } 
+        return $totalScore;
+    }
+
+    function calculate_knockout_point()
+    {
+        $user_id = $this->session->userdata('user_id');
+        //if contest_type = 1, score = 10
+        //if contest_type = 2, score = 100
+        //if contest_type = 3, score = 10
+
+        $this->db->select();
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get('tbl_answer');  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            $totalScore = 0;
+            $results = $query->result();
+            foreach($results as $row){
+                $result = $this->get_correct_answer_n_contest_type_by_question_id($row->question_id);
+                $correctAnswer = $result['answer'];
+                //$contest_type = $result['contest_type']; 
+                $userAnswer = $row->answer;
+                $totalScore+=100;
+            }
+        } 
+        return $totalScore;
+    }
+
+    function calculate_football_knowledge_point()
+    {
+        $user_id = $this->session->userdata('user_id');
+        //if contest_type = 1, score = 10
+        //if contest_type = 2, score = 100
+        //if contest_type = 3, score = 10
+
+        $this->db->select();
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get('tbl_answer');  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            $totalScore = 0;
+            $results = $query->result();
+            foreach($results as $row){
+                $result = $this->get_correct_answer_n_contest_type_by_question_id($row->question_id);
+                $correctAnswer = $result['answer'];
+                $contest_type = $result['contest_type']; 
+                $userAnswer = $row->answer;
+                $totalScore+=10;
             }
         } 
         return $totalScore;

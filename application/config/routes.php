@@ -66,7 +66,8 @@ $route['admin/Coupon/([0-9]+)'] = 'admin/Coupon';
 
 
 // Frontend Section
-$route['terms-and-condition'] = 'home/terms_and_condition';
+$route['privacy-policy'] = 'home/privacy_policy';
+$route['terms-and-conditions'] = 'home/terms_and_conditions';
 $route['registration_process'] = 'home/registration_process';
 $route['thank-you'] = 'home/thank_you';
 $route['login-process'] = 'home/login_process';
@@ -81,3 +82,5 @@ $route['forgot-password'] = 'home/forgot_password';
 $route['forgot-password-process'] = 'home/forgot_password_process';
 $route['reset-password/(:any)'] = 'home/reset_password/$1';
 $route['getselectecountry'] ='home/getselectecountry';
+$route['scoreboard'] ='home/scoreboard';
+$route['log-out'] ='home/log_out';
