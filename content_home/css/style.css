@@ -144,6 +144,17 @@ label.myButton input[type="file"] {
 }
 .countryscore input{color:#000}
 .countrydisable{font-size:20px}
+.mnemonic a{
+    color: #337ab7;
+    background-color: #181B1D;
+    padding: 5px;
+    border: 1px #46484B solid;
+    text-decoration: none;
+}
+.mnemonic p{
+    padding: 5px 0; 
+}
+.mnemonicpage {background-image: url(../images/background_mnemonic.png);}
 /* Developer added CSS ends here */
 
 @media (max-width: 480px) {
@@ -164,6 +175,9 @@ label.myButton input[type="file"] {
     #user-bar .left a {
         font-size: 16px;
     }
+    #opt .wrap .down .cont {
+        padding: 10px;
+    }
 }
 @media (min-width: 480px) and (max-width: 769px) {
     .home, .face {margin: 0 auto;}
@@ -181,6 +195,9 @@ label.myButton input[type="file"] {
     #user-bar .left a {
         font-size: 16px;
     }
+    #opt .wrap .down .cont {
+        padding: 10px;
+    }
 }
 @media (min-width: 769px) and (max-width: 993px) {
     .home, .face {margin: 0 auto;}
@@ -197,6 +214,9 @@ label.myButton input[type="file"] {
     }
     #user-bar .left a {
         font-size: 16px;
+    }
+    #opt .wrap .down .cont {
+        padding: 10px;
     }
 }
 @media (min-width: 993px) and (max-width: 1200px){}
