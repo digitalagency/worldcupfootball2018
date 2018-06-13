@@ -15,7 +15,7 @@
 </head>
 
 <body class="mnemonicpage">          
-<div id="banner"><img src="https://setwetnepal.com/playinstyle/content_home/images/banner.png" width="100%"></div>
+<div id="banner"><img src="https://setwetnepal.com/playinstyle/content_home/images/index_banner.png" width="100%"></div>
 
 <!-- body start -->
 <div class="container">
