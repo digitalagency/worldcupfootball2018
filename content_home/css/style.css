@@ -143,6 +143,7 @@ label.myButton input[type="file"] {
     margin-right: 20px;
 }
 .countryscore input{color:#000}
+
 .countrydisable{font-size:20px}
 .mnemonic a{
     color: #337ab7;
@@ -155,6 +156,7 @@ label.myButton input[type="file"] {
     padding: 5px 0; 
 }
 .mnemonicpage {background-image: url(../images/background_mnemonic.png);}
+.countrydisable{font-size:20px; color:#00aeef}
 /* Developer added CSS ends here */
 
 @media (max-width: 480px) {

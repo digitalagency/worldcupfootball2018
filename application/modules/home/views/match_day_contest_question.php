@@ -49,11 +49,11 @@ if($left_hours>24)
               {
               ?>
               <label class="radio-inline">
-                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
+                <input type="radio" onclick="handleClick(this);" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_1;?>" <?php if($match_info['0']->team_1==$answer) echo 'checked="checked"';?>>
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
               </label>
               <label class="radio-inline">
-                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                <input type="radio" onclick="handleClick(this);" name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
               </label>                  
               <?php
@@ -79,9 +79,9 @@ if($left_hours>24)
               if($row->question_number=="4")
               {
               ?>
-              <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
+              <select class="form-control firstteamplayer"  name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
                 <option value="">Select Answer</option>                
-                <option disabled><?php echo $this->home_model->get_country_name($match_info['0']->team_1);?></option>
+                <option disabled class="countrydisable"><?php echo $this->home_model->get_country_name($match_info['0']->team_1);?></option>
                   <?php 
                   $players = $this->home_model->get_all_players($match_info['0']->team_1);
                   foreach($players as $player){?>
@@ -89,7 +89,7 @@ if($left_hours>24)
                   <?php 
                   }
                   ?>
-                <option disabled><?php echo $this->home_model->get_country_name($match_info['0']->team_2);?></option>
+                <option disabled class="countrydisable"><?php echo $this->home_model->get_country_name($match_info['0']->team_2);?></option>
                   <?php 
                   $players = $this->home_model->get_all_players($match_info['0']->team_2);
                   foreach($players as $player){?>
