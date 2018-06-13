@@ -33,7 +33,7 @@ elseif($_SERVER['HTTP_HOST']=="localhost"){
 else
 {	
 	//$config['base_url'] = 'http://localhost/worldcupfootball2018';
-	$config['base_url'] = '//www.setwetnepal.com/playinstyle';
+	$config['base_url'] = 'https://www.setwetnepal.com/playinstyle';
 }
 
 
