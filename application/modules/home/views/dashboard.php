@@ -14,9 +14,11 @@
         <div class="wrap">
           <img src="<?php echo base_url();?>content_home/images/con-cir2.png" alt="">
           <div class="low">
-            <a href="#">How to play the contest</a><br>
-            <button type="button" class="btn btn-default two" onclick="window.location='<?php echo base_url().'ultimate-contest-question';?>'">Click to Play</button>
-          </div>
+            <a href="#">This contest will open soon.</a><br>
+            <!-- <button type="button" class="btn btn-default two" onclick="window.location='<?php echo base_url().'ultimate-contest-question';?>'">Click to Play</button>
+ -->
+            <button type="button" class="btn btn-default two" title="Stay Tuned!!">Click to Play</button>
+           </div>
         </div>
       </div>
       <div class="col-md-4 col-sm-4">

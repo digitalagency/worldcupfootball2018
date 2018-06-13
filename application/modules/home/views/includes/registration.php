@@ -13,16 +13,8 @@
       <input type="text" class="form-control" id="username" name="username" required>
     </div>
     <div class="form-group">
-      <label for="Email">GENDER</label>
-      <div class="clear"></div>
-      <input type="radio" id="gender" name="gender"  value="male" required>
-      <img src="<?php echo base_url().'content_home/images/male.png';?>" alt="Male">
-      <input type="radio" id="gender" name="gender" value="female" required>
-      <img src="<?php echo base_url().'content_home/images/female.png';?>" alt="Female">
-    </div>
-    <div class="form-group">
       <label for="Email">MOBILE NUMBER</label>
-      <input type="number" class="form-control" id="mobile_number" name="mobile_number" required>
+      <input type="number" min="0" class="form-control" id="mobile_number" name="mobile_number" required>
     </div>
     <div class="form-group">
       <label for="Email">EMAIL</label>
@@ -41,6 +33,14 @@
         <input name="yourimage" id="yourimage" type="file" />
         <span>UPLOAD YOUR IMAGE</span>
       </label>
+    </div>
+    <div class="form-group">
+      <label for="Email">USE ONE OF THE DEFAULT</label>
+      <div class="clear"></div>
+      <input type="radio" id="gender" name="gender"  value="male" required>
+      <img src="<?php echo base_url().'content_home/images/male.png';?>" alt="Male">
+      <input type="radio" id="gender" name="gender" value="female" required>
+      <img src="<?php echo base_url().'content_home/images/female.png';?>" alt="Female">
     </div>
     <div class="bottom">
       <button type="submit" class="btn btn-default" name="btnsubmit">SUBMIT</button>      

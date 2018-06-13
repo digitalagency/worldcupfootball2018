@@ -440,22 +440,25 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=5;$i++)
             {
-                $data='';
-                $data = array(
-                    'user_id' => $user_id,
-                    'question_id' => $this->input->post('question_id_'.$i)
-                );
-                $question_id = $_POST['question_id_'.$i];
-                if($i==1 && isset($_POST['answer1_'.$i]) && isset($_POST['answer2_'.$i]))
-                {                
-                    $data['answer'] = $_POST['answer1_'.$i].','.$_POST['answer2_'.$i];
-                }
-                else
-                    $data['answer'] = $_POST['answer_'.$i];
-                print_r($data);
-                //echo $question_id.' -- '.$answer.'<br>';            
-                $this->db->insert('tbl_answer',$data);
-                $aid = $this->db->insert_id(); 
+                if(isset($_POST['question_id_'.$i]))
+                {
+                    $data='';
+                    $data = array(
+                        'user_id' => $user_id,
+                        'question_id' => $this->input->post('question_id_'.$i)
+                    );
+                    $question_id = $_POST['question_id_'.$i];
+                    if($i==1 && isset($_POST['answer1_'.$i]) && isset($_POST['answer2_'.$i]))
+                    {                
+                        $data['answer'] = $_POST['answer1_'.$i].','.$_POST['answer2_'.$i];
+                    }
+                    else
+                        $data['answer'] = $_POST['answer_'.$i];
+                    //print_r($data);
+                    //echo $question_id.' -- '.$answer.'<br>';            
+                    $this->db->insert('tbl_answer',$data);
+                    $aid = $this->db->insert_id();
+                    } 
             }
             return $aid;
         }
@@ -495,18 +498,21 @@ class Home_model extends CI_Model {
         {
             for($i=1;$i<=4;$i++)
             {
-                $data='';
-                $data = array(
-                    'user_id' => $user_id,
-                    'question_id' => $this->input->post('question_id_'.$i),
-                    'answer' => $this->input->post('answer_'.$i)
-                );
-                $question_id = $_POST['question_id_'.$i];
-                    $data['answer'] = $_POST['answer_'.$i];
-                //print_r($data);
-                //echo $question_id.' -- '.$answer.'<br>';            
-                $this->db->insert('tbl_answer',$data);
-                $aid = $this->db->insert_id(); 
+                if(isset($_POST['question_id_'.$i]))
+                {
+                    $data='';
+                    $data = array(
+                        'user_id' => $user_id,
+                        'question_id' => $this->input->post('question_id_'.$i),
+                        'answer' => $this->input->post('answer_'.$i)
+                    );
+                    $question_id = $_POST['question_id_'.$i];
+                        $data['answer'] = $_POST['answer_'.$i];
+                    //print_r($data);
+                    //echo $question_id.' -- '.$answer.'<br>';            
+                    $this->db->insert('tbl_answer',$data);
+                    $aid = $this->db->insert_id(); 
+                }
             }
             return $aid;
         }
@@ -576,10 +582,13 @@ class Home_model extends CI_Model {
                 $correctAnswer = $result['answer'];
                 $contest_type = $result['contest_type']; 
                 $userAnswer = $row->answer;
-                if($contest_type==1 || $contest_type==3)
-                    $totalScore+=10;
-                elseif($contest_type==2)
-                    $totalScore+=100;
+                if($correctAnswer==$userAnswer)
+                {
+                    if($contest_type==1 || $contest_type==3)
+                        $totalScore+=10;
+                    elseif($contest_type==2)
+                        $totalScore+=100;
+                }
             }
         } 
         return $totalScore;
@@ -608,10 +617,14 @@ class Home_model extends CI_Model {
                 $correctAnswer = $result['answer'];
                 //$contest_type = $result['contest_type']; 
                 $userAnswer = $row->answer;
-                if($contest_type==1 || $contest_type==3)
-                    $totalScore+=10;
-                elseif($contest_type==2)
-                    $totalScore+=100;
+                //echo $correctAnswer.' -- '.$userAnswer;
+                if($correctAnswer==$userAnswer)
+                {
+                    if($contest_type==1 || $contest_type==3)
+                        $totalScore+=10;
+                    elseif($contest_type==2)
+                        $totalScore+=100;
+                }
             }
         } 
         return $totalScore;
@@ -667,6 +680,29 @@ class Home_model extends CI_Model {
             }
         } 
         return $totalScore;
+    }
+
+    function calculateDateDiff($fromDate, $toDate)
+    {
+        /*$start  = date_create($fromDate);
+        $end    = date_create($toDate);
+        echo $start.' -- '.$end;*/
+        $start=strtotime($fromDate);
+        $end=strtotime($toDate);
+        $diff = $end-$start;
+
+       /* echo 'The difference is ';
+        echo  $diff->y . ' years, ';
+        echo  $diff->m . ' months, ';
+        echo  $diff->d . ' days, ';
+        echo  $diff->h . ' hours, ';
+        echo  $diff->i . ' minutes, ';
+        echo  $diff->s . ' seconds';*/
+        // Output: The difference is 28 years, 5 months, 19 days, 20 hours, 34 minutes, 36 seconds
+        //echo 'The difference in hours : ' . $diff->h;
+        //echo 'The difference in days : ' . $diff->days;
+        // Output: The difference in days : 10398
+            return $diff;
     }
 
     function dateDiff($fromDate, $toDate)
