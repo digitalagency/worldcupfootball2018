@@ -30,15 +30,11 @@ class user_model extends CI_Model {
 
 
 
-    public function get_all_registered_user($limit,$offset,$region){
-        $this->db->select('tp.id,tp.uploaded_date,tp.likes,tp.imagepath,tp.imagename,tu.id as user_id,tu.registration_number,tu.full_name,tu.sub_region,tu.main_region,tu.coupon_no,tu.coupon_qty,tu.shade,tu.pattern');
-        $this->db->from('tbl_photo AS tp');
-        if($region!='all')
-            $this->db->like('tu.registration_number', $region.'-', 'after');
-
-        $this->db->join('tbl_user AS tu', 'tp.user_id = tu.registration_number', 'INNER');
+    public function get_all_registered_user($limit,$offset,$flag=''){
+        $this->db->select('*');
+        $this->db->from('tbl_participants');
         $this->db->limit($limit, $offset);
-        $this->db->order_by("tp.id","ASC");
+        $this->db->order_by("id","ASC");
         $query = $this->db->get();
         //echo $this->db->last_query();
         if ($query->num_rows() == 0) {
@@ -48,13 +44,9 @@ class user_model extends CI_Model {
         }
     }
 
-    public function count_all_registered_user($region){
-        $this->db->select('tp.id,tp.uploaded_date,tp.likes,tp.imagepath,tp.imagename,tu.registration_number,tu.full_name,tu.sub_region,tu.main_region,tu.coupon_no,tu.coupon_qty,tu.shade,tu.pattern');
-        $this->db->from('tbl_photo AS tp');
-        if($region!='all')
-            $this->db->like('tu.registration_number', $region, 'after');
-
-        $this->db->join('tbl_user AS tu', 'tp.user_id = tu.registration_number', 'INNER');
+    public function count_all_registered_user($flag){
+        $this->db->select('*');
+        $this->db->from('tbl_participants');
         $query = $this->db->get();
         return $query->num_rows();
     }

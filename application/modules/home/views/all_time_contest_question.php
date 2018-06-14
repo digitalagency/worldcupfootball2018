@@ -49,7 +49,7 @@ $left_hours = $this->home_model->dateDiff($now, $question_date);
             }
             ?> 
             <?php if($this->home_model->check_if_already_answered_by_question_id($question_id)>0){?>
-            <label class="radio-inline">You have already answered to these questions.</label>
+            <label class="radio-inline">You have already answered to these questions. &nbsp;&nbsp;<a href="<?php echo base_url() . 'dashboard';?>">Go to Home</a></label>
             <?php } ?>
           </div>
         </div>

@@ -10,16 +10,16 @@ if($left_hours>24)
 ?>
 
 <div id="opt">
-  <div class="container">
+  <div class="container">     
+    <?php
+    $action = base_url() . 'match-day-contest-question/'.$this->uri->segment(2);
+    $attributes = array('class' => 'form-horizontal form-bordered', 'id' => 'form1', 'enctype' => 'multipart/form-data');
+    echo form_open_multipart($action, $attributes);
+    ?>
     <div class="wrap">
       <div class="up one">
         <h1>MATCH DAY CONTEST</h1>
-      </div>      
-      <?php
-      $action = base_url() . 'match-day-contest-question/'.$this->uri->segment(2);
-      $attributes = array('class' => 'form-horizontal form-bordered', 'id' => 'form1', 'enctype' => 'multipart/form-data');
-      echo form_open_multipart($action, $attributes);
-      ?>
+      </div> 
       <div class="down">
         <div class="head">
           <h2>GROUP STAGE</h2>
@@ -88,14 +88,13 @@ if($left_hours>24)
                 ?>
                 <label class="radio-inline">
                   <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
-                  <input type="number" min="0" name="answer1_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['0']; ?>" style="background:#1c1c1c; width:50px;"> 
+                  <input type="number" min="0" name="answer1_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['0']; ?>"> 
                 </label>
                 <label class="radio-inline">
-                  <input type="number" min="0" name="answer2_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['1']; ?>" style="background:#1c1c1c; width:50px;"> 
+                  <input type="number" min="0" name="answer2_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $aa['1']; ?>"> 
                   <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
-                </label>
-                
-                <?php
+                </label>                
+              <?php
               }
               if($row->question_number=="4")
               {
@@ -130,7 +129,7 @@ if($left_hours>24)
             }
             ?>
             <?php if($this->home_model->check_if_already_answered($match_id)>0){?>
-            <label class="radio-inline">You have already answered to these match questions.</label>
+            <label class="radio-inline">You have already answered to these match questions. &nbsp;&nbsp;&nbsp;<a href="<?php echo base_url() . 'dashboard';?>">Go to Home</a></label>
             <?php } ?>
           </div>
         </div>
@@ -138,7 +137,7 @@ if($left_hours>24)
       <?php if($this->home_model->check_if_already_answered($match_id)==0){?>
       <button name="btnSubmit" class="btn btn-default submit" type="submit">Submit</button>
       <?php } ?>
-      <?php echo form_close(); ?>
     </div>
+    <?php echo form_close(); ?>
   </div>
 </div>

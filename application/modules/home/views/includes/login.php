@@ -4,6 +4,16 @@
     <h3>Log In</h3>
   </div>
   <div class="down">
+    <?php if(isset($_GET['error'])){?>
+    <div class="form-group">
+      <label for="message">
+        <?php 
+        if($_GET['error']=="iupc"){
+          echo "Invalid Username/Password combination.";
+        }
+        ?>        
+    </div>
+    <?php } ?>
     <div class="form-group">
       <label for="Email">EMAIL ADDRESS</label>
       <input type="email" class="form-control" id="username" name="username" required>

@@ -42,6 +42,9 @@
             e) Top 50 participants will win SetWet gift hamper.</li>
             <li>The winners must collect their prizes within 10days after the winner announcement. If the gift did not collect within that period, it will not be valid and company will not be liable to give gift thereafter.</li>
             <li>Winners must inbox their contact details to Set Wet Nepal Facebook page after the declaration of winning through a post in Set Wet Nepal Facebook page.Winners will be announce after the end of the Final Match.</li>
+            <li>In case, the same participant uses multiple registrations, only the first entry will be considered eligible to play the contest.</li>
+            <li>The winner must bring the printout of the emails received send from us regarding the winner declaration.</li>
+            <li>The winner also must bring their citizenship card/ID card to collect their prize.</li>
             <li>The Winners and participants must visit Digbijay Complex 6th floor (Opposite of Rio Apartment), Jwagal, Lalitpur within 10 days (From 11 am to 4 pm - Map: http://bit.ly/Digitalin-Location) to collect your gift. In case if the winner is not from Kathmandu and unable to visit, s/he must nominate somebody by sending their details on our Facebook Page to collect their prizes on their behalf with a valid ID of the winner as well as the receiver.</li>
             <li>The prizes are non-transferable, non-exchangeable and non-redeemable for cash.</li>
             <li>SetWet Nepal may use the picture of the winners and participants with the prize/gift taken at the time of collecting the prize/gift for any promotional/ marketing purpose of the company.</li>

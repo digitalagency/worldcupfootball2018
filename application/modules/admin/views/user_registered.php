@@ -6,29 +6,22 @@
 
       <div class="row">
         <div class="col-md-12">
-            <div class="panel-footer">
-            <a class="btn btn-success below_space" href="<?php echo base_url(); ?>admin/User/add"><i class="fa fa-plus" data-original-title="View Basket"></i> Add User </a>
-            <div class="col-xs-10">
+        <!--<div class="panel-footer">
+            <div class="col-xs-12">
               <input type="text" name="search" id='search' class="form-control" value='' placeholder="Search for User" />
             </div>
-        </div>
+        </div> -->
           <div class="table-responsive">  
             <table class="table table-hover" id="table1" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th width="1%">Reg S.N.</th>
-                  <th width="10%">Registration Date </th>
-                  <!-- <th width="5%">Registration Code</th> -->
-                  <th width="20%">Customer Info</th>
-                  <!-- <th width="10%">Main Region</th>
-                  <th width="10%">Sub Region</th> -->
-                  <th width="10%">Coupon No.</th>
-                  <th width="10%">Coupon qty.</th>
-                  <th width="10%">Fb Likes</th>
-                  <th width="10%">Uploaded Image</th>
-                  <th width="10%">Shades</th>
-                  <th width="10%">Pattern</th>
-                  <th width="20%" class="table-action text-center">Action</th>
+                  <th width="5%" class="text-center">S.N.</th>
+                  <th width="20%">Registered On</th>
+                  <th width="20%">Full Name</th>
+                  <th width="10%">Gender</th>
+                  <th width="20%">Mobile No.</th>
+                  <th width="20%">Email</th>
+                  <th width="5%" class="table-action text-center">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,34 +37,15 @@
                     //print_r($key);
                   //echo $key->ordering;
                     ++$counter;
-                    if($row->shade=="Non- Metallica")
-                      $shade_location = base_url()."content_home/images/nonmetallica/".$row->pattern;
-                    else
-                      $shade_location = base_url()."content_home/images/metallica/".$row->pattern;
-                    $colorname = str_replace(".jpg","",$row->pattern);
-                    $colorname = str_replace("Metalica ","",$colorname);
-                    $colorname = str_replace("Metallica ","",$colorname);
-                    $colorname = str_replace("_"," ",$colorname);
                     ?>
                   <tr>
-                    <td><?php echo $row->id; ?></td>
-                    <td><?php echo $row->uploaded_date; ?></td>
-                    <!-- <td><?php echo $row->registration_number; ?></td> -->
-                    <td><?php echo $row->registration_number; ?><br><?php echo $row->full_name;?></td>
-                    <!-- <td><?php echo $row->main_region; ?></td>
-                    <td><?php echo $row->sub_region; ?></td>-->
-                    <td><?php echo $row->coupon_no; ?></td>
-                    <td><?php echo $row->coupon_qty;?></td> 
-                    <td><?php echo $row->likes; ?></td>
-                    <td><img src="<?php echo base_url().$row->imagepath.$row->imagename; ?>" style="max-height:100px; max-width:100px;"></td>
-                    <td><?php echo $row->shade; ?></td>
-                    <td><img src="<?php echo $shade_location;?>" title="<?php echo $colorname;?>"><br><?php echo ucfirst($colorname);?></td>
-                    <td class="table-action text-center">
-                      <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>admin/User/edit/<?php echo $row->user_id; ?>"><i class="fa fa-edit tooltips" data-original-title="Edit Activity"></i> Edit</a>
-                      |
-                      <?php $remove_link = base_url().'admin/User/removeUser/'.$row->id.'/'.$this->uri->segment(4).'/'.$this->uri->segment(5);?>
-                      <button type="button" class="btn btn-success btn-sm delete_Activity" link="<?php echo $remove_link; ?>" data-toggle="modal" data-target="#myModalDelete"><i class="fa fa-trash tooltips" data-original-title="Remove User"></i> Remove</button>
-                    </td>
+                    <td class="text-center"><?php echo $counter+$page; ?></td>
+                    <td><?php echo $row->registered_on; ?></td>
+                    <td><?php echo $row->fname; ?></td>
+                    <td><?php echo $row->gender; ?></td>
+                    <td><?php echo $row->mobile_number;?></td> 
+                    <td><?php echo $row->email; ?></td>
+                    <td class="table-action text-center">&nbsp;</td>
                   </tr>
                   <?php
                   $i++;
@@ -83,9 +57,9 @@
                   </tr>
                   <?php } ?>
                 </tbody>
-              </table>
-            </div><!-- table-responsive -->
-           <?php echo $this->pagination->create_links();?>
+            </table>
+          </div><!-- table-responsive -->
+          <?php echo $this->pagination->create_links();?>
           </div><!-- col-md-6 -->
         </div>
 

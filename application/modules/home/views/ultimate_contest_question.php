@@ -85,8 +85,8 @@
               <?php foreach($countries as $country){?>
               <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
               <?php
-                                    $players = $this->home_model->get_all_players($country->id);
-                                    foreach($players as $player){?>
+                $players = $this->home_model->get_all_players($country->id);
+                foreach($players as $player){?>
               <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
               <?php }
                                 } ?>
@@ -104,8 +104,8 @@
               <?php foreach($countries as $country){?>
               <option value="" disabled class="countrydisable"><?php echo $country->country_name;?></option>
               <?php
-                                    $players = $this->home_model->get_all_players($country->id);
-                                    foreach($players as $player){?>
+                $players = $this->home_model->get_all_players($country->id);
+                foreach($players as $player){?>
               <option value="<?php echo $player->id;?>" <?php if($answer==$player->id) echo 'selected="selected"';?>>-&nbsp;<?php echo $player->player_name;?></option>
               <?php }
                                 } ?>
@@ -134,16 +134,15 @@
                     }
             ?>
           </div>
-          <?php
-            $i++;
-            endforeach;                            
-            }
-            ?>
-          <?php if(!empty($answer)){?>
-          <label class="radio-inline">You have already answered to these questions.</label>
-          <?php
-          }
-          ?>
+        <?php
+        $i++;
+        endforeach;                            
+        }
+        if(!empty($answer)){?>
+        <label class="radio-inline">You have already answered to these questions.<a href="<?php echo base_url() . 'dashboard';?>">Go to Home</a></label>
+        <?php
+        }
+        ?>
         </div>
       </div>
       <?php if(empty($answer)){?>

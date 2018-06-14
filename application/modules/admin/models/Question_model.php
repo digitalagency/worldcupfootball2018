@@ -103,7 +103,7 @@ class question_model extends CI_Model {
         for($i=1;$i<=5;$i++)
         {
             $question_id = $_POST['question_id_'.$i];
-            if($i==1 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
+            if($i==2 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
             {                
                 $answer = $_POST['answer_'.$i]['0'].','.$_POST['answer_'.$i]['1'];
             }
@@ -132,6 +132,7 @@ class question_model extends CI_Model {
     function get_all_time_contest_questions(){
         $this->db->select();
         $this->db->where('contest_type', '3');
+        $this->db->order_by("datetime","ASC");
         $query = $this->db->get($this->table_question);  
         if ($query->num_rows() == 0) {
             return FALSE;

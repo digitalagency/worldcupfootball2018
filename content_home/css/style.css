@@ -33,7 +33,7 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 #user-bar .left p span {color: #ff9600;}
 #user-bar .left a {font-size: 14px;}
 #user-bar .right {text-align: right;}
-#user-bar .wrap {width: 40px;float: right;}
+#user-bar .wrap {width: 150px; float: right;}
 #user-bar .wrap p {text-align: center;font-size: 17px;margin-top:0px;margin-bottom: 0px;color: #FFF;}
 
 .circle-line {margin: 98px 0px;}
@@ -52,7 +52,7 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 #opt .wrap {width: 702px;margin: 0 auto;} 
 #opt .wrap .down  {background-color: #1f1f1f;} 
 #opt .wrap .down .head h2  {color: #FFF;padding: 16px 30px;margin-top: 6px;} 
-#opt .up.one {background-image: url(../images/thirdban-2.png);background-size: cover;} 
+#opt .up.one {background-image: url(../images/thirdban-1.png);background-size: cover;} 
 #opt .up.one h1 {color: #FFF;text-align: center;padding: 12px;font-size: 50px;} 
 #opt .wrap .down .cont .i-wrap{height: 450px;overflow-y:scroll;}
 #opt .wrap .down .cont {padding: 32px;}
@@ -72,7 +72,7 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 .q .form-control {width: 20%;display: inline-block; margin-right: 10px;}
 .q select{display: inline-block; margin-right: 10px; padding:5px; width: 30%; background: #373B3E; color: #FFFFFF; border: 1px #4F5052 solid; border-radius: 0;}
 .q input[type="number"] {
-    display: inline-block; padding:5px; width: 20px; background: #373B3E; color: #FFFFFF; border: 1px #4F5052 solid; border-radius: 0;}
+    display: inline-block; padding:5px; width: 20px; background:#1c1c1c; width:44px; color: #FFFFFF; border: 1px #4F5052 solid; border-radius: 0;}
 .q-wrap {color: #FFF;}
 .q-wrap p {margin-bottom: 4px;}
 .q-wrap .radio-inline {color: #00aeef;}
@@ -173,8 +173,8 @@ label.myButton input[type="file"] {
 
 @media (max-width: 480px) {
     .home, .face {width: 100%;}
-    #user-bar .left, #user-bar .right {float: left; width: 50%; text-align:center; margin-top: 0px;}
-    #user-bar .right .wrap {float: none;margin: 0 auto;margin-top: 20px;}
+    #user-bar .left, #user-bar .right {float: left; width: 50%; margin-top: 0px;}
+    #user-bar .right .wrap {float: none;margin: 0 auto;margin-top: 0px;}
     #opt .wrap {width: 100%;}
     #opt .wrap .down .cont .i-wrap {font-size: 16px;}
     #opt .wrap .down .cont .op .date,#opt .wrap .down .cont .op .off {width: 100%;}
@@ -187,7 +187,7 @@ label.myButton input[type="file"] {
         font-size: 20px;
     }
     #user-bar .left a {
-        font-size: 16px;
+        font-size: 14px;
     }
     #opt .wrap .down .cont {
         padding: 10px;

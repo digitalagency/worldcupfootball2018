@@ -22,7 +22,7 @@ class Dashboard extends MY_Controller {
 
     function index() {
 
-        $data['title'] = 'Asian Paints :: World Cup Football 2018 Quiz Competition';
+        $data['title'] = 'SETWET :: Play in Style';
 
         $data['page_header'] = 'Dashboard';
 
@@ -34,7 +34,7 @@ class Dashboard extends MY_Controller {
 
         $data['nav'] = 'dashboard';
 
-        //$data['total_registered_users'] = $this->general_model->countTotal('tbl_photo');
+        $data['total_registered_users'] = $this->general_model->countTotal('tbl_participants');
 
         //$data['total_registration_numbers'] = $this->general_model->countTotal('tbl_user');
 

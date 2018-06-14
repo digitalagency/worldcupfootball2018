@@ -109,7 +109,7 @@ class Home_model extends CI_Model {
         $provided_password = md5($password);
         
         $where = '(username="'.$username.'" OR email = "'.$username.'") AND password = "'.$provided_password.'"';
-        $this->db->select('id,username,email');
+        $this->db->select('id,mobile_number,email');
         $this->db->where($where);
         $query =  $this->db->get('tbl_participants');
         if ($query->num_rows() == 0) {
@@ -120,7 +120,7 @@ class Home_model extends CI_Model {
             $user_id = $val->id;
             $userdata = array(
                    'user_id'  => $val->id,
-                   'username'  => $val->username,
+                   'mobile_number'  => $val->mobile_number,
                    'email'     => $val->email,
                    'logged_in' => TRUE
                );
@@ -132,7 +132,7 @@ class Home_model extends CI_Model {
 
     function doLogout()
     {
-        $userdata = array('user_id' => '', 'username' => '', 'email' => '', 'logged_in' => '');
+        $userdata = array('user_id' => '', 'mobile_number' => '', 'email' => '', 'logged_in' => '');
         $this->session->set_userdata($userdata);
         $this->session->unset_userdata($userdata);
         $this->session->sess_destroy();
@@ -226,7 +226,8 @@ class Home_model extends CI_Model {
     public function checkLoggedIn()
     {        
         $user_id = $this->session->userdata('user_id');
-        if(empty($user_id))            
+        $mobile_number = $this->session->userdata('mobile_number');
+        if(empty($user_id) && !empty($mobile_number))            
             redirect(base_url());
     }
 
