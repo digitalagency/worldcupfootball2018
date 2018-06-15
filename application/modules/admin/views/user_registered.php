@@ -12,7 +12,7 @@
             </div>
         </div> -->
           <div class="table-responsive">  
-            <table class="table table-hover" id="table1" cellspacing="0" width="100%">
+            <table class="table table-hover user_register" id="table1" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th width="5%" class="text-center">S.N.</th>

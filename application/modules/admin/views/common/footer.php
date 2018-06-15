@@ -27,6 +27,14 @@
         });
       });
   });
+
+  $(function () {
+      $('.user_register').DataTable({
+          "lengthMenu": [[ 50, 100, -1], [50,100, "All"]],
+      });
+  });
+
+
 </script>
 </body>
 </html>
