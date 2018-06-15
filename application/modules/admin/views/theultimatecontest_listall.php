@@ -39,10 +39,10 @@
                 </tr>
                 <tr>
                   <td>
-          <?php
+                    <?php
                     if($row->question_number=="1")
                     {
-                      ?>
+                    ?>
                     <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" required>
                       <option value="">Select Country</option>
                       <?php foreach($countries as $country){?>
