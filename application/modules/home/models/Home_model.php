@@ -119,7 +119,7 @@ class Home_model extends CI_Model {
             $val = $query->row();
             $user_id = $val->id;
             $userdata = array(
-                   'user_id'  => $val->id,
+                   'contestant_id'  => $val->id,
                    'mobile_number'  => $val->mobile_number,
                    'email'     => $val->email,
                    'logged_in' => TRUE
@@ -132,7 +132,7 @@ class Home_model extends CI_Model {
 
     function doLogout()
     {
-        $userdata = array('user_id' => '', 'mobile_number' => '', 'email' => '', 'logged_in' => '');
+        $userdata = array('contestant_id' => '', 'mobile_number' => '', 'email' => '', 'logged_in' => '');
         $this->session->set_userdata($userdata);
         $this->session->unset_userdata($userdata);
         $this->session->sess_destroy();
@@ -224,11 +224,14 @@ class Home_model extends CI_Model {
     }
 
     public function checkLoggedIn()
-    {        
-        $user_id = $this->session->userdata('user_id');
+    {
+        $user_id = $this->session->userdata('contestant_id');
         $mobile_number = $this->session->userdata('mobile_number');
-        if(empty($user_id) && !empty($mobile_number))            
+        if(empty($user_id) && empty($mobile_number))
             redirect(base_url());
+
+
+
     }
 
     public function getUser($user_id)
@@ -351,7 +354,7 @@ class Home_model extends CI_Model {
     }
 
     function enter_match_day_contest_answer($match_id){
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         if($this->check_if_already_answered($match_id)==0)
         {
             for($i=1;$i<=4;$i++)
@@ -381,7 +384,7 @@ class Home_model extends CI_Model {
 
     function check_if_already_answered($match_id)
     {        
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         $this->db->select('');
         $this->db->where("match_id",$match_id);
         $this->db->where("user_id",$user_id);
@@ -395,7 +398,7 @@ class Home_model extends CI_Model {
 
     function check_if_already_answered_by_question_id($question_id)
     {        
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         $this->db->select('');
         $this->db->where("question_id",$question_id);
         $this->db->where("user_id",$user_id);
@@ -441,7 +444,7 @@ class Home_model extends CI_Model {
 
     function get_user_answer_by_question_id($question_id)
     {        
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         $this->db->select('answer');
         $this->db->where("question_id",$question_id);
         $this->db->where("user_id",$user_id);
@@ -468,7 +471,7 @@ class Home_model extends CI_Model {
     }
 
     function enter_ultimate_contest_answer(){
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         //print_r($_POST);
         if($this->check_if_already_answered('0')==0)
         {
@@ -525,7 +528,7 @@ class Home_model extends CI_Model {
     }    
 
     function enter_all_time_contest_answer(){
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         $question_id = $this->uri->segment(2);
         //print_r($_POST);
         
@@ -599,7 +602,7 @@ class Home_model extends CI_Model {
 
     function calculateUserScore()
     {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         //if contest_type = 1, score = 10
         //if contest_type = 2, score = 100
         //if contest_type = 3, score = 10
@@ -631,7 +634,7 @@ class Home_model extends CI_Model {
 
     function calculate_point_by_contest_type($contest_type)
     {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         //if contest_type = 1, score = 10
         //if contest_type = 2, score = 100
         //if contest_type = 3, score = 10
@@ -667,7 +670,7 @@ class Home_model extends CI_Model {
 
     function calculate_knockout_point()
     {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         //if contest_type = 1, score = 10
         //if contest_type = 2, score = 100
         //if contest_type = 3, score = 10
@@ -693,7 +696,7 @@ class Home_model extends CI_Model {
 
     function calculate_football_knowledge_point()
     {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('contestant_id');
         //if contest_type = 1, score = 10
         //if contest_type = 2, score = 100
         //if contest_type = 3, score = 10

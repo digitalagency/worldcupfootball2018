@@ -6,7 +6,7 @@
 
 <body>
 <?php
-$user_id = $this->session->userdata('user_id');
+$user_id = $this->session->userdata('contestant_id');
 if(isset($user_id) && $user_id>0)
     $home = base_url().'dashboard';
 else

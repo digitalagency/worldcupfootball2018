@@ -1,6 +1,6 @@
 <?php
 $this->home_model->checkLoggedIn();
-$user_id = $this->session->userdata('user_id');
+$user_id = $this->session->userdata('contestant_id');
 $user_info = $this->home_model->getUser($user_id);
 $your_score = $this->home_model->calculateUserScore();
 $gender = $this->home_model->getGender($user_id);
