@@ -152,7 +152,7 @@ if($left_hours>24)
           </div>
         </div>
       </div>
-      <?php if($this->home_model->check_if_already_answered($match_id)==0){?>
+      <?php if($this->home_model->check_if_already_answered($match_id)==0 && $difference > 0){?>
       <button name="btnSubmit" class="btn btn-default submit" <?php echo $disable;?> type="submit">Submit</button>
       <?php } ?>
       <?php echo form_close(); ?>
