@@ -44,6 +44,55 @@ class user_model extends CI_Model {
         }
     }
 
+    function get_total_score_by_user_id($user_id)
+    {
+        //$user_id = $this->session->userdata('user_id');
+        //if contest_type = 1, score = 10
+        //if contest_type = 2, score = 100
+        //if contest_type = 3, score = 10
+
+        $this->db->select();
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get('tbl_answer');  
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            $totalScore = 0;
+            $results = $query->result();
+            foreach($results as $row){
+                $result = $this->get_correct_answer_n_contest_type_by_question_id($row->question_id);
+                $correctAnswer = $result['answer'];
+                $contest_type = $result['contest_type']; 
+                $userAnswer = $row->answer;
+                if($correctAnswer==$userAnswer)
+                {
+                    if($contest_type==1 || $contest_type==3)
+                        $totalScore+=10;
+                    elseif($contest_type==2)
+                        $totalScore+=100;
+                }
+            }
+        } 
+        return $totalScore;
+    }
+
+    function get_correct_answer_n_contest_type_by_question_id($question_id)
+    {
+        $this->db->select('answer,contest_type');
+        $this->db->where("id",$question_id);
+        $query =  $this->db->get('tbl_questions');
+        if ($query->num_rows() == 0) {
+            return 0;
+        } else {
+            
+            $val = $query->row();
+            $answer = $val->answer;
+            $result['contest_type'] = $val->contest_type;
+            $result['answer'] = $val->answer;
+            return $result;
+        }
+    }
+
     public function count_all_registered_user($flag){
         $this->db->select('*');
         $this->db->from('tbl_participants');

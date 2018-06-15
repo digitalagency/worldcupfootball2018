@@ -54,7 +54,7 @@ class User extends MY_Controller {
         
         $config['base_url'] = base_url() . 'admin/User/registered/';
         $config['uri_segment'] = 4;
-        $config['per_page'] = 50;
+        $config['per_page'] = 500;
 
         /* Bootstrap Pagination  */
 

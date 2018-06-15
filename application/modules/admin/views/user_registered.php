@@ -21,7 +21,7 @@
                   <th width="10%">Gender</th>
                   <th width="20%">Mobile No.</th>
                   <th width="20%">Email</th>
-                  <th width="5%" class="table-action text-center">&nbsp;</th>
+                  <th width="5%">Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,7 +45,7 @@
                     <td><?php echo $row->gender; ?></td>
                     <td><?php echo $row->mobile_number;?></td> 
                     <td><?php echo $row->email; ?></td>
-                    <td class="table-action text-center">&nbsp;</td>
+                    <td><?php echo $this->User_model->get_total_score_by_user_id($row->id);?></td>
                   </tr>
                   <?php
                   $i++;
