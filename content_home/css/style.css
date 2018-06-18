@@ -97,6 +97,27 @@ button.btn-default {background-color: rgba(218, 218, 218, 0.2);}
 #home .back .cont .submit {margin: 0px;color: #0a8ec1;text-decoration: none;}
 /*Change Log*/
 
+table{    
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+}
+.table-hover>tbody>tr:hover {
+    background-color: #191919;
+}
+.dataTables_length label{
+    color: #FFFFFF;
+}
+.dataTables_filter label{
+    color: #FFFFFF;
+}
+
+.dataTables_info{
+    color: #FFFFFF;
+}
+
+.table-responsive {
+    overflow-x: hidden;
+}
 
 footer {margin-top: 80px;text-align: center;}
 footer a {}

@@ -85,3 +85,5 @@ $route['getselectecountry'] ='home/getselectecountry';
 $route['getfirstteamplayer'] ='home/getfirstteamplayer';
 $route['scoreboard'] ='home/scoreboard';
 $route['log-out'] ='home/log_out';
+$route['leaderboard'] ='home/leaderboard';
+$route['leaderboard/(:any)'] ='home/leaderboard/$1';

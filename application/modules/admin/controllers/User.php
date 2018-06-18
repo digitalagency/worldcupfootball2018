@@ -79,7 +79,8 @@ class User extends MY_Controller {
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $total_rows = $this->db->count_all('tbl_participants');
         $config['total_rows'] = $total_rows;
-        $data['user_info'] = $this->User_model->get_all_registered_user($config['per_page'], $page,$flag);
+        //$data['user_info'] = $this->User_model->get_all_registered_user($config['per_page'], $page,$flag);
+        $data['user_info'] = $this->User_model->get_all_registered_users();
         $this->pagination->initialize($config);
 
         $data['title'] = 'Registered Users';

@@ -290,6 +290,47 @@ class Home extends View_Controller {
         }
         echo $output;
     }
+
+    function leaderboard()
+    {
+        $config['base_url'] = base_url() . 'leaderboard/';
+        $config['uri_segment'] = 2;
+        $config['per_page'] = 50;
+
+        /* Bootstrap Pagination  */
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] ="</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+        /* End of Bootstrap Pagination */
+        $flag="";
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $total_rows = $this->db->count_all('tbl_participants');
+        $config['total_rows'] = $total_rows;
+        $data['user_info'] = $this->home_model->get_all_registered_user();
+        $this->pagination->initialize($config);
+
+        $data['title'] = 'Leaderboard';
+        $data['page_header'] = 'Registered Participants :: Total number - '.$total_rows;
+        $data['page_header_icone'] = 'fa-product-user';
+        $data['nav'] = 'User';
+        $data['page'] = $page;
+        $data['panel_title'] = 'Registered Participant List';
+        $data['main'] = 'leaderboard';
+
+        $this->load->view('main', $data);
+    }
 }
 
 /* End of file Home.php

@@ -3,8 +3,10 @@ $question_id = $this->uri->segment(2);
 $now = date('Y-m-d H:i:s');
 $question_date = $this->home_model->get_question_date_by_question_id($question_id);
 $left_hours = $this->home_model->dateDiff($now, $question_date);
-/*if($left_hours>24)
-  redirect(base_url() . 'dashboard');*/
+$isActive = $this->home_model->checkifActive($question_date);
+
+if($isActive<0)
+  redirect(base_url() . 'dashboard');
 ?>
 
 <div id="opt">
@@ -28,23 +30,26 @@ $left_hours = $this->home_model->dateDiff($now, $question_date);
             foreach ($question_info as $row):
             //print_r($row);
             //echo $key->ordering;
+            if($isActive>0)
+            {
             ++$counter;
             $answer = $this->home_model->get_user_answer_by_question_id($row->id);
             ?>
             <div class="q">
               <p><?php echo $counter;?>. <?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"></p>              
               <label class="radio-inline">
-                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_1;?>" <?php if(!empty($row->option_3) && $answer==$row->option_1) echo 'checked="checked"';?>> <?php echo $row->option_1;?>
+                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_1;?>" <?php if(!empty($row->option_1) && $answer===$row->option_1) echo 'checked="checked"';?>> <?php echo $row->option_1;?>
               </label>
               <label class="radio-inline">
-                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_2;?>" <?php if(!empty($row->option_3) && $answer==$row->option_2) echo 'checked="checked"';?>> <?php echo $row->option_2;?>
+                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_2;?>" <?php if(!empty($row->option_2) && $answer===$row->option_2) echo 'checked="checked"';?>> <?php echo $row->option_2;?>
               </label>
               <label class="radio-inline">
-                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_3;?>" <?php if(!empty($row->option_3) && $answer==$row->option_3) echo 'checked="checked"';?>> <?php echo $row->option_3;?>
+                <input type="radio" name="answer_<?php echo $counter;?>" value="<?php echo $row->option_3;?>" <?php if(!empty($row->option_3) && $answer===$row->option_3) echo 'checked="checked"';?>> <?php echo $row->option_3;?>
               </label>
             </div>
             <?php
             $i++;
+            }
             endforeach;
             }
             ?> 

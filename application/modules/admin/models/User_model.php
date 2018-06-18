@@ -44,6 +44,20 @@ class user_model extends CI_Model {
         }
     }
 
+
+    public function get_all_registered_users(){
+        $this->db->select('*');
+        $this->db->from('tbl_participants');
+        $this->db->order_by("id","ASC");
+        $query = $this->db->get();
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
     function get_total_score_by_user_id($user_id)
     {
         //$user_id = $this->session->userdata('user_id');

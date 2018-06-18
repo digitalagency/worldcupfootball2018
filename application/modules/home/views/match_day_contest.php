@@ -23,9 +23,11 @@
             }
             ?>
             <div class="op">
-              <span class="date"><?php echo date( "F d", strtotime( $question->match_date ) );?></span>
-              <span class="off"><?php echo $this->home_model->get_country_name($question->team_1);?> Vs <?php echo $this->home_model->get_country_name($question->team_2);?></span>
-              <?php if($left_hours>0 && $left_hours<=24){?>
+              <span class="date"><?php echo date( "F d H:i", strtotime( $question->match_date ) );?></span>
+              <span class="off"><?php echo $this->home_model->get_country_name($question->team_1);?> Vs <?php echo $this->home_model->get_country_name($question->team_2);?>
+                <?php echo '<div style="display:none;">match date='.$match_date.' -- Left hours : '.$left_hours.' -- isAnswered = '.$this->home_model->check_if_already_answered($question->id).'</div>';?>
+              </span>
+              <?php if($left_hours<24){?>
                 <a class="click" href="<?php echo base_url();?>match-day-contest-question/<?php echo $question->id;?>" title="<?php echo $title;?>">Click to Play</a>
               <?php } ?>
             </div>

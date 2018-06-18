@@ -355,7 +355,14 @@ class Home_model extends CI_Model {
 
     function enter_match_day_contest_answer($match_id){
         $user_id = $this->session->userdata('contestant_id');
-        if($this->check_if_already_answered($match_id)==0)
+
+        $match_date = $this->get_match_date_by_match_id($match_id);
+        $current_date = date('Y-m-d H:i:s');
+        //$difference = $this->dateDiff($current_date, $match_date);
+        $difference = $this->calculate_remaining_time($match_date);
+        //echo 'difference = '.$difference;
+        //echo '<br>Is Answered = '.$this->check_if_already_answered($match_id);
+        if($this->check_if_already_answered($match_id)==0 && $difference>0)
         {
             for($i=1;$i<=4;$i++)
             {
@@ -545,9 +552,7 @@ class Home_model extends CI_Model {
                         'answer' => $this->input->post('answer_'.$i)
                     );
                     $question_id = $_POST['question_id_'.$i];
-                        $data['answer'] = $_POST['answer_'.$i];
-                    //print_r($data);
-                    //echo $question_id.' -- '.$answer.'<br>';            
+                        $data['answer'] = $_POST['answer_'.$i];        
                     $this->db->insert('tbl_answer',$data);
                     $aid = $this->db->insert_id(); 
                 }
@@ -745,103 +750,56 @@ class Home_model extends CI_Model {
 
     function dateDiff($fromDate, $toDate)
     {
-        /*$start  = date_create($fromDate);
-        $end    = date_create($toDate);
-        echo $start.' -- '.$end;*/
-        $start=date_create($fromDate);
-        $end=date_create($toDate);
-        $diff   = date_diff( $start, $end );
+        
+        //$matchdatetime = $match_info[0]->match_date;
+        $dt = new DateTime($toDate);
+        $date = $dt->format('Y-m-d H:i:s');
 
-       /* echo 'The difference is ';
-        echo  $diff->y . ' years, ';
-        echo  $diff->m . ' months, ';
-        echo  $diff->d . ' days, ';
-        echo  $diff->h . ' hours, ';
-        echo  $diff->i . ' minutes, ';
-        echo  $diff->s . ' seconds';*/
-        // Output: The difference is 28 years, 5 months, 19 days, 20 hours, 34 minutes, 36 seconds
-        //echo 'The difference in hours : ' . $diff->h;
-        //echo 'The difference in days : ' . $diff->days;
-        // Output: The difference in days : 10398
-        if($diff->y==0 && $diff->m==0 && $diff->d==0)
-            return $diff->h;
-        else
-            return $diff->h+100;
+        $today = strtotime(date("Y-m-d H:i:s"));
+        $date    = strtotime($date);
+
+        $datediff = $date - $today;
+        //$difference = floor($datediff/(60*60*24));
+        $difference = gmdate("H", $datediff);
+
+        $hours = floor($datediff / 3600);
+        $minutes = floor(($datediff / 60) % 60);
+        $seconds = $datediff % 60;
+
+        $hms = "$hours:$minutes:$seconds";
+        return $hours;
     }
 
-    public function getPattern_by_shade($shades)
+    function checkifActive($date)
     {
-        $this->db->select('id,pattern');
-        $this->db->where('shades',$shades);
-        $this->db->where('display','1');
-        $this->db->order_by("pattern","ASC");
-        $query =  $this->db->get('tbl_pattern');
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return $query->result();
-        }
+        $dt = new DateTime($date);
+        $date = $dt->format('Y-m-d H:i:s');
+
+        $today = strtotime(date("Y-m-d H:i:s"));
+        $date    = strtotime($date);
+
+        $datediff = $today-$date;
+        return $datediff;
     }
 
-    public function getTopusers_by_regioncode($regioncode)
+
+
+    function calculate_remaining_time($date)
     {
-        $this->db->select('tp.id id,tp.user_id,tp.likes,tp.imagepath,tp.imagename,tu.full_name');
-        $this->db->from('tbl_photo tp');
-        $this->db->join('tbl_user tu', 'tu.registration_number = tp.user_id');
-        $this->db->like('tp.user_id',$regioncode.'-','after');
-        $this->db->where('tp.imagepath!=','');
-        $this->db->where('tp.imagename!=','');
-        $this->db->order_by("tp.likes","DESC");
-        $this->db->limit(16);
-        $query =  $this->db->get();
-        //echo $this->db->last_query();
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return $query->result();
-        }
+        $dt = new DateTime($date);
+        $date = $dt->format('Y-m-d H:i:s');
+
+        $today = strtotime(date("Y-m-d H:i:s"));
+        $date    = strtotime($date);
+
+        $datediff = $date-$today;
+        return $datediff;
     }
 
-    public function get_user_by_reg_no($reg_no)
-    {
-        $this->db->select('tp.id id,tp.user_id,tp.likes,tp.imagepath,tp.imagename,tu.full_name');
-        $this->db->from('tbl_photo tp');
-        $this->db->join('tbl_user tu', 'tu.registration_number = tp.user_id');
-        $this->db->where('tp.user_id',$reg_no);
-        $query =  $this->db->get();
-        //echo $this->db->last_query();
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return $query->result();
-        }
-    }
-
-    public function getRegisteredusers_by_regioncode($regioncode)
-    {
-        $this->db->select('id,user_id,likes,imagepath,imagename');
-        $this->db->like('user_id',$regioncode,'after');
-        $this->db->where('imagepath!=','');
-        $this->db->where('imagename!=','');
-        $this->db->order_by("likes","DESC");
-        $query =  $this->db->get('tbl_photo');
-        //echo $this->db->last_query();
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return $query->result();
-        }
-    }
-
-    public function get_all_registered_user($limit,$offset,$region){
-        $this->db->select('tp.id,tp.uploaded_date,tp.likes,tp.imagepath,tp.imagename,tu.id as user_id,tu.registration_number,tu.full_name,tu.sub_region,tu.main_region,tu.coupon_no,tu.coupon_qty,tu.shade,tu.pattern');
-        $this->db->from('tbl_photo AS tp');
-        if($region!='all')
-            $this->db->like('tu.registration_number', $region.'-', 'after');
-
-        $this->db->join('tbl_user AS tu', 'tp.user_id = tu.registration_number', 'INNER');
-        $this->db->limit($limit, $offset);
-        $this->db->order_by("tu.full_name","ASC");
+    public function get_all_registered_user(){
+        $this->db->select('*');
+        $this->db->from('tbl_participants');
+        $this->db->order_by("id","ASC");
         $query = $this->db->get();
         //echo $this->db->last_query();
         if ($query->num_rows() == 0) {
@@ -878,219 +836,36 @@ class Home_model extends CI_Model {
 
     }
 
-    public function getSubregions_by_main_region($main_region)
+    function get_total_score_by_user_id($user_id)
     {
-        $this->db->select('region');
-        $this->db->from('tbl_regions');        
-        $this->db->where('`parent_id` = (SELECT `id` FROM `tbl_regions` WHERE parent_id="0" AND region="'.$main_region.'")', NULL, FALSE);
-        $this->db->order_by("region","ASC");
-        $query =  $this->db->get();
-        //echo $this->db->last_query();
+        //$user_id = $this->session->userdata('user_id');
+        //if contest_type = 1, score = 10
+        //if contest_type = 2, score = 100
+        //if contest_type = 3, score = 10
+
+        $this->db->select();
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get('tbl_answer');  
         if ($query->num_rows() == 0) {
             return FALSE;
         } else {
-            return $query->result();
+            $totalScore = 0;
+            $results = $query->result();
+            foreach($results as $row){
+                $result = $this->get_correct_answer_n_contest_type_by_question_id($row->question_id);
+                $correctAnswer = $result['answer'];
+                $contest_type = $result['contest_type']; 
+                $userAnswer = $row->answer;
+                if($correctAnswer==$userAnswer)
+                {
+                    if($contest_type==1 || $contest_type==3)
+                        $totalScore+=10;
+                    elseif($contest_type==2)
+                        $totalScore+=100;
+                }
+            }
         } 
-    }
-
-    public function selectbox_for_Subregions_by_main_region($main_region)
-    {
-        $this->db->select('region');
-        $this->db->from('tbl_regions');        
-        $this->db->where('`parent_id` = (SELECT `id` FROM `tbl_regions` WHERE parent_id="0" AND region="'.$main_region.'")', NULL, FALSE);
-        $this->db->order_by("region","ASC");
-        $query =  $this->db->get();
-        //echo $this->db->last_query();
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            $selectbox = '
-            <select name="sub_region" id="sub_region" class="form-control">
-                <option value="">Select sub region</option>
-            ';
-            $subregion = $query->result();
-            foreach($subregion as $key=>$value)
-            {
-            $selectbox = '
-                <option value="'.$value->region.'">'.$value->region.'</option>
-                ';
-            }
-
-            $selectbox .= '
-            </select>
-            ';
-            echo $selectbox;
-        } 
-    }
-
-    public function getSerialnumber($regioncode)
-    {
-        $this->db->select('serial_number');
-        $this->db->like('user_id',$regioncode,'after');
-        $this->db->order_by('serial_number','DESC');
-        $this->db->limit(1);
-        $query =  $this->db->get('tbl_photo'); 
-        //echo $this->db->last_query();
-        if ($query->num_rows() == 0) {
-            return 1;
-        } else {
-            $val = $query->row();
-
-            $serialNumber = $val->serial_number;
-            return ($serialNumber+1);
-        }
-    }
-
-    public function getRegion($regno)
-    {        
-        $regno_arr = explode('-',$regno);
-        $area = $regno_arr['1'];
-        $region_arr = array('K'=>'kathmandu','P'=>'pokhara','C'=>'central','E'=>'eastern','W'=>'western','COM'=>'commercial');
-        return $region_arr[$area];
-    }
-
-
-    public function getGift($regno)
-    {
-        $this->db->select('prize_image,coupon_code,prize_details');
-        $this->db->where('user_id',$regno);
-        $query =  $this->db->get('tbl_coupon');
-        if ($query->num_rows() == 0) {
-            return 0;
-        } else {
-            $val = $query->row();
-            $prize_image = $val->prize_image;
-            $coupon_code = $val->coupon_code;
-            $prize_details = $val->prize_details;
-
-            return $prize_image.'___'.$coupon_code.'___'.$prize_details;
-        }
-    }
-
-    public function getRandomCoupon($n)
-    {
-        $this->db->order_by('rand()');
-        $this->db->where('coupon_status','0');
-        $this->db->limit($n);
-        $query = $this->db->get('tbl_coupon');
-        return $query->result_array();
-    } 
-
-    public function isRegistered($regno)
-    {
-        $this->db->select('id');
-        $this->db->where('user_id',$regno);
-        $query =  $this->db->get('tbl_photo');
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-
-    public function updateCouponstatus($ecoupon,$user_id)
-    {
-        $data = array(
-            'coupon_status' => '1',
-            'user_id' => $user_id
-        );
-        $this->db->where('coupon_code', $ecoupon);
-        $this->db->update('tbl_coupon', $data); 
-    }
-
-    public function getLikesCount($share_url){
-        $url = 'https://graph.facebook.com/?fields=og_object%7Blikes.summary(true).limit(0)%7D,share&id='.$share_url;
-        //  Initiate curl
-        $ch = curl_init();
-        // Disable SSL verification
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        // Will return the response, if false it print the response
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // Set the url
-        curl_setopt($ch, CURLOPT_URL,$url);
-        // Execute
-        $result=curl_exec($ch);
-        // Closing
-        curl_close($ch);
-
-        $data = (array)json_decode($result, true);
-
-        $tc = '0';
-        if (isset($data['og_object'])) {
-            $bj = $data['og_object'];
-            $lik = $bj['likes'];
-            $summ = $lik['summary'];
-            $tc = $summ['total_count'];
-        }
-        return $tc;
-    }
-
-    public function update_likes_with_cron_job($regioncode)
-    {
-        $regno = $regioncode.'-';
-        $rusers = $this->getRegisteredusers_by_regioncode($regno);
-        //print_r($rusers);
-        if($rusers):
-        foreach($rusers as $key=>$row)
-        {
-            $id = $row->id;
-            $user_id = $row->user_id;
-            $old_likes = $row->likes;
-            $share_url = "https://rangmagical.bergernepal.com/photo-gallery-single/".$user_id;
-            if($new_likes>$old_likes)
-            $new_likes = $this->getLikesCount($share_url);
-            {
-                $data='';
-                $data['likes'] = $new_likes;                
-                $this->db->where('user_id', $user_id);
-                $this->db->update('tbl_photo', $data);
-                echo $id.' -- '.$old_likes.' -- UPDATED';
-                echo "<br>";
-            }
-        }
-        endif;
-    }
-
-    public function get_user($q){
-        //echo $q;
-        $this->db->select('*');
-        $this->db->like('full_name', $q,'after');
-        $query = $this->db->get('tbl_user');
-        if($query->num_rows() > 0){
-          foreach ($query->result_array() as $row){
-            //check if exists in tbl_photo
-            $registration_number = $row['registration_number'];
-            if($this->isRegistered($row['registration_number']))
-            {
-                $new_row['label']=htmlentities(stripslashes($row['full_name']));
-                $new_row['value']=htmlentities(stripslashes($row['full_name']));
-                $new_row['the_link']=base_url()."photo-gallery-single/".$row['registration_number'];
-                $row_set[] = $new_row; //build an array
-            }
-          }
-          echo json_encode($row_set); //format the array into json data
-        }
-    }
-
-    public function get_user_fb($q){
-        //echo $q;
-        $this->db->select('*');
-        $this->db->like('full_name', $q,'after');
-        $query = $this->db->get('tbl_user');
-        if($query->num_rows() > 0){
-          foreach ($query->result_array() as $row){
-            //check if exists in tbl_photo
-            $registration_number = $row['registration_number'];
-            if($this->isRegistered($row['registration_number']))
-            {
-                $new_row['label']=htmlentities(stripslashes($row['full_name']));
-                $new_row['value']=htmlentities(stripslashes($row['full_name']));
-                $new_row['the_link']=base_url()."facebook/photo_gallery_single/".$row['registration_number'];
-                $row_set[] = $new_row; //build an array
-            }
-          }
-          echo json_encode($row_set); //format the array into json data
-        }
+        return $totalScore;
     }
 }
 

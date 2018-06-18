@@ -45,6 +45,7 @@ if($left_hours>24)
             <div class="q">
               <p><?php echo $counter;?>. <?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"></p>
               <?php
+              //print_r($question_info);
               if($row->question_number=="1")
               {
               ?>
@@ -57,7 +58,7 @@ if($left_hours>24)
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
               </label>
                 <label class="radio-inline">
-                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
+                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($answer===0) echo 'checked="checked"';?>>
                   Draw
                 </label>
               <?php
@@ -70,12 +71,10 @@ if($left_hours>24)
                 <?php echo $this->home_model->get_country_name($match_info['0']->team_1);?>
               </label>
               <label class="radio-inline">
-                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
-                <?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
+                <input type="radio" <?php if($counter == 3){?>onclick="handleClick(this);"<?php }?> name="answer_<?php echo $counter;?>" value="<?php echo $match_info['0']->team_2;?>" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>><?php echo $this->home_model->get_country_name($match_info['0']->team_2);?>
               </label>
                 <label class="radio-inline">
-                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($match_info['0']->team_2==$answer) echo 'checked="checked"';?>>
-                  None
+                  <input type="radio"  name="answer_<?php echo $counter;?>" value="0" <?php if($answer===0) echo 'checked="checked"';?>>None
                 </label>
               <?php
               }
@@ -132,16 +131,18 @@ if($left_hours>24)
             <?php 
             $matchdatetime = $match_info[0]->match_date;
             $dt = new DateTime($matchdatetime);
-            $date = $dt->format('Y-m-d');
+            $date = $dt->format('Y-m-d H:i:s');
 
-            $today = strtotime(date("Y-m-d"));
+            $today = strtotime(date("Y-m-d H:i:s"));
             $date    = strtotime($date);
 
             $datediff = $date - $today;
             $difference = floor($datediff/(60*60*24));
+
+            //echo $difference;
             if($difference < 0 && $this->home_model->check_if_already_answered($match_id)==0){
               $disable =  'disabled';
-              echo '<label class="radio-inline">This question deadline is over.</label>';
+              echo '<label class="radio-inline">This question deadline is over.&nbsp;&nbsp;&nbsp;<a href="'.base_url().'dashboard">Go to Home</a></label>';
             }
             else{
               $disable = '';
@@ -152,7 +153,7 @@ if($left_hours>24)
           </div>
         </div>
       </div>
-      <?php if($this->home_model->check_if_already_answered($match_id)==0 && $difference > 0){?>
+      <?php if($this->home_model->check_if_already_answered($match_id)==0 && $difference >= 0){?>
       <button name="btnSubmit" class="btn btn-default submit" <?php echo $disable;?> type="submit">Submit</button>
       <?php } ?>
       <?php echo form_close(); ?>

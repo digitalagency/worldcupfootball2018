@@ -17,6 +17,10 @@
 <script src="<?php echo base_url();?>content_home/prettyPhoto/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <!-- prettyPhoto ends here -->
 
+ <!-- DataTables -->
+<link rel="stylesheet" href="<?php echo base_url();?>content_admin/plugins/datatables/dataTables.bootstrap.css">
+
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120817036-1"></script>
 <script>

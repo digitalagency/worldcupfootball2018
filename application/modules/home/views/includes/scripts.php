@@ -1,11 +1,27 @@
 <script src="<?php echo base_url(); ?>content_home/js/jquery-1.12.1.min.js"></script>
 <script src="<?php echo base_url(); ?>content_home/js/bootstrap.min.js"></script>
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function(){
-    $("area[rel^='prettyPhoto']").prettyPhoto();
-}); 
-</script>
+<!-- DataTables -->
+<script src="<?php echo base_url(); ?>content_admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>content_admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
+<script type="text/javascript" charset="utf-8">
+/*$(document).ready(function(){
+    $("area[rel^='prettyPhoto']").prettyPhoto();
+});*/
+/*$(function () {
+    $('.user_register').DataTable({
+      "lengthMenu": [[ 50, 100, -1], [50,100, "All"]],
+      "order": [[ 3, 'desc' ]],
+    });
+});*/ 
+
+$(document).ready(function() {
+    $('.user_register').DataTable( {
+        "order": [[ 2, 'desc' ]],
+        "lengthMenu": [[ 10, 25, 50, 100, -1], ['Top 10','Top 25','Top 50','Top 100', "All"]]
+    } );
+} );
+</script>
 <script>
     function selectCountry() {
         var firstcountryname = $(".firstcountry option:selected").text();
