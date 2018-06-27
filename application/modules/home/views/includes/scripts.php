@@ -16,13 +16,26 @@
 });*/ 
 
 $(document).ready(function() {
-    $('.user_register').DataTable( {
+    /*$('.user_register').DataTable( {
         "order": [[ 2, 'desc' ]],
         "lengthMenu": [[ 10, 25, 50, 100, -1], ['Top 10','Top 25','Top 50','Top 100', "All"]]
+    } );*/
+    $('.user_register').DataTable( {
+        "order": [[ 2, 'desc' ]],
+        "lengthMenu": [[ 50, 100, -1], ['Top 50','Top 100', "All"]]
     } );
 } );
 </script>
 <script>
+    function showhide(parameter){
+        //alert(parameter);
+        if(parameter=='group_stage'){
+            $("#group_stage").fadeToggle();;
+        }
+        if(parameter=='round_of_16'){
+            $("#round_of_16").fadeToggle();
+        }
+    }
     function selectCountry() {
         var firstcountryname = $(".firstcountry option:selected").text();
         var secoundcountryname = $(".secondcountry option:selected").text();

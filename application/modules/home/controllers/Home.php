@@ -137,7 +137,8 @@ class Home extends View_Controller {
         $data['menu'] = 'procedure';
         $data['page_title'] = '.:: Set Wet Nepal :: ';
         $data['main'] = 'match_day_contest';  
-        $data['question_info'] = $this->home_model->getMatchDayContest();      
+        $data['question_info'] = $this->home_model->getMatchDayContest();     
+        $data['round_of_16'] = $this->home_model->getRoundOf16();    
         $this->load->view('main',$data);
     }
 
@@ -169,7 +170,7 @@ class Home extends View_Controller {
         {
             $this->home_model->enter_ultimate_contest_answer(); 
         }
-        $data['countries'] = $this->home_model->get_all_countries();      
+        $data['countries'] = $this->home_model->get_all_top_16_countries();      
         $data['question_info'] = $this->home_model->getUltimateContestQuestion();      
         $this->load->view('main',$data);
     }

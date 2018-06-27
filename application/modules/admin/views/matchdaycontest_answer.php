@@ -27,7 +27,6 @@
           <div class="table-responsive">  
 
             <?php
-
             $action = base_url() . 'admin/Question/MatchDayContestAnswer/'.$this->uri->segment(4);
 
             $attributes = array('class' => 'form-horizontal form-bordered', 'id' => 'form1', 'enctype' => 'multipart/form-data');
@@ -79,17 +78,14 @@
                     <td>                     
 
                     <?php
-
                     if($row->question_number=="1")
-
                     {
-
                     ?>
 
                     <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
-                      <option value="">Select Answer</option>                
 
-                      <option value="0" <?php if($row->answer=="0") echo 'selected="selected"';?>>Draw</option>                
+                      <option value="">Select Answer</option>  
+                      <option value="0" <?php if($row->answer=='0') echo 'selected="selected"';?>>Draw</option>               
 
                       <option value="<?php echo $match_info['0']->team_1;?>" <?php if($row->answer==$match_info['0']->team_1) echo 'selected="selected"';?>><?php echo $this->Country_model->get_country_name($match_info['0']->team_1);?></option>
 
@@ -109,11 +105,12 @@
 
                       <?php echo $this->Country_model->get_country_name($match_info['0']->team_1);?> VS <?php echo $this->Country_model->get_country_name($match_info['0']->team_2);?>
 
-                      <input type="text" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $row->answer; ?>" placeholder="0-0">(For example : 0-1)
+                      <input type="text" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>" value="<?php echo $row->answer; ?>" placeholder="0-0">
 
                       <?php
 
                     }
+
                     if($row->question_number=="3")
 
                     {
@@ -121,9 +118,9 @@
                     ?>
 
                     <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
-                      <option value="">Select Answer</option>                
 
-                      <option value="0" <?php if($row->answer=="0") echo 'selected="selected"';?>>None</option>                
+                      <option value="">Select Answer</option>  
+                      <option value="0" <?php if($row->answer=='0') echo 'selected="selected"';?>>None</option>            
 
                       <option value="<?php echo $match_info['0']->team_1;?>" <?php if($row->answer==$match_info['0']->team_1) echo 'selected="selected"';?>><?php echo $this->Country_model->get_country_name($match_info['0']->team_1);?></option>
 
@@ -143,7 +140,8 @@
 
                     <select class="form-control" name="answer_<?php echo $counter;?>" id="answer_<?php echo $counter;?>">
 
-                      <option value="">Select Answer</option>                
+                      <option value="">Select Answer</option>   
+                      <option value="0" <?php if($row->answer=='0') echo 'selected="selected"';?>>None</option>               
 
                       <option disabled><?php echo $this->Country_model->get_country_name($match_info['0']->team_1);?></option>
 

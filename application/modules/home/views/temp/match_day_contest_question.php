@@ -22,7 +22,7 @@ if($left_hours>24)
       ?>
       <div class="down">
         <div class="head">
-          <h2><?php if($match_id>=49) echo 'ROUNF OF 16'; else echo 'GROUP STAGE'; ?></h2>
+          <h2>GROUP STAGE</h2>
         </div>
         <div class="cont">
           <div class="q-wrap">
@@ -40,10 +40,10 @@ if($left_hours>24)
                 $answer = $this->home_model->get_user_answer_by_question_id($row->id);
               else
                 $answer = '';
-              
+              //echo $answer;
             ?>
             <div class="q">
-              <p><?php echo $counter;?>. <?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"> Answer : <?php echo $answer;?></p>
+              <p><?php echo $counter;?>. <?php echo $row->question; ?><input type="hidden" name="question_id_<?php echo $counter;?>" id="question_id_<?php echo $counter;?>" value="<?php echo $row->id; ?>"></p>
               <?php
               //print_r($question_info);
               if($row->question_number=="1")

@@ -100,10 +100,11 @@ class question_model extends CI_Model {
 
     function updateUltimateContestAnswers()
     {
+        print_r($_POST);
         for($i=1;$i<=5;$i++)
         {
             $question_id = $_POST['question_id_'.$i];
-            if($i==2 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
+            if($i==1 && isset($_POST['answer_'.$i]['0']) && isset($_POST['answer_'.$i]['1']))
             {                
                 $answer = $_POST['answer_'.$i]['0'].','.$_POST['answer_'.$i]['1'];
             }
@@ -115,6 +116,7 @@ class question_model extends CI_Model {
             );
             $this->db->where('id',$question_id);
             $this->db->update($this->table_question,$data);
+            echo $this->db->last_query();
         }
     }
 

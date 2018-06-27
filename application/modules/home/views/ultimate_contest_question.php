@@ -134,15 +134,16 @@
                     }
             ?>
           </div>
-        <?php
-        $i++;
-        endforeach;                            
-        }
-        if(!empty($answer)){?>
-        <label class="radio-inline">You have already answered to these questions.<a href="<?php echo base_url() . 'dashboard';?>">Go to Home</a></label>
-        <?php
-        }
-        ?>
+          <?php
+            $i++;
+            endforeach;                            
+            }
+            ?>
+          <?php if(!empty($answer)){?>
+          <label class="radio-inline">You have already answered to these questions.<a href="<?php echo base_url() . 'dashboard';?>">Go to Home</a></label>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <?php if(empty($answer)){?>

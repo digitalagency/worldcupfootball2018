@@ -18,6 +18,7 @@ if($page!="terms-and-conditions" && $page!="privacy-policy" && $page!="thank-you
             <a href="<?php echo base_url();?>dashboard"><img src="<?php echo base_url();?>content_home/images/home.png" title="Go to Home"></a>
             <p>Your Score: <span><?php if($your_score>0) echo $your_score; else echo 0;?></span></p>
             <a href="<?php echo base_url();?>scoreboard">Click to See Scoreboard</a>
+            <p><a href="<?php echo base_url();?>leaderboard">Click to See Leaderboard</a></p>
         </div>
         <div class="right">
             <div class="wrap text-center">

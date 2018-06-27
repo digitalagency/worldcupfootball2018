@@ -311,6 +311,19 @@ class Home_model extends CI_Model {
         }
     }
 
+    public function getRoundOf16()
+    {        
+        $this->db->select('');
+        $this->db->where("id >=",'49');
+        $query =  $this->db->get('tbl_match');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
     function getMatchDayContestQuestion($match_id)
     {
         $this->db->select('');
@@ -573,6 +586,19 @@ class Home_model extends CI_Model {
 
     public function get_all_countries(){
         $this->db->select('*');
+        $this->db->order_by("country_name","ASC");
+        $query =  $this->db->get('tbl_country');
+        //echo "SELECT * FROM ".$this->table_country." LIMIT ".$limit.", ".$offset;
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    public function get_all_top_16_countries(){
+        $this->db->select('*');
+        $this->db->where('isTop16','1');
         $this->db->order_by("country_name","ASC");
         $query =  $this->db->get('tbl_country');
         //echo "SELECT * FROM ".$this->table_country." LIMIT ".$limit.", ".$offset;
